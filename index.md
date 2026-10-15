@@ -379,9 +379,9 @@ graph TD
 
     <ul style="padding-left: 20px; color: #c9d1d9; font-size: 1.05rem; line-height: 1.7;">
         <li style="margin-bottom: 12px;">
-            <strong style="color: #ff7b72;">🔴 The Friction Point (The Before):</strong> Manual software updates on corporate servers introduced severe human misconfiguration risks, caused system downtime spikes of 15 percent, and delayed critical business operations and scaling.
+            <strong style="color: #ff7b72;">🔴 The Friction Point :</strong> Manual software updates on corporate servers introduced severe human misconfiguration risks, caused system downtime spikes of 15 percent, and delayed critical business operations and scaling.
         <li style="margin-bottom: 12px;">
-            <strong style="color: #79c0ff;">⚙️ The Architecture Map (The Technical Fix):</strong> Developed an idempotent continuous delivery pipeline using GitHub Actions that automatically intercepts repository adjustments, runs secure token handshakes, compiles minimal Docker container images under 150MB, and publishes runtime updates live.
+            <strong style="color: #79c0ff;">⚙️ The Architectural Fix :</strong> Developed an idempotent continuous delivery pipeline using GitHub Actions that automatically intercepts repository adjustments, runs secure token handshakes, compiles minimal Docker container images under 150MB, and publishes runtime updates live.
         </li>
     </ul>
 
@@ -413,10 +413,51 @@ graph TD
     </ul>
 </div>
 
-### Project 08: High-Ticket B2B RevOps Client Intake and Capacity Scaling Engine
-*   **The Friction Point:** High-ticket consulting firms face an operational ceiling where onboarding new clients requires hours of manual CRM mapping, account creation, and folder provisioning, leading to entry delays and staff burnout.
-*   **The Technical Fix:** Built an event-driven data integration pipeline linking n8n enterprise workflows with HubSpot CRM systems to completely automate client intake object routing, structure custom metadata objects, and sync accounts in real-time.
-*   **Commercial ROI:** Reduces data processing latency from 48 hours to less than 3 seconds with 0 percent manual errors, allowing the enterprise to double intake capacity to 40 plus high-ticket accounts without hiring a single operational employee, saving 90,000 dollars a year.
+<!-- Project 08 Card -->
+<div style="background-color: #090d13; border: 1px solid #21262d; border-radius: 6px; padding: 25px; margin-bottom: 25px; box-shadow: 0 4px 6px rgba(0,0,0,0.2);">
+    <h3 style="margin-top: 0; font-size: 1.35rem; color: #79c0ff; font-weight: 600; border-bottom: none; padding-bottom: 0;">
+        Project 08: High-Ticket B2B RevOps Client Intake & Capacity Scaling Engine
+    </h3>
+    
+    <div style="margin-top: 10px; margin-bottom: 20px;">
+        <span style="display: inline-block; background-color: #111827; border: 1px solid #1e3a8a; color: #60a5fa; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; margin-right: 5px;">n8n Workflows</span>
+        <span style="display: inline-block; background-color: #111827; border: 1px solid #1e3a8a; color: #60a5fa; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; margin-right: 5px;">CRM Object Mapping</span>
+        <span style="display: inline-block; background-color: #111827; border: 1px solid #1e3a8a; color: #60a5fa; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; margin-right: 5px;">Data Ingestion</span>
+    </div>
+
+    <ul style="padding-left: 20px; color: #c9d1d9; font-size: 1.05rem; line-height: 1.7;">
+        <li style="margin-bottom: 12px;">
+            <strong style="color: #ff7b72;">🔴 The Friction Point :</strong> A rapidly scaling firm faced operational ceiling when onboarding new clients. Manual onboarding processes required 4 hours of tedious CRM mapping and account creation inflating latency to 48 hours, causing onboarding syntax errors to spike by 15 percent, and limiting intake thresholds to 15 accounts a month due to staff burnout.
+        </li>
+        <li style="margin-bottom: 12px;">
+            <strong style="color: #79c0ff;">⚙️ The Architectural Fix :</strong> Eliminated human data-entry bottlenecks completely by architecting an event-driven data pipeline linking n8n enterprise workflows and relational database synchronization layers. When a closed deal transitions to "Won" inside the CRM, a secure webhook instantly triggers an automated multi-branched mapping and account provisioning sequence.
+        </li>
+    </ul>
+
+    <!-- Visual Architectural Diagram - Rendered Directly After Technical Fix -->
+    <div class="mermaid" style="background-color: #0b0f17; border: 1px solid #1e3a8a; border-radius: 6px; padding: 20px; margin: 25px 0;">
+graph TD
+    A[💼 CRM: Deal Marked Closed-Won] -->|Secure Webhook Trigger| B[⚙️ n8n Enterprise Core Engine]
+    B --> C[📊 Custom CRM Object Mapping Engine]
+    B --> D[🗄️ Relational Database Architecture Sync]
+    C -->|Extract Client Metadata & Lifecycle Tags| E[Unified Client Onboarding Payload]
+    D -->|Provision Secure Client Portal Framework| E
+    E --> F[✉️ Push Instant Slack Alert to Operations Team]
+    E --> G[🖥️ Launch Live Client Dashboard Account]
+    classDef default fill:#0d1117,stroke:#388bfd,color:#c9d1d9;
+    classDef highlight fill:#161b22,stroke:#58a6ff,stroke-width:2px,color:#58a6ff;
+    class B,E highlight;
+    </div>
+
+    <ul style="padding-left: 20px; color: #c9d1d9; font-size: 1.05rem; line-height: 1.7; margin-top: 20px;">
+        <li style="margin-bottom: 12px;">
+            <strong style="color: #d19a66;">🚨 Data Performance Baseline:</strong> Client data replication latency dropped instantly from 48 hours to less than 3 seconds. Manual human synchronization entry requirements dropped to absolute zero, providing a flawless onboarding experience for high-net-worth accounts.
+        </li>
+        <li style="margin-bottom: 0;">
+            <strong style="color: #56b6c2;">🟢 The Business Result (Commercial ROI):</strong> Successfully doubled monthly processing capacity to 40 plus high-ticket accounts without growing operations headcount, saving the enterprise over <span style="font-weight: bold; color: #e5c07b;">90,000 dollars annually</span> in projected specialized staffing overhead.
+        </li>
+    </ul>
+</div>
 
 ### Project 09: Enterprise Subscription Billing and Financial Churn Mitigation Grid
 *   **The Friction Point:** Large-scale digital platforms bleed revenue silently due to failed subscription transactions, mismatched invoicing logs, and unrevoked credentials when client cards decline, forcing accounting teams to waste 30 plus hours a week manually cross-referencing records.
