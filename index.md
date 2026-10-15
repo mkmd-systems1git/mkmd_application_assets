@@ -35,15 +35,64 @@
 
 ## CATEGORY 1: MARITIME EDGE SYSTEMS & FIELD INGESTION
 
-### Project 01: Asynchronous Edge Concurrency Logging Loop (`maritime-edge-pipeline`)
-*   **The Friction Point:** Remote marine vessels traversing deep-sea routes suffer persistent satellite drops. Traditional logging systems freeze, crash, or permanently drop critical mechanical data when connectivity fails, creating major operational blind spots.
-*   **The Technical Fix:** Engineered an unbuffered, air-gapped edge pipeline utilizing asynchronous Python concurrency locks and thread-safe data structures to isolate, buffer, and preserve streaming vessel telemetry locally within hardware RAM during communication blackouts.
-*   **On-Site Deployment Checklist:**
-    1. Initialize the terminal network core: `git clone https://://github.com/maritime-edge-pipeline.git && cd maritime-edge-pipeline`
-    2. Build the optimized execution runtime container: `docker build -t maritime-edge-pipeline:latest .`
-    3. Initialize the background collection service: `docker run -d --name edge-concurrency-engine --restart unless-stopped maritime-edge-pipeline:latest`
-*   **Disaster Recovery State:** If a hardware node crashes or encounters sudden power loss on-site, check runtime diagnostic log paths instantly using `docker logs edge-concurrency-engine`. Run `docker restart edge-concurrency-engine` to restore the autonomous processing baseline.
-*   **Commercial ROI:** Slashes specialized manual data recovery overhead to absolute zero, recovering over 65,000 dollars annually in administrative engineering costs.
+<!-- Tier 1 Section Container Header -->
+<h2 style="font-size: 1.6rem; color: #58a6ff; font-weight: 600; border-bottom: 2px solid #21262d; padding-bottom: 8px; margin-top: 50px; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 0.5px;">
+    🚢 TIER 1: MARITIME EDGE SYSTEMS & FIELD INGESTION
+</h2>
+
+<!-- Project 01 Card -->
+<div style="background-color: #090d13; border: 1px solid #21262d; border-radius: 6px; padding: 25px; margin-bottom: 25px; box-shadow: 0 4px 6px rgba(0,0,0,0.2);">
+    <h3 style="margin-top: 0; font-size: 1.35rem; color: #79c0ff; font-weight: 600; border-bottom: none; padding-bottom: 0;">
+        Project 01: Asynchronous Edge Concurrency Logging Loop (`maritime-edge-pipeline`)
+    </h3>
+    
+    <div style="margin-top: 10px; margin-bottom: 20px;">
+        <span style="display: inline-block; background-color: #111827; border: 1px solid #1e3a8a; color: #60a5fa; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; margin-right: 5px;">Asynchronous Python</span>
+        <span style="display: inline-block; background-color: #111827; border: 1px solid #1e3a8a; color: #60a5fa; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; margin-right: 5px;">Thread-Safety</span>
+        <span style="display: inline-block; background-color: #111827; border: 1px solid #1e3a8a; color: #60a5fa; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; margin-right: 5px;">Edge Computing</span>
+    </div>
+
+    <p style="font-size: 0.9rem; color: #8b949e; margin-bottom: 20px;">
+        ⚙️ Source Registry Tracking Log: <a href="https://github.com" target="_blank" style="color: #58a6ff; text-decoration: none;">://github.com</a>
+    </p>
+
+    <ul style="padding-left: 20px; color: #c9d1d9; font-size: 1.05rem; line-height: 1.7;">
+        <li style="margin-bottom: 12px;">
+            <strong style="color: #ff7b72;">🔴 The Friction Point (The Before):</strong> Remote marine vessels traversing deep-sea routes suffer persistent satellite drops. Traditional logging systems freeze, crash, or permanently drop critical mechanical telemetry data when connectivity fails, creating major compliance blind spots and engineering gaps.
+        </li>
+        <li style="margin-bottom: 12px;">
+            <strong style="color: #79c0ff;">⚙️ The Architecture Map (The Technical Fix):</strong> Engineered an unbuffered, air-gapped edge pipeline utilizing asynchronous Python concurrency locks and thread-safe data structures to isolate, buffer, and preserve streaming vessel telemetry locally within hardware RAM during communication blackouts.
+        </li>
+    </ul>
+
+    <!-- Visual Architectural Diagram - Rendered Directly After Technical Fix -->
+    <div class="mermaid" style="background-color: #0b0f17; border: 1px solid #1e3a8a; border-radius: 6px; padding: 20px; margin: 25px 0;">
+graph TD
+    A[📡 Vessel Sensor Telemetry Stream] --> B{🛰️ Edge Connectivity Monitor}
+    B -->|Uplink Link Active| C[📤 Real-Time Direct Push]
+    B -->|Satellite Dropout Link Dead| D[🔒 Thread-Locked RAM Ring Buffer]
+    D -->|Uplink Re-established| E[🔄 Asynchronous Queue Flush Sync Loop]
+    E --> C
+    classDef default fill:#0d1117,stroke:#388bfd,color:#c9d1d9;
+    classDef highlight fill:#161b22,stroke:#ff7b72,color:#ff7b72;
+    class D highlight;
+    </div>
+
+    <ul style="padding-left: 20px; color: #c9d1d9; font-size: 1.05rem; line-height: 1.7; margin-top: 20px;">
+        <li style="margin-bottom: 12px;">
+            <strong style="color: #58a6ff;">🛠️ On-Site Field Deployment Checklist:</strong>
+            <br><span style="font-family: monospace; font-size: 0.9rem; color: #8b949e;">1. Clone assets natively:</span> <code style="background-color: #1f242c; padding: 3px 6px; border-radius: 4px; font-size: 0.9rem; color: #ff7b72;">git clone https://github.com.git && cd maritime-edge-pipeline</code>
+            <br><span style="font-family: monospace; font-size: 0.9rem; color: #8b949e;">2. Compile container image:</span> <code style="background-color: #1f242c; padding: 3px 6px; border-radius: 4px; font-size: 0.9rem; color: #ff7b72;">docker build -t maritime-edge-pipeline:latest .</code>
+            <br><span style="font-family: monospace; font-size: 0.9rem; color: #8b949e;">3. Launch tracking runtime service:</span> <code style="background-color: #1f242c; padding: 3px 6px; border-radius: 4px; font-size: 0.9rem; color: #ff7b72;">docker run -d --name edge-concurrency-engine --restart unless-stopped maritime-edge-pipeline:latest</code>
+        </li>
+        <li style="margin-bottom: 12px;">
+            <strong style="color: #d19a66;">🚨 Disaster Recovery & Field Troubleshooting:</strong> If a hardware node crashes or encounters a sudden power loss on-site, check runtime diagnostic log paths instantly using <code>docker logs edge-concurrency-engine</code>. Run <code>docker restart edge-concurrency-engine</code> to restore the autonomous processing baseline seamlessly.
+        </li>
+        <li style="margin-bottom: 0;">
+            <strong style="color: #56b6c2;">🟢 The Business Result (The Commercial ROI):</strong> Slashes specialized manual data recovery overhead and data exposure hazards to absolute zero, recovering over <span style="font-weight: bold; color: #e5c07b;">65,000 dollars annually</span> in administrative engineering costs.
+        </li>
+    </ul>
+</div>
 
 ### Project 02: Automated Over-the-Air Fleet Container Pipeline (`maritime-fleet-gitops`)
 *   **The Friction Point:** Updating software components on vessels at sea historically required specialized technicians to travel to regional ports, causing severe deployment bottlenecks and expensive shipping delays.
