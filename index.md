@@ -222,10 +222,10 @@ graph TD
 
     <ul style="padding-left: 20px; color: #c9d1d9; font-size: 1.05rem; line-height: 1.7;">
         <li style="margin-bottom: 12px;">
-            <strong style="color: #ff7b72;">🔴 The Friction Point (The Before):</strong> Intermittent communication link cutouts on remote telemetry terminals led to missing system logs and broken transactional histories, causing severe data gaps and data recovery risks for private high-stakes enterprise platforms.
+            <strong style="color: #ff7b72;">🔴 The Friction Point :</strong> Intermittent communication link cutouts on remote telemetry terminals led to missing system logs and broken transactional histories, causing severe data gaps and data recovery failures for private high-stakes enterprise platforms.
         </li>
         <li style="margin-bottom: 12px;">
-            <strong style="color: #79c0ff;">⚙️ The Architecture Map (The Technical Fix):</strong> Implemented a self-healing edge synchronization loop utilizing an internal thread-safe ring-buffer queue (<code>collections.deque</code> and <code>threading.Lock</code>) that intercepts dropouts, dynamic allocations, and safely holds 500 telemetry payloads locally without data drops.
+            <strong style="color: #79c0ff;">⚙️ The Architectural Fix :</strong> Implemented a self-healing edge synchronization loop utilizing an internal thread-safe ring-buffer queue (<code>collections.deque</code> and <code>threading.Lock</code>) that intercepts dropouts, dynamic allocations, and safely holds 500 telemetry payloads locally without data drops.
         </li>
     </ul>
 
@@ -251,7 +251,7 @@ graph TD
             <strong style="color: #d19a66;">🚨 Disaster Recovery & Field Troubleshooting:</strong> Operator supervision is not required during link dropouts. The memory queue caches records natively, executing a clean 3-second bulk synchronization wave straight to the cloud core the exact millisecond uplink validation returns. If a container runtime environment gets corrupted, execute <code>docker rm -f live-edge-agent</code> and re-run step 3.
         </li>
         <li style="margin-bottom: 0;">
-            <strong style="color: #56b6c2;">🟢 The Business Result (The Commercial ROI):</strong> Drives data drops and remote configuration liabilities down to absolute zero, securing transaction history logs and recovering over <span style="font-weight: bold; color: #e5c07b;">65,000 dollars a year</span> in system repair costs.
+            <strong style="color: #56b6c2;">🟢 The Business Result (Commercial ROI):</strong> Drove data drops and remote configuration liabilities down to absolute zero, securing transaction history logs and recovering over <span style="font-weight: bold; color: #e5c07b;">65,000 dollars a year</span> in system repair costs.
         </li>
     </ul>
 </div>
