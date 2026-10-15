@@ -356,17 +356,62 @@ graph TD
 
 ---
 
-## CATEGORY 3: ENTERPRISE OPERATIONS AUTOMATION & REVENUE EFFICIENCY
+<!-- Category 3 Section Container Header -->
+<h2 style="font-size: 1.6rem; color: #58a6ff; font-weight: 600; border-bottom: 2px solid #21262d; padding-bottom: 8px; margin-top: 50px; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 0.5px;">
+    🚀 CATEGORY 3: ENTERPRISE OPERATIONS AUTOMATION & REVENUE EFFICIENCY
+</h2>
 
-### Project 07: Continuous Delivery GitOps Container Pipeline (`GitOps-Container-Deployment-Pipeline---Automation`)
-*   **The Friction Point:** Manual software updates on production servers introduced human configuration risks, caused system downtime spikes of 15 percent, and delayed critical business operations scaling.
-*   **The Technical Fix:** Developed an idempotent continuous delivery pipeline using GitHub Actions that automatically intercepts repository adjustments, runs secure token handshakes, compiles minimal Docker container images, and publishes updates live.
-*   **On-Site Deployment Checklist:**
-    1. Clone the master automation delivery architecture assets: `git clone https://github.com && cd GitOps-Container-Deployment-Pipeline---Automation`
-    2. Verify manifest validity: `python3 -m json.tool workflows/onboarding.json`
-    3. Run local runtime loop checks: `python3 core_ops/app.py`
-*   **Disaster Recovery State:** If a deployment fails due to a missing comma in a configuration file, use the native JSON validator tool to pinpoint the drift, commit the fix, and the pipeline will complete updates in 21 seconds.
-*   **Commercial ROI:** Lowers deployment human error to absolute zero, saving an estimated 74,000 dollars annually in specialized engineering maintenance overhead.
+<!-- Project 07 Card -->
+<div style="background-color: #090d13; border: 1px solid #21262d; border-radius: 6px; padding: 25px; margin-bottom: 25px; box-shadow: 0 4px 6px rgba(0,0,0,0.2);">
+    <h3 style="margin-top: 0; font-size: 1.35rem; color: #79c0ff; font-weight: 600; border-bottom: none; padding-bottom: 0;">
+        Project 07: Continuous Delivery GitOps Container Pipeline (`GitOps-Container-Deployment-Pipeline---Automation`)
+    </h3>
+    
+    <div style="margin-top: 10px; margin-bottom: 20px;">
+        <span style="display: inline-block; background-color: #111827; border: 1px solid #1e3a8a; color: #60a5fa; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; margin-right: 5px;">GitOps CD</span>
+        <span style="display: inline-block; background-color: #111827; border: 1px solid #1e3a8a; color: #60a5fa; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; margin-right: 5px;">Docker Isolation</span>
+        <span style="display: inline-block; background-color: #111827; border: 1px solid #1e3a8a; color: #60a5fa; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; margin-right: 5px;">GitHub Actions</span>
+    </div>
+
+    <p style="font-size: 0.9rem; color: #8b949e; margin-bottom: 20px;">
+        ⚙️ Source Registry Tracking Log: <a href="https://github.com" target="_blank" style="color: #58a6ff; text-decoration: none;">://github.com</a>
+    </p>
+
+    <ul style="padding-left: 20px; color: #c9d1d9; font-size: 1.05rem; line-height: 1.7;">
+        <li style="margin-bottom: 12px;">
+            <strong style="color: #ff7b72;">🔴 The Friction Point (The Before):</strong> Manual software updates on corporate servers introduced severe human misconfiguration risks, caused system downtime spikes of 15 percent, and delayed critical business operations and scaling.
+        <li style="margin-bottom: 12px;">
+            <strong style="color: #79c0ff;">⚙️ The Architecture Map (The Technical Fix):</strong> Developed an idempotent continuous delivery pipeline using GitHub Actions that automatically intercepts repository adjustments, runs secure token handshakes, compiles minimal Docker container images under 150MB, and publishes runtime updates live.
+        </li>
+    </ul>
+
+    <!-- Visual Architectural Diagram - Rendered Directly After Technical Fix -->
+    <div class="mermaid" style="background-color: #0b0f17; border: 1px solid #1e3a8a; border-radius: 6px; padding: 20px; margin: 25px 0;">
+graph TD
+    A[📄 Onboarding.json Workflow Altered] -->|Commit Event| B[🐙 Push to GitHub Repository Main]
+    B --> C[🔷 GitHub Actions Continuous Delivery Belt Runs]
+    C -->|Least Privilege Secret Verification| D[🐳 Package Secure Runtime Docker Image Layer]
+    D --> E[🚀 Automate Live Container Rollout Window: 21 Seconds]
+    classDef default fill:#0d1117,stroke:#388bfd,color:#c9d1d9;
+    classDef highlight fill:#161b22,stroke:#ff7b72,stroke-width:2px,color:#ff7b72;
+    class C,D highlight;
+    </div>
+
+    <ul style="padding-left: 20px; color: #c9d1d9; font-size: 1.05rem; line-height: 1.7; margin-top: 20px;">
+        <li style="margin-bottom: 12px;">
+            <strong style="color: #58a6ff;">🛠️ On-Site Field Deployment Checklist:</strong>
+            <br><span style="font-family: monospace; font-size: 0.9rem; color: #8b949e;">1. Clone the master automation delivery architecture assets:</span> <code style="background-color: #1f242c; padding: 3px 6px; border-radius: 4px; font-size: 0.9rem; color: #ff7b72;">git clone https://github.com.git && cd GitOps-Container-Deployment-Pipeline---Automation</code>
+            <br><span style="font-family: monospace; font-size: 0.9rem; color: #8b949e;">2. Verify declarative business operations metadata schema syntax:</span> <code style="background-color: #1f242c; padding: 3px 6px; border-radius: 4px; font-size: 0.9rem; color: #ff7b72;">python3 -m json.tool workflows/onboarding.json</code>
+            <br><span style="font-family: monospace; font-size: 0.9rem; color: #8b949e;">3. Run local runtime loop validation checks:</span> <code style="background-color: #1f242c; padding: 3px 6px; border-radius: 4px; font-size: 0.9rem; color: #ff7b72;">python3 core_ops/app.py</code>
+        </li>
+        <li style="margin-bottom: 12px;">
+            <strong style="color: #d19a66;">🚨 Disaster Recovery & Field Troubleshooting:</strong> If a deployment fails due to an unclosed bracket or missing trailing comma in a configuration workflow file, use the native JSON validator tool to pinpoint the specific drift line. Commit the fix text, and the pipeline engine will self-heal, completing container updates in an automated 21-second cloud window.
+        </li>
+        <li style="margin-bottom: 0;">
+            <strong style="color: #56b6c2;">🟢 The Business Result Commercial ROI):</strong> Lowers deployment human error risk to absolute zero, dropping release latency and recovering over <span style="font-weight: bold; color: #e5c07b;">74,000 dollars annually</span> in specialized engineering maintenance overhead.
+        </li>
+    </ul>
+</div>
 
 ### Project 08: High-Ticket B2B RevOps Client Intake and Capacity Scaling Engine
 *   **The Friction Point:** High-ticket consulting firms face an operational ceiling where onboarding new clients requires hours of manual CRM mapping, account creation, and folder provisioning, leading to entry delays and staff burnout.
