@@ -33,11 +33,10 @@
 
 ---
 
-## CATEGORY 1: MARITIME EDGE SYSTEMS & FIELD INGESTION
 
 <!-- Tier 1 Section Container Header -->
 <h2 style="font-size: 1.6rem; color: #58a6ff; font-weight: 600; border-bottom: 2px solid #21262d; padding-bottom: 8px; margin-top: 50px; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 0.5px;">
-    🚢 TIER 1: MARITIME EDGE SYSTEMS & FIELD INGESTION
+    🚢 CATEGORY 1: MARITIME EDGE SYSTEMS & FIELD INGESTION
 </h2>
 
 <!-- Project 01 Card -->
@@ -94,14 +93,57 @@ graph TD
     </ul>
 </div>
 
-### Project 02: Automated Over-the-Air Fleet Container Pipeline (`maritime-fleet-gitops`)
-*   **The Friction Point:** Updating software components on vessels at sea historically required specialized technicians to travel to regional ports, causing severe deployment bottlenecks and expensive shipping delays.
-*   **The Technical Fix:** Built an automated over-the-air GitOps delivery conveyor belt utilizing GitHub Actions and secure Docker package abstractions to package, verify, and stream rolling microservice configuration updates directly to remote data nodes.
-*   **On-Site Deployment Checklist:**
-    1. Clone the master delivery assets: `git clone https://://github.com/maritime-fleet-gitops.git && cd maritime-fleet-gitops`
-    2. Review the core YAML workflow automation layout: `cat .github/workflows/deploy-pipeline.yml`
-*   **Disaster Recovery State:** If a container registry authentication timeout occurs due to network clipping, the engine’s built-in secure token handshake protocol (`packages: write`) automatically generates a single-use token on the next sequential git push event.
-*   **Commercial ROI:** Eliminates port technician travel expenses completely, saving the fleet company over 74,000 dollars a year in logistics maintenance drag.
+<!-- Project 02 Card -->
+<div style="background-color: #090d13; border: 1px solid #21262d; border-radius: 6px; padding: 25px; margin-bottom: 25px; box-shadow: 0 4px 6px rgba(0,0,0,0.2);">
+    <h3 style="margin-top: 0; font-size: 1.35rem; color: #79c0ff; font-weight: 600; border-bottom: none; padding-bottom: 0;">
+        Project 02: Automated Over-the-Air Fleet Container Pipeline (`maritime-fleet-gitops`)
+    </h3>
+    
+    <div style="margin-top: 10px; margin-bottom: 20px;">
+        <span style="display: inline-block; background-color: #111827; border: 1px solid #1e3a8a; color: #60a5fa; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; margin-right: 5px;">GitOps Pipelines</span>
+        <span style="display: inline-block; background-color: #111827; border: 1px solid #1e3a8a; color: #60a5fa; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; margin-right: 5px;">Docker Containers</span>
+        <span style="display: inline-block; background-color: #111827; border: 1px solid #1e3a8a; color: #60a5fa; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; margin-right: 5px;">GitHub Actions CI-CD</span>
+    </div>
+
+    <p style="font-size: 0.9rem; color: #8b949e; margin-bottom: 20px;">
+        ⚙️ Source Registry Tracking Log: <a href="https://github.com" target="_blank" style="color: #58a6ff; text-decoration: none;">://github.com</a>
+    </p>
+
+    <ul style="padding-left: 20px; color: #c9d1d9; font-size: 1.05rem; line-height: 1.7;">
+        <li style="margin-bottom: 12px;">
+            <strong style="color: #ff7b72;">🔴 The Friction Point (The Before):</strong> Updating internal software applications on cargo vessels at sea historically requires specialized technicians to travel to regional ports, causing severe deployment bottlenecks and expensive logistical delays.
+        </li>
+        <li style="margin-bottom: 12px;">
+            <strong style="color: #79c0ff;">⚙️ The Architecture Map (The Technical Fix):</strong> Built an automated over-the-air GitOps delivery conveyor belt utilizing GitHub Actions and secure Docker package abstractions to compile, verify, and stream rolling microservice configuration updates directly to remote data nodes.
+        </li>
+    </ul>
+
+    <!-- Visual Architectural Diagram - Rendered Directly After Technical Fix -->
+    <div class="mermaid" style="background-color: #0b0f17; border: 1px solid #1e3a8a; border-radius: 6px; padding: 20px; margin: 25px 0;">
+graph TD
+    A[💻 Push Configuration change to Git main] --> B[⚙️ GitHub Actions CI-CD Runner Engine]
+    B -->|Lint and Compile Minimal Container Base| C[📦 Publish Cryptographic Image to GHCR.io Vault]
+    C -->|Secure Over-the-Air Payload Stream Request| D[🚢 Remote Active Fleet Nodes at Sea]
+    classDef default fill:#0d1117,stroke:#388bfd,color:#c9d1d9;
+    classDef highlight fill:#161b22,stroke:#58a6ff,stroke-width:2px,color:#58a6ff;
+    class B,C highlight;
+    </div>
+
+    <ul style="padding-left: 20px; color: #c9d1d9; font-size: 1.05rem; line-height: 1.7; margin-top: 20px;">
+        <li style="margin-bottom: 12px;">
+            <strong style="color: #58a6ff;">🛠️ On-Site Field Deployment Checklist:</strong>
+            <br><span style="font-family: monospace; font-size: 0.9rem; color: #8b949e;">1. Clone the master delivery assets:</span> <code style="background-color: #1f242c; padding: 3px 6px; border-radius: 4px; font-size: 0.9rem; color: #ff7b72;">git clone https://github.com.git && cd maritime-fleet-gitops</code>
+            <br><span style="font-family: monospace; font-size: 0.9rem; color: #8b949e;">2. Review core YAML workflow automation deployment logic:</span> <code style="background-color: #1f242c; padding: 3px 6px; border-radius: 4px; font-size: 0.9rem; color: #ff7b72;">cat .github/workflows/deploy-pipeline.yml</code>
+        </li>
+        <li style="margin-bottom: 12px;">
+            <strong style="color: #d19a66;">🚨 Disaster Recovery & Field Troubleshooting:</strong> If a container registry authentication handshake timeout occurs due to deep-sea satellite link clipping, operator intervention is not required. The engine’s built-in secure permissions configuration block (<code>packages: write</code>) will automatically re-verify single-use token handshakes on the next sequential git event.
+        </li>
+        <li style="margin-bottom: 0;">
+            <strong style="color: #56b6c2;">🟢 The Business Result (The Commercial ROI):</strong> Eliminates port technician unnecessary travel expenses completely and cuts deployment errors to absolute zero, saving the fleet company over <span style="font-weight: bold; color: #e5c07b;">74,000 dollars a year</span> in manual operational costs.
+        </li>
+    </ul>
+</div>
+
 
 ### Project 03: Multi-Module Decentralized Landing Grid (`maritime-cloud-coast-infrastructure`)
 *   **The Friction Point:** Manual cloud dashboard setup patterns for port receiving stations created un-audited infrastructure environments, exposed open database ingress ports, and increased vulnerability to data breach vectors.
