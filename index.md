@@ -57,10 +57,10 @@
 
     <ul style="padding-left: 20px; color: #c9d1d9; font-size: 1.05rem; line-height: 1.7;">
         <li style="margin-bottom: 12px;">
-            <strong style="color: #ff7b72;">🔴 The Friction Point (The Before):</strong> Remote marine vessels traversing deep-sea routes suffer persistent satellite drops. Traditional logging systems freeze, crash, or permanently drop critical mechanical telemetry data when connectivity fails, creating major compliance blind spots and engineering gaps.
+            <strong style="color: #ff7b72;">🔴 The Friction Point :</strong> Remote marine vessels traversing deep-sea routes suffer persistent satellite drops. Traditional logging systems freeze, crash, or permanently drop critical mechanical telemetry data when connectivity fails, creating major compliance blind spots and engineering gaps.
         </li>
         <li style="margin-bottom: 12px;">
-            <strong style="color: #79c0ff;">⚙️ The Architecture Map (The Technical Fix):</strong> Engineered an unbuffered, air-gapped edge pipeline utilizing asynchronous Python concurrency locks and thread-safe data structures to isolate, buffer, and preserve streaming vessel telemetry locally within hardware RAM during communication blackouts.
+            <strong style="color: #79c0ff;">⚙️ The Architectural Fix :</strong> Engineered an unbuffered, air-gapped edge pipeline utilizing asynchronous Python concurrency locks and thread-safe data structures to isolate, buffer, and preserve streaming vessel telemetry locally within hardware RAM during communication blackouts.
         </li>
     </ul>
 
@@ -88,7 +88,7 @@ graph TD
             <strong style="color: #d19a66;">🚨 Disaster Recovery & Field Troubleshooting:</strong> If a hardware node crashes or encounters a sudden power loss on-site, check runtime diagnostic log paths instantly using <code>docker logs edge-concurrency-engine</code>. Run <code>docker restart edge-concurrency-engine</code> to restore the autonomous processing baseline seamlessly.
         </li>
         <li style="margin-bottom: 0;">
-            <strong style="color: #56b6c2;">🟢 The Business Result (The Commercial ROI):</strong> Slashes specialized manual data recovery overhead and data exposure hazards to absolute zero, recovering over <span style="font-weight: bold; color: #e5c07b;">65,000 dollars annually</span> in administrative engineering costs.
+            <strong style="color: #56b6c2;">🟢 The Business Result (Commercial ROI):</strong> Slashes specialized manual data recovery overhead and data exposure hazards to absolute zero, recovering over <span style="font-weight: bold; color: #e5c07b;">65,000 dollars annually</span> in administrative engineering costs.
         </li>
     </ul>
 </div>
@@ -111,10 +111,10 @@ graph TD
 
     <ul style="padding-left: 20px; color: #c9d1d9; font-size: 1.05rem; line-height: 1.7;">
         <li style="margin-bottom: 12px;">
-            <strong style="color: #ff7b72;">🔴 The Friction Point (The Before):</strong> Updating internal software applications on cargo vessels at sea historically requires specialized technicians to travel to regional ports, causing severe deployment bottlenecks and expensive logistical delays.
+            <strong style="color: #ff7b72;">🔴 The Friction Point :</strong> Updating internal software applications on cargo vessels at sea historically requires specialized technicians to travel to regional ports, causing severe deployment bottlenecks and expensive logistical delays.
         </li>
         <li style="margin-bottom: 12px;">
-            <strong style="color: #79c0ff;">⚙️ The Architecture Map (The Technical Fix):</strong> Built an automated over-the-air GitOps delivery conveyor belt utilizing GitHub Actions and secure Docker package abstractions to compile, verify, and stream rolling microservice configuration updates directly to remote data nodes.
+            <strong style="color: #79c0ff;">⚙️ The Architectural Fix :</strong> Built an automated over-the-air GitOps delivery conveyor belt utilizing GitHub Actions and secure Docker package abstractions to compile, verify, and stream rolling microservice configuration updates directly to remote data nodes.
         </li>
     </ul>
 
@@ -139,21 +139,63 @@ graph TD
             <strong style="color: #d19a66;">🚨 Disaster Recovery & Field Troubleshooting:</strong> If a container registry authentication handshake timeout occurs due to deep-sea satellite link clipping, operator intervention is not required. The engine’s built-in secure permissions configuration block (<code>packages: write</code>) will automatically re-verify single-use token handshakes on the next sequential git event.
         </li>
         <li style="margin-bottom: 0;">
-            <strong style="color: #56b6c2;">🟢 The Business Result (The Commercial ROI):</strong> Eliminates port technician unnecessary travel expenses completely and cuts deployment errors to absolute zero, saving the fleet company over <span style="font-weight: bold; color: #e5c07b;">74,000 dollars a year</span> in manual operational costs.
+            <strong style="color: #56b6c2;">🟢 The Business Result (Commercial ROI):</strong> Eliminates port technician unnecessary travel expenses completely and cuts deployment errors to absolute zero, saving the fleet company over <span style="font-weight: bold; color: #e5c07b;">74,000 dollars a year</span> in manual operational costs.
         </li>
     </ul>
 </div>
 
+<!-- Project 03 Card -->
+<div style="background-color: #090d13; border: 1px solid #21262d; border-radius: 6px; padding: 25px; margin-bottom: 25px; box-shadow: 0 4px 6px rgba(0,0,0,0.2);">
+    <h3 style="margin-top: 0; font-size: 1.35rem; color: #79c0ff; font-weight: 600; border-bottom: none; padding-bottom: 0;">
+        Project 03: Multi-Module Decentralized Landing Grid (`maritime-cloud-coast-infrastructure`)
+    </h3>
+    
+    <div style="margin-top: 10px; margin-bottom: 20px;">
+        <span style="display: inline-block; background-color: #111827; border: 1px solid #1e3a8a; color: #60a5fa; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; margin-right: 5px;">AWS Architecture</span>
+        <span style="display: inline-block; background-color: #111827; border: 1px solid #1e3a8a; color: #60a5fa; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; margin-right: 5px;">HashiCorp Terraform</span>
+        <span style="display: inline-block; background-color: #111827; border: 1px solid #1e3a8a; color: #60a5fa; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; margin-right: 5px;">Security Hardening</span>
+    </div>
 
-### Project 03: Multi-Module Decentralized Landing Grid (`maritime-cloud-coast-infrastructure`)
-*   **The Friction Point:** Manual cloud dashboard setup patterns for port receiving stations created un-audited infrastructure environments, exposed open database ingress ports, and increased vulnerability to data breach vectors.
-*   **The Technical Fix:** Designed a highly decoupled, modular Infrastructure-as-Code landing zone layout using HashiCorp Terraform to programmatically provision an isolated virtual network perimeter secured by tight network firewall rules.
-*   **On-Site Deployment Checklist:**
-    1. Navigate to the core IaC deck: `git clone https://://github.com/maritime-cloud-coast-infrastructure.git && cd maritime-cloud-coast-infrastructure/terraform`
-    2. Initialize local state files: `terraform init`
-    3. Deploy the network perimeter: `terraform apply -auto-approve`
-*   **Disaster Recovery State:** In the event of configuration drift or manual firewall port tampering, execute `terraform apply -auto-approve` to automatically tear down unauthorized network paths and restore the secure infrastructure baseline.
-*   **Commercial ROI:** Enforces absolute security isolation and saves an estimated 65,000 dollars annually in regulatory data compliance audit liabilities.
+    <p style="font-size: 0.9rem; color: #8b949e; margin-bottom: 20px;">
+        ⚙️ Source Registry Tracking Log: <a href="https://github.com" target="_blank" style="color: #58a6ff; text-decoration: none;">://github.com</a>
+    </p>
+
+    <ul style="padding-left: 20px; color: #c9d1d9; font-size: 1.05rem; line-height: 1.7;">
+        <li style="margin-bottom: 12px;">
+            <strong style="color: #ff7b72;">🔴 The Friction Point :</strong> Manual cloud web dashboard configurations for port receiving stations created un-audited cloud environments, left sensitive billing configurations tracking blind, and exposed open ingestion database ports to open public scanning.
+        </li>
+        <li style="margin-bottom: 12px;">
+            <strong style="color: #79c0ff;">⚙️ The Architectural Fix :</strong> Designed a highly decoupled, multi-module Infrastructure-as-Code(Iac) landing zone layout using HashiCorp Terraform to programmatically provision an isolated virtual network perimeter secured by tight network firewall rules and encrypted AWS S3 storage vaults.
+        </li>
+    </ul>
+
+    <!-- Visual Architectural Diagram - Rendered Directly After Technical Fix -->
+    <div class="mermaid" style="background-color: #0b0f17; border: 1px solid #1e3a8a; border-radius: 6px; padding: 20px; margin: 25px 0;">
+graph TD
+    A[🎛️ Terraform Master Control Cockpit] -->|Deploy Submodule| B[🛡️ AWS VPC Network Perimeter Isolation]
+    A -->|Deploy Submodule| C[🔒 AWS S3 Storage Vault Layer]
+    B -->|Firewall Port 1883 Ingress Filter| D[📡 Encapsulated Telemetry Streams]
+    C -->|Mandatory Encryption Enforced| E[🔐 Hardware AES256 At Rest]
+    classDef default fill:#0d1117,stroke:#388bfd,color:#c9d1d9;
+    classDef highlight fill:#161b22,stroke:#98c379,stroke-width:2px,color:#98c379;
+    class C,E highlight;
+    </div>
+
+    <ul style="padding-left: 20px; color: #c9d1d9; font-size: 1.05rem; line-height: 1.7; margin-top: 20px;">
+        <li style="margin-bottom: 12px;">
+            <strong style="color: #58a6ff;">🛠️ On-Site Field Deployment Checklist:</strong>
+            <br><span style="font-family: monospace; font-size: 0.9rem; color: #8b949e;">1. Clone the core IaC blueprints natively:</span> <code style="background-color: #1f242c; padding: 3px 6px; border-radius: 4px; font-size: 0.9rem; color: #ff7b72;">git clone https://github.com.git && cd maritime-cloud-coast-infrastructure/terraform</code>
+            <br><span style="font-family: monospace; font-size: 0.9rem; color: #8b949e;">2. Initialize local state files and providers:</span> <code style="background-color: #1f242c; padding: 3px 6px; border-radius: 4px; font-size: 0.9rem; color: #ff7b72;">terraform init</code>
+            <br><span style="font-family: monospace; font-size: 0.9rem; color: #8b949e;">3. Programmatically deploy the network perimeter:</span> <code style="background-color: #1f242c; padding: 3px 6px; border-radius: 4px; font-size: 0.9rem; color: #ff7b72;">terraform apply -auto-approve</code>
+        </li>
+        <li style="margin-bottom: 12px;">
+            <strong style="color: #d19a66;">🚨 Disaster Recovery & Field Troubleshooting:</strong> In the event of manual web panel interference or environment configuration drift, run the self-healing idempotency recovery line: <code>terraform apply -auto-approve</code>. This command automatically cross-references state parameters, destroys un-audited access loops, and perfectly restores your secure network perimeter instantly.
+        </li>
+        <li style="margin-bottom: 0;">
+            <strong style="color: #56b6c2;">🟢 The Business Result (Commercial ROI):</strong> Enforces absolute security isolation and data protection across stations, completely removing manual hardening overhead to save an estimated <span style="font-weight: bold; color: #e5c07b;">65,000 dollars annually</span> in compliance audit failures.
+        </li>
+    </ul>
+</div>
 
 ---
 
