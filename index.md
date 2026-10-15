@@ -459,10 +459,52 @@ graph TD
     </ul>
 </div>
 
-### Project 09: Enterprise Subscription Billing and Financial Churn Mitigation Grid
-*   **The Friction Point:** Large-scale digital platforms bleed revenue silently due to failed subscription transactions, mismatched invoicing logs, and unrevoked credentials when client cards decline, forcing accounting teams to waste 30 plus hours a week manually cross-referencing records.
-*   **The Technical Fix:** Designed a secure, automated financial recovery grid utilizing Make.com enterprise routing architectures and real-time Stripe webhook listeners. When a transaction status changes in Stripe, an encrypted webhook splits the event into immediate automated action paths: updating CRM custom billing indicators, locking access protocols dynamically on the day of failure, and deploying multi-stage automated dunning communication loops linking directly to self-service customer invoicing portal frameworks.
-*   **Commercial ROI:** Data tracking gaps plummeted to zero. The automated dunning infrastructure successfully catches and recovers 87 percent of all failed billing cycles within the first 30 days of deployment, instantly restoring over 15,600 dollars a month in high-margin recurring income.
+<!-- Project 09 Card -->
+<div style="background-color: #090d13; border: 1px solid #21262d; border-radius: 6px; padding: 25px; margin-bottom: 25px; box-shadow: 0 4px 6px rgba(0,0,0,0.2);">
+    <h3 style="margin-top: 0; font-size: 1.35rem; color: #79c0ff; font-weight: 600; border-bottom: none; padding-bottom: 0;">
+        Project 09: Enterprise Subscription Billing & Financial Churn Mitigation Grid
+    </h3>
+    
+    <div style="margin-top: 10px; margin-bottom: 20px;">
+        <span style="display: inline-block; background-color: #111827; border: 1px solid #1e3a8a; color: #60a5fa; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; margin-right: 5px;">Make.com Core</span>
+        <span style="display: inline-block; background-color: #111827; border: 1px solid #1e3a8a; color: #60a5fa; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; margin-right: 5px;">Stripe Webhooks</span>
+        <span style="display: inline-block; background-color: #111827; border: 1px solid #1e3a8a; color: #60a5fa; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; margin-right: 5px;">Financial RevOps</span>
+    </div>
+
+    <ul style="padding-left: 20px; color: #c9d1d9; font-size: 1.05rem; line-height: 1.7;">
+        <li style="margin-bottom: 12px;">
+            <strong style="color: #ff7b72;">🔴 The Friction Point :</strong> An international 8-figure e-learning and agency brand handling over 5,000 active monthly client accounts was experiencing quiet revenue decay. Disconnected subscription billing engines failed to automatically revoke platform credentials when payment cards declined, forcing accounting teams to waste 30 plus hours a week manually cross-referencing logs and causing a silent 4% monthly revenue leakage equivalent to 18,000 dollars slipping away every single month.
+        </li>
+        <li style="margin-bottom: 12px;">
+            <strong style="color: #79c0ff;">⚙️ The Architectural Fix :</strong> Designed a secure, automated financial recovery grid using Make.com Enterprise architectures and real-time Stripe webhook routing listeners. When a transaction status changes in Stripe, an encrypted webhook splits the event into immediate automated action paths: updating CRM lifecycles, locking platform credentials dynamically on the day of failure, and deploying multi-stage dunning communication cascades linking directly to self-service portals.
+        </li>
+    </ul>
+
+    <!-- Visual Architectural Diagram - Rendered Directly After Technical Fix -->
+    <div class="mermaid" style="background-color: #0b0f17; border: 1px solid #1e3a8a; border-radius: 6px; padding: 20px; margin: 25px 0;">
+graph TD
+    A[💳 Stripe: Payment Failed Event] -->|Encrypted Webhook| B[⚙️ Make.com Enterprise Router]
+    B --> C[📊 HubSpot CRM Ledger Mapping]
+    B --> D[🔒 Security Gateway Access Control]
+    C -->|Flag Custom Billing Objects & Log Churn Risk| E[Automated Recovery Cascade]
+    D -->|Suspend Active Client Portal Access Instantly| E
+    E --> F[✉️ Trigger Multi-Stage Dunning Communication Engine]
+    E --> G[💳 Generate Secure Self-Service Stripe Invoicing Link]
+    classDef default fill:#0d1117,stroke:#388bfd,color:#c9d1d9;
+    classDef highlight fill:#161b22,stroke:#ff7b72,stroke-width:2px,color:#ff7b72;
+    class B,D highlight;
+    </div>
+
+    <ul style="padding-left: 20px; color: #c9d1d9; font-size: 1.05rem; line-height: 1.7; margin-top: 20px;">
+        <li style="margin-bottom: 12px;">
+            <strong style="color: #d19a66;">🚨 Data Performance Baseline:</strong> Revenue tracking gaps dropped to absolute zero and manual accounting reconciliation loops were entirely eliminated. The automated dunning infrastructure successfully catches and updates account parameters in under 2 seconds, maintaining absolute financial ledger alignment.
+        </li>
+        <li style="margin-bottom: 0;">
+            <strong style="color: #56b6c2;">🟢 The Business Result (Commercial ROI):</strong> Successfully caught and recovered 87% of all failed billing cycles within the first 30 days of deployment, instantly restoring over <span style="font-weight: bold; color: #e5c07b;">15,600 dollars a month</span> in high-margin recurring income.
+        </li>
+    </ul>
+</div>
+
 
 ### Project 10: Full-Stack Corporate Data Highway and Multi-App Consolidation Hub
 *   **The Friction Point:** Businesses operating across fragmented software platforms suffer heavy data silos. Staff waste 40 plus hours a week manually downloading CSV files from one tool, formatting rows, and uploading them into another just to keep cross-department records aligned.
