@@ -550,3 +550,57 @@ graph TD
     </ul>
 </div>
 
+<!-- Technical Skills Matrix Section Header -->
+<h2 style="font-size: 1.6rem; color: #58a6ff; font-weight: 600; border-bottom: 2px solid #21262d; padding-bottom: 8px; margin-top: 50px; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 0.5px;">
+    🛠️ TECHNICAL CORE EXPERTISE TERMINAL
+</h2>
+
+<!-- Skills Terminal Grid Container -->
+<div style="background-color: #161b22; border: 1px solid #30363d; border-radius: 6px; padding: 25px; box-shadow: 0 4px 6px rgba(0,0,0,0.2);">
+    
+    <div style="margin-bottom: 20px;">
+        <h4 style="margin: 0 0 10px 0; font-size: 1.1rem; color: #79c0ff; text-transform: uppercase; letter-spacing: 0.5px;">1. Cloud Infrastructure & Core DevOps (AWS Ecosystem Focus)</h4>
+        <p style="margin: 0; font-size: 1rem; color: #c9d1d9; line-height: 1.6;">
+            <strong>Cloud Infrastructure:</strong> AWS Ecosystem Administration (VPC Topology, S3 Encrypted Storage Vaults, IAM Least-Privilege Policies, CloudWatch Engine Metrics, EC2 Compute Layers). <br>
+            <strong>Orchestration & DevOps:</strong> HashiCorp Terraform (Decoupled Multi-Module Declarative IaC Staging), Kubernetes (K3s Remote Edge Clustering), Docker Containerization, Container Registries (GHCR.io), Git Version Source Control, GitHub Actions CI-CD Delivery Conveyor Belts. <br>
+            <strong>Network Isolation:</strong> Zero-Trust Security Perimeters, Ingress Firewall Security Groups, Port-Level Traffic Filtering (Port 1883), Subnet Ingress Isolation, Hardware AES256 Server-Side Encryption at Rest.
+        </p>
+    </div>
+
+    <div style="margin-bottom: 20px; border-top: 1px solid #21262d; padding-top: 15px;">
+        <h4 style="margin: 0 0 10px 0; font-size: 1.1rem; color: #79c0ff; text-transform: uppercase; letter-spacing: 0.5px;">2. Asynchronous Programming, Edge Computing, & Core Communication</h4>
+        <p style="margin: 0; font-size: 1rem; color: #c9d1d9; line-height: 1.6;">
+            <strong>Protocols & Transport:</strong> MQTT Protocol Broker Ingestion (Port 1883), Edge-to-Cloud Telemetry Streams, Serial Communication Interfaces. <br>
+            <strong>Concurrency Engines:</strong> Asynchronous Python (Asyncio, Threading Concurrency, Process Control Loops), Thread-Safe Local RAM Buffer Management, Low-Level Thread Locks (<code>threading.Lock</code>), Ring-Buffer Queue Engineering (<code>collections.deque</code>), Unbuffered Logging Systems. <br>
+            <strong>Resilience Frameworks:</strong> Offline-First Data Isolation, Self-Healing Back-Off Synchronization, Telemetry Payload Caching, Low-Bandwidth / High-Latency Edge Routing Systems, Satellite Link Dropout Mitigation.
+        </p>
+    </div>
+
+    <div style="margin-bottom: 20px; border-top: 1px solid #21262d; padding-top: 15px;">
+        <h4 style="margin: 0 0 10px 0; font-size: 1.1rem; color: #79c0ff; text-transform: uppercase; letter-spacing: 0.5px;">3. Full-Stack Web Development & Data Engineering</h4>
+        <p style="margin: 0; font-size: 1rem; color: #c9d1d9; line-height: 1.6;">
+            <strong>Backend Architectures:</strong> Full-Stack Systems Automation, Custom API Endpoint Interfacing, Web API Development, JSON Metadata Package Parsing, Relational Database Synchronization, Cloud Storage Buckets (S3, SQL Datastores). <br>
+            <strong>Frontend Interfaces:</strong> Lightweight Custom Web Interfaces, Dynamic Telemetry Dashboards, Live Operational Monitoring Layouts, Data Visualization, Form Ingestion Triage Handlers.
+        </p>
+    </div>
+
+    <div style="margin-bottom: 20px; border-top: 1px solid #21262d; padding-top: 15px;">
+        <h4 style="margin: 0 0 10px 0; font-size: 1.1rem; color: #79c0ff; text-transform: uppercase; letter-spacing: 0.5px;">4. Enterprise Workflow & Data Integration</h4>
+        <p style="margin: 0; font-size: 1rem; color: #c9d1d9; line-height: 1.6;">
+            <strong>Orchestration Stacks:</strong> n8n Enterprise Core Workflows, Make.com Enterprise Architecture, Real-Time Webhook Routing, Event-Driven Ingestion Channels, Schema Object Mapping. <br>
+            <strong>Corporate Integration Tools:</strong> HubSpot CRM Custom Object Mapping, Stripe Financial Infrastructure Integration, Stripe Webhook Listeners, Automated Dunning Cascades, Self-Service Billing Portals, Multi-App Cross-Department Data Consolidation.
+        </p>
+    </div>
+
+    <div style="border-top: 1px solid #21262d; padding-top: 15px;">
+        <h4 style="margin: 0 0 10px 0; font-size: 1.1rem; color: #79c0ff; text-transform: uppercase; letter-spacing: 0.5px;">5. LLMOps & Knowledge Engineering</h4>
+        <p style="margin: 0; font-size: 1rem; color: #c9d1d9; line-height: 1.6;">
+            <strong>AI Infrastructures:</strong> Retrieval-Augmented Generation (RAG Engine Architecture), Autonomous Multi-Agent Workflows, Context Extraction Architectures, Prompt Engineering Optimization, Secure Vector Storage Cluster Relational Synchronization.
+        </p>
+    </div>
+
+</div>
+
+<p style="text-align: center; color: #8b949e; font-size: 0.85rem; margin-top: 50px; font-family: monospace;">
+    // Deployed Autonomously via GitHub Pages Continuous Integration Framework
+</p>
