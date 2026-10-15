@@ -1,8 +1,35 @@
-# MUENI KITOKO
-### Edge DevOps & Systems Automation Portfolio
-* **Availability State:** Active | Fully available for global travel, independent contract infrastructure roles, and immediate on-site field or remote deployments.
-* **Direct Engineering Channel:** muenikitoko63@gmail.com | Nairobi, Kenya
-* **Core Source Control Profile:** [://github.com](https://://github.com)
+<div style="background-color: #161b22; border: 1px solid #30363d; border-left: 4px solid #388bfd; padding: 30px; border-radius: 6px; margin-bottom: 30px;">
+    <!-- Minimalist Software Engineering Symbol -->
+    <div style="font-family: monospace; font-size: 2.5rem; color: #58a6ff; margin-bottom: 15px;">&lt;/&gt;</div>
+    
+    <h1 style="margin: 0; font-size: 2.2rem; color: #58a6ff; font-weight: 600;">MUENI KITOKO</h1>
+    <p style="margin: 5px 0 20px 0; font-size: 1.25rem; font-weight: 500; color: #8b949e;">DevOps / Cloud Systems & Automation Engineer</p>
+    
+    <p style="font-size: 0.95rem; color: #8b949e; margin-bottom: 25px;">
+        📍 Nairobi, Kenya | ✉️ <a href="mail to:muenikitoko63@gmail.com" style="color: #58a6ff; text-decoration: none;">muenikitoko63@gmail.com</a> | 🐙 <a href="https://github.com" target="_blank" style="color: #58a6ff; text-decoration: none;">://github.com</a>
+    </p>
+
+    <h2 style="font-size: 1.15rem; color: #79c0ff; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 0.5px;">About Me / Core Value Proposition</h2>
+    <p style="font-size: 1.1rem; color: #e6edf3; line-height: 1.7; margin: 0 0 20px 0;">
+        A DevOps / Cloud Systems & Automation Engineer, I architect Decoupled Cloud & Edge Infrastructure, Automate Deployment workflows, and Engineer Absolute Security & Privacy Isolation, to guarantee 100% data continuity, and eliminate up to $74,000/year in manual operational waste.
+    </p>
+    
+    <div style="color: #58a6ff; font-size: 0.9rem; font-weight: 600; background-color: #0d1117; display: inline-block; padding: 6px 12px; border-radius: 4px; border: 1px solid #30363d; margin-bottom: 25px;">
+        🟢 Status: Available for immediate global travel and on-site and remote deployments.
+    </div>
+
+    <!-- Horizontal Experience Metrics Dashboard -->
+    <div style="display: flex; gap: 40px; border-top: 1px solid #21262d; padding-top: 20px; margin-top: 10px;">
+        <div>
+            <div style="font-size: 1.8rem; font-weight: bold; color: #58a6ff; line-height: 1;">1+</div>
+            <div style="font-size: 0.85rem; color: #8b949e; text-transform: uppercase; margin-top: 5px;">Years Active System Labs</div>
+        </div>
+        <div>
+            <div style="font-size: 1.8rem; font-weight: bold; color: #58a6ff; line-height: 1;">10+</div>
+            <div style="font-size: 0.85rem; color: #8b949e; text-transform: uppercase; margin-top: 5px;">Production Deployments Locked</div>
+        </div>
+    </div>
+</div>
 
 ---
 
