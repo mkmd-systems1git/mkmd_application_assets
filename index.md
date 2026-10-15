@@ -256,16 +256,58 @@ graph TD
     </ul>
 </div>
 
+<!-- Project 05 Card -->
+<div style="background-color: #090d13; border: 1px solid #21262d; border-radius: 6px; padding: 25px; margin-bottom: 25px; box-shadow: 0 4px 6px rgba(0,0,0,0.2);">
+    <h3 style="margin-top: 0; font-size: 1.35rem; color: #79c0ff; font-weight: 600; border-bottom: none; padding-bottom: 0;">
+        Project 05: Terraform Secure Perimeter Landing Zone (`isolated-cloud-landing-grid-secure-API`)
+    </h3>
+    
+    <div style="margin-top: 10px; margin-bottom: 20px;">
+        <span style="display: inline-block; background-color: #111827; border: 1px solid #1e3a8a; color: #60a5fa; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; margin-right: 5px;">AWS VPC Isolation</span>
+        <span style="display: inline-block; background-color: #111827; border: 1px solid #1e3a8a; color: #60a5fa; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; margin-right: 5px;">HashiCorp Terraform</span>
+        <span style="display: inline-block; background-color: #111827; border: 1px solid #1e3a8a; color: #60a5fa; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; margin-right: 5px;">AES256 Encryption</span>
+    </div>
 
-### Project 05: Terraform Secure Perimeter Landing Zone (`isolated-cloud-landing-grid-secure-API`)
-*   **The Friction Point:** Ad-hoc database deployments left private client ledgers and sensitive system credentials exposed to open public network scans, increasing data leak liabilities.
-*   **The Technical Fix:** Engineered a zero-trust declarative landing grid via HashiCorp Terraform modules, placing all storage persistence resources behind a strict edge firewall and wrapping data layers in mandatory hardware AES256 server-side encryption at rest.
-*   **On-Site Deployment Checklist:**
-    1. Clone the master security blueprints: `git clone https://://github.com/isolated-cloud-landing-grid-secure-API.git && cd isolated-cloud-landing-grid-secure-API/terraform`
-    2. Initialize the module layers: `terraform init`
-    3. Deploy the private vault: `terraform apply -auto-approve`
-*   **Disaster Recovery State:** If a firewall parameter drift occurs due to manual web panel adjustments, execute the self-healing line `terraform apply -auto-approve` to tear down un-audited paths. If a bucket naming conflict occurs, open `modules/storage_vault/main.tf`, modify the `bucket` tracking name string to an enterprise unique variable, and re-run the apply line.
-*   **Commercial ROI:** Guarantees absolute privacy isolation, protecting high-value business assets and removing data exposure hazards, saving an estimated 65,000 dollars annually in corporate compliance audit liabilities.
+    <p style="font-size: 0.9rem; color: #8b949e; margin-bottom: 20px;">
+        ⚙️ Source Registry Tracking Log: <a href="https://github.com" target="_blank" style="color: #58a6ff; text-decoration: none;">://github.com</a>
+    </p>
+
+    <ul style="padding-left: 20px; color: #c9d1d9; font-size: 1.05rem; line-height: 1.7;">
+        <li style="margin-bottom: 12px;">
+            <strong style="color: #ff7b72;">🔴 The Friction Point :</strong> Ad-hoc cloud server and database deployments left private client ledgers and sensitive system credentials exposed to open public network scans, increasing data leak liabilities and security exposures.
+        </li>
+        <li style="margin-bottom: 12px;">
+            <strong style="color: #79c0ff;">⚙️ The Architectural Fix :</strong> Engineered a zero-trust declarative landing grid via HashiCorp Terraform modules, placing all storage persistence resources behind a strict edge firewall and wrapping data layers in mandatory hardware AES-256 server-side encryption at rest.
+        </li>
+    </ul>
+
+    <!-- Visual Architectural Diagram - Rendered Directly After Technical Fix -->
+    <div class="mermaid" style="background-color: #0b0f17; border: 1px solid #1e3a8a; border-radius: 6px; padding: 20px; margin: 25px 0;">
+graph TD
+    A[☁️ AWS Virtual Private Cloud Perimeter] --> B[🛡️ Security Group Ingress Traffic Filter]
+    B -->|Restrict to Port 1883 Inbound| C[🗄️ Isolated Private Network Subnet]
+    C --> D[🔒 AWS S3 Storage Vault Layer]
+    D -->|Enforce Access Control Rules| E[🔐 Hardware AES256 Server-Side Encryption]
+    classDef default fill:#0d1117,stroke:#388bfd,color:#c9d1d9;
+    classDef highlight fill:#161b22,stroke:#388bfd,stroke-width:2px,color:#58a6ff;
+    class B,D,E highlight;
+    </div>
+
+    <ul style="padding-left: 20px; color: #c9d1d9; font-size: 1.05rem; line-height: 1.7; margin-top: 20px;">
+        <li style="margin-bottom: 12px;">
+            <strong style="color: #58a6ff;">🛠️ On-Site Field Deployment Checklist:</strong>
+            <br><span style="font-family: monospace; font-size: 0.9rem; color: #8b949e;">1. Clone the master security blueprints:</span> <code style="background-color: #1f242c; padding: 3px 6px; border-radius: 4px; font-size: 0.9rem; color: #ff7b72;">git clone https://github.com.git && cd isolated-cloud-landing-grid-secure-API/terraform</code>
+            <br><span style="font-family: monospace; font-size: 0.9rem; color: #8b949e;">2. Initialize the multi-module layer providers:</span> <code style="background-color: #1f242c; padding: 3px 6px; border-radius: 4px; font-size: 0.9rem; color: #ff7b72;">terraform init</code>
+            <br><span style="font-family: monospace; font-size: 0.9rem; color: #8b949e;">3. Programmatically provision the private landing grid:</span> <code style="background-color: #1f242c; padding: 3px 6px; border-radius: 4px; font-size: 0.9rem; color: #ff7b72;">terraform apply -auto-approve</code>
+        </li>
+        <li style="margin-bottom: 12px;">
+            <strong style="color: #d19a66;">🚨 Disaster Recovery & Field Troubleshooting:</strong> If an external administrator introduces configuration drift by making manual updates via the cloud console dashboard, execute <code>terraform apply -auto-approve</code>. This immediately forces the infrastructure baseline to re-align, tearing down un-audited network paths. If a bucket naming conflict occurs, open <code>modules/storage_vault/main.tf</code>, change the unique bucket variable tracking text string, and re-run your apply command.
+        </li>
+        <li style="margin-bottom: 0;">
+            <strong style="color: #56b6c2;">🟢 The Business Result (Commercial ROI):</strong> Establishes absolute privacy isolation across data tiers, eliminating security exposure vectors and saving an estimated <span style="font-weight: bold; color: #e5c07b;">65,000 dollars annually</span> in compliance audit liabilities.
+        </li>
+    </ul>
+</div>
 
 ### Project 06: Sovereign Enterprise LLMOps Ingestion & Context RAG Engine
 *   **The Friction Point:** Corporate leadership teams lose hours cross-referencing disconnected document directories to extract context for critical business decisions, while sharing data with public third-party AI interfaces risks severe intellectual property leaks.
