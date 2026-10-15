@@ -309,10 +309,50 @@ graph TD
     </ul>
 </div>
 
-### Project 06: Sovereign Enterprise LLMOps Ingestion & Context RAG Engine
-*   **The Friction Point:** Corporate leadership teams lose hours cross-referencing disconnected document directories to extract context for critical business decisions, while sharing data with public third-party AI interfaces risks severe intellectual property leaks.
-*   **The Technical Fix:** We engineered an automated context retrieval engine (a RAG) and deployed a custom autonomous AI Agent network using LLMOps framework architectures and n8n data pipelines. When a new internal asset or technical update is uploaded, an event listener instantly triggers a multi-stage prompt infrastructure to parse contents and sync structural logs dynamically.
-*   **Commercial ROI:** Corporate data latency dropped to less than 12 seconds. Eliminates 90 percent of system administrative lookup bottlenecks, reclaiming over 40 hours monthly of strategic leadership focus every single month while maintaining absolute internal data privacy.
+<!-- Project 06 Card -->
+<div style="background-color: #090d13; border: 1px solid #21262d; border-radius: 6px; padding: 25px; margin-bottom: 25px; box-shadow: 0 4px 6px rgba(0,0,0,0.2);">
+    <h3 style="margin-top: 0; font-size: 1.35rem; color: #79c0ff; font-weight: 600; border-bottom: none; padding-bottom: 0;">
+        Project 06: Sovereign Enterprise LLMOps Ingestion & Context RAG Engine
+    </h3>
+    
+    <div style="margin-top: 10px; margin-bottom: 20px;">
+        <span style="display: inline-block; background-color: #111827; border: 1px solid #1e3a8a; color: #60a5fa; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; margin-right: 5px;">LLMOps Architecture</span>
+        <span style="display: inline-block; background-color: #111827; border: 1px solid #1e3a8a; color: #60a5fa; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; margin-right: 5px;">Vector Cluster Sync</span>
+        <span style="display: inline-block; background-color: #111827; border: 1px solid #1e3a8a; color: #60a5fa; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; margin-right: 5px;">n8n AI Workflows</span>
+    </div>
+
+    <ul style="padding-left: 20px; color: #c9d1d9; font-size: 1.05rem; line-height: 1.7;">
+        <li style="margin-bottom: 12px;">
+            <strong style="color: #ff7b72;">🔴 The Friction Point :</strong> Corporate leadership teams lose up to 12 hours weekly cross-referencing disconnected document directories to extract context for investor pitches and strategic decisions. Concurrently, transmitting sensitive internal cloud deployment variables and corporate assets to public AI interfaces introduces severe intellectual property leak vulnerabilities.
+        </li>
+        <li style="margin-bottom: 12px;">
+            <strong style="color: #79c0ff;">⚙️ The Architectural Fix :</strong> Engineered an automated context retrieval engine (RAG) and deployed a custom autonomous AI Agent network using LLMOps framework architectures and n8n data pipelines. When a new corporate asset is uploaded, an event listener instantly parses content using precise prompt optimization models and synchronizes vector updates into secure relational database clusters.
+        </li>
+    </ul>
+
+    <!-- Visual Architectural Diagram - Rendered Directly After Technical Fix -->
+    <div class="mermaid" style="background-color: #0b0f17; border: 1px solid #1e3a8a; border-radius: 6px; padding: 20px; margin: 25px 0;">
+graph TD
+    A[📂 Internal Asset / Corporate Update Upload] -->|Event Trigger| B[⚙️ n8n AI Orchestration Core]
+    B --> C[🔏 Custom LLMOps Prompt Stack Layer]
+    B --> D[🧬 Relational Database Vector Sync Cluster]
+    C -->|Extract Structural Metrics| E[Structured Content Payload]
+    D -->|Update Centralized Knowledge Base| E
+    E --> F[🖥️ Push Interactive Summary to Founder Dashboard]
+    classDef default fill:#0d1117,stroke:#388bfd,color:#c9d1d9;
+    classDef highlight fill:#161b22,stroke:#58a6ff,stroke-width:2px,color:#58a6ff;
+    class B,C,D highlight;
+    </div>
+
+    <ul style="padding-left: 20px; color: #c9d1d9; font-size: 1.05rem; line-height: 1.7; margin-top: 20px;">
+        <li style="margin-bottom: 12px;">
+            <strong style="color: #d19a66;">🚨 Performance & Maintenance Baseline:</strong> By containerizing the core LLM orchestration stack and anchoring vector lookups entirely within a private network perimeter, documentation processing speeds execute in under 12 seconds. Technical data lookups achieve absolute consistency with manual administrative overhead dropping to zero.
+        </li>
+        <li style="margin-bottom: 0;">
+            <strong style="color: #56b6c2;">🟢 The Business Result (Commercial ROI):</strong> Completely eliminates executive administrative drag, reclaiming over <span style="font-weight: bold; color: #e5c07b;">40 hours monthly</span> of high-value leadership focus while guaranteeing 100 percent internal data privacy isolation.
+        </li>
+    </ul>
+</div>
 
 ---
 
