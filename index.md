@@ -505,8 +505,48 @@ graph TD
     </ul>
 </div>
 
+<!-- Project 10 Card -->
+<div style="background-color: #090d13; border: 1px solid #21262d; border-radius: 6px; padding: 25px; margin-bottom: 25px; box-shadow: 0 4px 6px rgba(0,0,0,0.2);">
+    <h3 style="margin-top: 0; font-size: 1.35rem; color: #79c0ff; font-weight: 600; border-bottom: none; padding-bottom: 0;">
+        Project 10: Full-Stack Corporate Data Highway & Multi-App Consolidation Hub
+    </h3>
+    
+    <div style="margin-top: 10px; margin-bottom: 20px;">
+        <span style="display: inline-block; background-color: #111827; border: 1px solid #1e3a8a; color: #60a5fa; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; margin-right: 5px;">Full-Stack API</span>
+        <span style="display: inline-block; background-color: #111827; border: 1px solid #1e3a8a; color: #60a5fa; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; margin-right: 5px;">Data Pipelines</span>
+        <span style="display: inline-block; background-color: #111827; border: 1px solid #1e3a8a; color: #60a5fa; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; margin-right: 5px;">n8n Enterprise</span>
+    </div>
 
-### Project 10: Full-Stack Corporate Data Highway and Multi-App Consolidation Hub
-*   **The Friction Point:** Businesses operating across fragmented software platforms suffer heavy data silos. Staff waste 40 plus hours a week manually downloading CSV files from one tool, formatting rows, and uploading them into another just to keep cross-department records aligned.
-*   **The Technical Fix:** Engineered a unified corporate data hub by combining full-stack web architectures with secure cloud DevOps infrastructure and robust n8n enterprise instances. Built secure API webhooks to listen to all 12 fragmented corporate apps, capturing, parsing, and cleaning incoming multi-platform JSON packages to completely normalize and structure raw data points into organized relational database tables for absolute consistency across all departments.
-*   **Commercial ROI:** Cross-platform data fragmentation dropped to absolute zero. Permanently eliminated manual file transfers from daily operations, instantly slashing software subscription costs by 34,000 dollars a year while providing leadership with an accurate, real-time look at true profit margins.
+    <ul style="padding-left: 20px; color: #c9d1d9; font-size: 1.05rem; line-height: 1.7;">
+        <li style="margin-bottom: 12px;">
+            <strong style="color: #ff7b72;">🔴 The Friction Point :</strong> A high-volume B2B enterprise generating mid-7-figures was experiencing severe internal data fragmentation across disconnected platforms (marketing, CRMs, billing, inventory, and fulfillment). Operations staff spent 40 plus hours a week manually downloading CSV files from one tool, formatting rows, and uploading them into another just to align records, causing costly mistakes and blinding profit margins.
+        </li>
+        <li style="margin-bottom: 12px;">
+            <strong style="color: #79c0ff;">⚙️ The Architecture Map (The Technical Fix):</strong> Engineered a unified corporate data hub by combining full-stack web architectures with secure cloud DevOps infrastructure and robust n8n enterprise instances. Built secure API webhooks to listen to all 12 fragmented applications, capturing, parsing, and cleaning incoming multi-platform JSON packages to completely normalize and structure raw data points into organized relational database tables for absolute consistency across all departments.
+        </li>
+    </ul>
+
+    <!-- Visual Architectural Diagram - Rendered Directly After Technical Fix -->
+    <div class="mermaid" style="background-color: #0b0f17; border: 1px solid #1e3a8a; border-radius: 6px; padding: 20px; margin: 25px 0;">
+graph TD
+    A[🌐 12 Disconnected Corporate Apps] -->|Fragmented API Webhooks| B[🛡️ Secure Cloud DevOps Gateway]
+    B --> C[⚙️ n8n Master Orchestration Engine]
+    C --> D[🔏 Full-Stack Data Normalization Layer]
+    D --> E[🗄️ Centralized Relational Database Hub]
+    E --> F[🖥️ Real-Time Executive Performance Dashboard]
+    E --> G[🔒 Automated Security Compliance Logs]
+    classDef default fill:#0d1117,stroke:#388bfd,color:#c9d1d9;
+    classDef highlight fill:#161b22,stroke:#58a6ff,stroke-width:2px,color:#58a6ff;
+    class B,C,E highlight;
+    </div>
+
+    <ul style="padding-left: 20px; color: #c9d1d9; font-size: 1.05rem; line-height: 1.7; margin-top: 20px;">
+        <li style="margin-bottom: 12px;">
+            <strong style="color: #d19a66;">🚨 Data Performance Baseline:</strong> Cross-platform data fragmentation dropped to absolute zero and manual CSV file-transfers were permanently eliminated.
+        </li>
+        <li style="margin-bottom: 0;">
+            <strong style="color: #56b6c2;">🟢 The Business Result (Commercial ROI):</strong> Instantly slashed software subscription costs by <span style="font-weight: bold; color: #e5c07b;">34,000 dollars a year</span>, saved hundreds of weekly staff hours, and provided leadership with a completely accurate real-time look at true profit margins.
+        </li>
+    </ul>
+</div>
+
