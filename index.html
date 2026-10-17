@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MUENI KITOKO | Portfolio Control Center</title>
+    <style>
+        body {
+            background-color: #0d1117;
+            color: #c9d1d9;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 40px max(20px, (100% - 1000px) / 2);
+        }
+        .header-box { background-color: #161b22; border: 1px solid #30363d; border-left: 4px solid #388bfd; padding: 30px; border-radius: 6px; margin-bottom: 30px; }
+        h1 { margin: 0; font-size: 2.2rem; color: #58a6ff; font-weight: 600; }
+        .title-sub { margin: 5px 0 20px 0; font-size: 1.25rem; font-weight: 500; color: #8b949e; }
+        .offer-text { font-size: 1.1rem; color: #e6edf3; line-height: 1.7; margin: 0 0 20px 0; }
+        .status-badge { color: #58a6ff; font-size: 0.9rem; font-weight: 600; background-color: #0d1117; display: inline-block; padding: 6px 12px; border-radius: 4px; border: 1px solid #30363d; margin-bottom: 25px; }
+        .metrics-bar { display: flex; gap: 40px; border-top: 1px solid #21262d; padding-top: 20px; }
+        .metric-num { font-size: 1.8rem; font-weight: bold; color: #58a6ff; line-height: 1; }
+        .metric-lbl { font-size: 0.85rem; color: #8b949e; text-transform: uppercase; margin-top: 5px; }
+        
+        /* 4-Card Dashboard Menu Layout Grid */
+        .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-bottom: 40px; }
+        .menu-card { background-color: #161b22; border: 1px solid #30363d; border-radius: 6px; padding: 25px; text-align: center; cursor: pointer; transition: transform 0.2s, border-color 0.2s; }
+        .menu-card:hover { transform: translateY(-3px); border-color: #388bfd; background-color: #1c2128; }
+        .menu-card h2 { margin: 0 0 10px 0; font-size: 1.2rem; color: #58a6ff; text-transform: uppercase; letter-spacing: 0.5px; }
+        .menu-card p { margin: 0; font-size: 0.9rem; color: #8b949e; }
+        
+        /* View Content Display Drawers */
+        .content-panel { display: none; background-color: #161b22; border: 1px solid #30363d; border-radius: 6px; padding: 30px; animation: fadeIn 0.3s ease; }
+        .project-block { background-color: #0d1117; border: 1px solid #21262d; border-radius: 6px; padding: 25px; margin-bottom: 30px; }
+        .project-block h3 { margin-top: 0; color: #79c0ff; font-size: 1.3rem; border-bottom: 1px solid #21262d; padding-bottom: 8px; }
+        .tags-row { margin-bottom: 15px; }
+        .tag { display: inline-block; background-color: #111827; border: 1px solid #1e3a8a; color: #60a5fa; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; margin-right: 5px; }
+        .src-link { font-size: 0.9rem; color: #8b949e; margin-bottom: 15px; }
+        .src-link a { color: #388bfd; text-decoration: none; }
+        .src-link a:hover { text-decoration: underline; }
+        ul { padding-left: 20px; margin: 15px 0; }
+        li { margin-bottom: 10px; font-size: 1.05rem; }
+        code { background-color: #1f242c; padding: 3px 6px; border-radius: 4px; font-family: monospace; font-size: 0.9rem; color: #ff7b72; }
+        
+        /* High-Signal Architecture Diagrams (Pure HTML Canvas Layout) */
+        .diagram-container { background-color: #0d1117; border: 1px solid #1e3a8a; border-radius: 6px; padding: 20px; margin: 20px 0; font-family: monospace; font-size: 0.9rem; }
+        .dia-row { display: flex; align-items: center; justify-content: center; margin: 10px 0; }
+        .dia-box { background-color: #161b22; border: 1px solid #388bfd; padding: 10px 15px; border-radius: 4px; text-align: center; min-width: 180px; color: #c9d1d9; }
+        .dia-box.alert { border-color: #ff7b72; color: #ff7b72; }
+        .dia-arrow { color: #58a6ff; padding: 0 15px; font-weight: bold; }
+        
+        .skills-group { margin-bottom: 25px; }
+        .skills-group h4 { margin: 0 0 10px 0; font-size: 1.1rem; color: #79c0ff; text-transform: uppercase; }
+        
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+    <script>
+        function openDrawer(panelId) {
+            document.querySelectorAll('.content-panel').forEach(p => p.style.display = 'none');
+            document.getElementById(panelId).style.display = 'block';
+            document.getElementById(panelId).scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</head>
+<body>
+
+    <!-- Header Block Component -->
+    <div class="header-box">
+        <div style="font-family: monospace; font-size: 2.5rem; color: #388bfd; margin-bottom: 10px;">&lt;/&gt;</div>
+        <h1>MUENI KITOKO</h1>
+        <div class="title-sub">DevOps / Cloud Systems & Automation Engineer</div>
+        <p class="offer-text">
+            A DevOps / Cloud Systems & Automation Engineer. I architect Decoupled Cloud & Edge Infrastructure, Automate Deployment workflows, and I Engineer Absolute Security & Privacy Isolation, to guarantee 100% data continuity, and eliminate up to $74,000/year in manual operational waste.
+        </p>
+        <div class="status-badge">🟢 Status: Available for immediate global travel and on-site or remote deployments.</div>
+        <div style="font-size: 0.95rem; color: #8b949e;">
+            📍 Nairobi, Kenya | ✉️ <a href="mailto:muenikitoko63@gmail.com" style="color: #388bfd; text-decoration:none;">muenikitoko63@gmail.com</a> | 🐙 <a href="https://github.com" target="_blank" style="color: #388bfd; text-decoration:none;">://github.com</a>
+        </div>
+        
+        <div class="metrics-bar" style="margin-top: 25px;">
+            <div><div class="metric-num">1+</div><div class="metric-lbl">Years Active System Labs</div></div>
+            <div><div class="metric-num">10+</div><div class="metric-lbl">Projects Completed</div></div>
+        </div>
+    </div>
+
+    <!-- 4-Card Dashboard Control Deck Grid -->
+    <div class="dashboard-grid">
+        <div class="menu-card" onclick="openDrawer('maritime-panel')">
+            <h2>🚢 Maritime Edge</h2>
+            <p>3 Production Systems</p>
+        </div>
+        <div class="menu-card" onclick="openDrawer('zero-trust-panel')">
+            <h2>🔒 Zero-Trust</h2>
+            <p>3 Production Systems</p>
+        </div>
+        <div class="menu-card" onclick="openDrawer('ops-automation-panel')">
+            <h2>🚀 Ops Automation</h2>
+            <p>4 Production Systems</p>
+        </div>
+        <div class="menu-card" onclick="openDrawer('skills-panel')">
+            <h2>🛠️ Core Skills</h2>
+            <p>Full Terminal Stack</p>
+        </div>
+    </div>
+
+    <!-- DRAWER 1: MARITIME EDGE -->
+    <div id="maritime-panel" class="content-panel">
+        <h2 style="color:#58a6ff; margin-top:0;"> CATEGORY 1: MARITIME EDGE SYSTEMS & FIELD INGESTION</h2>
+        
+        <div class="project-block">
+            <h3>Project 01: Asynchronous Edge Concurrency Logging Loop (`maritime-edge-pipeline`)</h3>
+            <div class="tags-row"><span class="tag">Asynchronous Python</span><span class="tag">Thread-Safety</span><span class="tag">Edge Computing</span></div>
+            <div class="src-link">Tracking Log: <a href="https://github.com/maritime-edge-pipeline" target="_blank">://github.com/maritime-edge-pipeline</a></div>
+            <ul>
+                <li><strong style="color:#ff7b72;">🔴 The Friction Point:</strong> Remote marine vessels traversing deep-sea routes suffer persistent satellite drops. Traditional logging systems freeze, crash, or permanently drop critical telemetry records when connectivity fails, introducing severe data blind spots.</li>
+                <li><strong style="color:#79c0ff;">⚙️ The Architecture Map:</strong> Engineered an unbuffered, air-gapped edge pipeline utilizing asynchronous Python concurrency locks and thread-safe data structures to isolate, buffer, and preserve streaming vessel telemetry locally within hardware RAM during communication blackouts.</li>
+            </ul>
+            <div class="diagram-container">
+                <div class="dia-row"><div class="dia-box">📡 Vessel Sensor Telemetry</div><div class="dia-arrow">➔</div><div class="dia-box">🛰️ Edge Link Monitor</div></div>
+                <div class="dia-row" style="margin-left: 200px;"><div class="dia-arrow">🔽 Link Dead</div></div>
+                <div class="dia-row"><div class="dia-box alert">🔒 Thread-Locked RAM Buffer</div><div class="dia-arrow">➔</div><div class="dia-box">🔄 Auto Queue Flush Sync</div><div class="dia-arrow">➔</div><div class="dia-box">📤 Cloud Database Ingestion</div></div>
+            </div>
+            <ul>
+                <li><strong style="color:#58a6ff;">🛠️ On-Site Deployment Checklist:</strong><br>
+                    <code>git clone https://github.com/maritime-edge-pipeline.git && cd maritime-edge-pipeline</code><br>
+                    <code>docker build -t edge-pipeline:latest .</code><br>
+                    <code>docker run -d --name edge-engine --restart unless-stopped edge-pipeline:latest</code>
+                </li>
+                <li><strong style="color:#d19a66;">🚨 Disaster Recovery:</strong> If a hardware node crashes or encounters a sudden power loss on-site, check runtime diagnostic log paths instantly using <code>docker logs edge-engine</code>. Run <code>docker restart edge-engine</code> to restore the baseline seamlessly.</li>
+                <li><strong style="color:#56b6c2;">🟢 Commercial ROI:</strong> Recovering over <strong>$65,000 dollars annually</strong> in manual data recovery overhead.</li>
+            </ul>
+        </div>
+
+        <div class="project-block">
+
+          <!-- Project 02 Card Container Element -->
+<div style="background-color: #161b22; border: 1px solid #30363d; border-left: 4px solid #1e3a8a; border-radius: 6px; padding: 25px; margin-bottom: 25px; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+    <h3 style="margin-top: 0; margin-bottom: 5px; font-size: 1.35rem; color: #58a6ff; font-weight: 600;">
+        Project 02: Automated Over-the-Air Fleet Container Pipeline (`maritime-fleet-gitops`)
+    </h3>
+    
+    <!-- High-Signal Technical Tag Indicators -->
+    <div style="margin-bottom: 20px; margin-top: 10px;">
+        <span style="display: inline-block; background-color: #0d1117; border: 1px solid #1e3a8a; color: #58a6ff; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; margin-right: 5px; font-family: monospace;">GITOPS CD</span>
+        <span style="display: inline-block; background-color: #0d1117; border: 1px solid #1e3a8a; color: #58a6ff; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; margin-right: 5px; font-family: monospace;">DOCKER RUNTIMES</span>
+        <span style="display: inline-block; background-color: #0d1117; border: 1px solid #1e3a8a; color: #58a6ff; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; margin-right: 5px; font-family: monospace;">GITHUB ACTIONS CI-CD</span>
+    </div>
+
+    <p style="font-size: 0.9rem; color: #8b949e; margin-bottom: 20px; font-family: monospace;">
+        ⚙️ Source Registry Tracking Log: <a href="https://github.com" target="_blank" style="color: #58a6ff; text-decoration: none;">://github.com</a>
+    </p>
+
+    <ul style="padding-left: 20px; color: #c9d1d9; font-size: 1.05rem; line-height: 1.7; list-style-type: square;">
+        <li style="margin-bottom: 12px;">
+            <strong style="color: #ff7b72;">🔴 The Friction Point (The Before):</strong> Updating critical internal software application layers on cargo vessels at sea historically required specialized systems technicians to physically travel to regional ports, causing severe deployment bottlenecks and expensive shipping delays.
+        </li>
+        <li style="margin-bottom: 15px;">
+            <strong style="color: #79c0ff;">⚙️ The Architecture Map (The Technical Fix):</strong> Built an automated, over-the-air GitOps delivery conveyor belt utilizing GitHub Actions orchestration and secure Docker package abstractions to package, verify, and stream rolling microservice configuration updates directly to remote fleet data nodes.
+        </li>
+    </ul>
+
+    <!-- Perfect Visual Flowchart Block - Rendered Directly After Technical Fix -->
+    <div style="background-color: #0d1117; border: 1px solid #1e3a8a; border-radius: 6px; padding: 20px; margin: 25px 0; font-family: monospace; font-size: 0.9rem; color: #c9d1d9; box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);">
+        <div style="display: flex; align-items: center; justify-content: center; margin: 10px 0;">
+            <div style="background-color: #161b22; border: 1px solid #388bfd; padding: 10px 15px; border-radius: 4px; text-align: center; min-width: 180px;">💻 Local Git Push to main</div>
+            <div style="color: #58a6ff; padding: 0 15px; font-weight: bold;">➔</div>
+            <div style="background-color: #161b22; border: 1px solid #388bfd; padding: 10px 15px; border-radius: 4px; text-align: center; min-width: 180px;">⚙️ GitHub Actions CI-CD</div>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: center; margin: 15px 0;">
+            <div style="color: #58a6ff; font-weight: bold; transform: rotate(90deg); margin-left: 200px;">➔</div>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: center; margin: 10px 0;">
+            <div style="background-color: #161b22; border: 1px solid #388bfd; padding: 10px 15px; border-radius: 4px; text-align: center; min-width: 180px;">🚢 Remote Active Fleet Nodes</div>
+            <div style="color: #58a6ff; padding: 0 15px; font-weight: bold;">👤🗀</div>
+            <div style="background-color: #161b22; border: 1px solid #ff7b72; padding: 10px 15px; border-radius: 4px; text-align: center; min-width: 180px; color: #ff7b72;">📦 GHCR.io Registry Vault</div>
+        </div>
+    </div>
+
+    <ul style="padding-left: 20px; color: #c9d1d9; font-size: 1.05rem; line-height: 1.7; list-style-type: square; margin-top: 20px;">
+        <li style="margin-bottom: 12px;">
+            <strong style="color: #58a6ff;">🛠️ On-Site Field Deployment Checklist:</strong>
+            <br><span style="font-family: monospace; font-size: 0.9rem; color: #8b949e;">1. Clone the master delivery assets:</span> <code style="background-color: #1f242c; padding: 3px 6px; border-radius: 4px; font-size: 0.9rem; color: #ff7b72; font-family: monospace;">git clone https://github.com.git && cd maritime-fleet-gitops</code>
+            <br><span style="font-family: monospace; font-size: 0.9rem; color: #8b949e;">2. Review core YAML workflow deployment logic maps:</span> <code style="background-color: #1f242c; padding: 3px 6px; border-radius: 4px; font-size: 0.9rem; color: #ff7b72; font-family: monospace;">cat .github/workflows/deploy-pipeline.yml</code>
+        </li>
+        <li style="margin-bottom: 12px;">
+            <strong style="color: #d19a66;">🚨 Disaster Recovery & Field Troubleshooting:</strong> If a container registry authentication timeout occurs due to deep-sea satellite link clipping, operator intervention is not required. The engine’s built-in secure permissions configuration block (<code>packages: write</code>) will automatically re-verify single-use token handshakes on the next sequential git build event loop trigger.
+        </li>
+        <li style="margin-bottom: 0;">
+            <strong style="color: #56b6c2;">🟢 The Business Result (The Commercial ROI):</strong> Eliminates port technician travel expenses completely and cuts system configuration drift to absolute zero, saving the fleet company over <span style="font-weight: bold; color: #e5c07b;">74,000 dollars a year</span> in manual operational waste without expanding team overhead.
+        </li>
+    </ul>
+</div>
+
+          <!-- Project 03 Card Container Element -->
+<div style="background-color: #161b22; border: 1px solid #30363d; border-left: 4px solid #1e3a8a; border-radius: 6px; padding: 25px; margin-bottom: 25px; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+    <h3 style="margin-top: 0; margin-bottom: 5px; font-size: 1.35rem; color: #58a6ff; font-weight: 600;">
+        Project 03: Multi-Module Decentralized Landing Grid (`maritime-cloud-coast-infrastructure`)
+    </h3>
+    
+    <!-- High-Signal Technical Tag Indicators -->
+    <div style="margin-bottom: 20px; margin-top: 10px;">
+        <span style="display: inline-block; background-color: #0d1117; border: 1px solid #1e3a8a; color: #58a6ff; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; margin-right: 5px; font-family: monospace;">AWS CLOUD</span>
+        <span style="display: inline-block; background-color: #0d1117; border: 1px solid #1e3a8a; color: #58a6ff; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; margin-right: 5px; font-family: monospace;">HASHICORP TERRAFORM</span>
+        <span style="display: inline-block; background-color: #0d1117; border: 1px solid #1e3a8a; color: #58a6ff; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; margin-right: 5px; font-family: monospace;">SECURITY HARDENING</span>
+    </div>
+
+    <p style="font-size: 0.9rem; color: #8b949e; margin-bottom: 20px; font-family: monospace;">
+        ⚙️ Source Registry Tracking Log: <a href="https://github.com" target="_blank" style="color: #58a6ff; text-decoration: none;">://github.com</a>
+    </p>
+
+    <ul style="padding-left: 20px; color: #c9d1d9; font-size: 1.05rem; line-height: 1.7; list-style-type: square;">
+        <li style="margin-bottom: 12px;">
+            <strong style="color: #ff7b72;">🔴 The Friction Point (The Before):</strong> Manual cloud web dashboard configuration routines for port receiving data stations created un-audited infrastructure environments, left sensitive environments tracking blind, and exposed database ingress ports to public network scanning.
+        </li>
+        <li style="margin-bottom: 15px;">
+            <strong style="color: #79c0ff;">⚙️ The Architecture Map (The Technical Fix):</strong> Designed a highly decoupled, multi-module Infrastructure-as-Code landing zone layout using HashiCorp Terraform to programmatically provision an isolated virtual network perimeter secured by tight network firewall rules and encrypted AWS S3 storage vaults.
+        </li>
+    </ul>
+
+    <!-- Perfect Visual Flowchart Block - Rendered Directly After Technical Fix -->
+    <div style="background-color: #0d1117; border: 1px solid #1e3a8a; border-radius: 6px; padding: 20px; margin: 25px 0; font-family: monospace; font-size: 0.9rem; color: #c9d1d9; box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);">
+        <div style="display: flex; align-items: center; justify-content: center; margin: 10px 0;">
+            <div style="background-color: #161b22; border: 1px solid #388bfd; padding: 10px 15px; border-radius: 4px; text-align: center; min-width: 180px;">🎛️ Terraform Control Cockpit</div>
+            <div style="color: #58a6ff; padding: 0 15px; font-weight: bold;">➔</div>
+            <div style="background-color: #161b22; border: 1px solid #388bfd; padding: 10px 15px; border-radius: 4px; text-align: center; min-width: 180px;">🛡️ AWS VPC Network Perimeter</div>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: center; margin: 15px 0;">
+            <div style="color: #58a6ff; font-weight: bold; transform: rotate(90deg); margin-left: 200px;">➔</div>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: center; margin: 10px 0;">
+            <div style="background-color: #161b22; border: 1px solid #ff7b72; padding: 10px 15px; border-radius: 4px; text-align: center; min-width: 180px; color: #ff7b72;">🔐 Hardware AES256 Encryption</div>
+            <div style="color: #58a6ff; padding: 0 15px; font-weight: bold;">➔</div>
+            <div style="background-color: #161b22; border: 1px solid #388bfd; padding: 10px 15px; border-radius: 4px; text-align: center; min-width: 180px;">🔒 AWS S3 Storage Vault Layer</div>
+        </div>
+    </div>
+
+    <ul style="padding-left: 20px; color: #c9d1d9; font-size: 1.05rem; line-height: 1.7; list-style-type: square; margin-top: 20px;">
+        <li style="margin-bottom: 12px;">
+            <strong style="color: #58a6ff;">🛠️ On-Site Field Deployment Checklist:</strong>
+            <br><span style="font-family: monospace; font-size: 0.9rem; color: #8b949e;">1. Clone the core IaC blueprints natively:</span> <code style="background-color: #1f242c; padding: 3px 6px; border-radius: 4px; font-size: 0.9rem; color: #ff7b72; font-family: monospace;">git clone https://github.com.git && cd maritime-cloud-coast-infrastructure/terraform</code>
+            <br><span style="font-family: monospace; font-size: 0.9rem; color: #8b949e;">2. Initialize local state files and providers:</span> <code style="background-color: #1f242c; padding: 3px 6px; border-radius: 4px; font-size: 0.9rem; color: #ff7b72; font-family: monospace;">terraform init</code>
+            <br><span style="font-family: monospace; font-size: 0.9rem; color: #8b949e;">3. Programmatically deploy the network perimeter:</span> <code style="background-color: #1f242c; padding: 3px 6px; border-radius: 4px; font-size: 0.9rem; color: #ff7b72; font-family: monospace;">terraform apply -auto-approve</code>
+        </li>
+        <li style="margin-bottom: 12px;">
+            <strong style="color: #d19a66;">🚨 Disaster Recovery & Field Troubleshooting:</strong> In the event of manual dashboard configuration drift or unauthorized firewall modifications, run the self-healing idempotency recovery line: <code>terraform apply -auto-approve</code>. This command automatically evaluates active state files, tears down un-audited routing loops, and restores your secure network perimeter instantly.
+        </li>
+        <li style="margin-bottom: 0;">
+            <strong style="color: #56b6c2;">🟢 The Business Result (The Commercial ROI):</strong> Enforces absolute perimeter isolation and data layer separation across regional land stations, completely removing manual hardening overhead to save an estimated <span style="font-weight: bold; color: #e5c07b;">65,000 dollars annually</span> in compliance failures.
+        </li>
+    </ul>
+</div>
+
+          <h2 style="font-size: 1.6rem; color: #58a6ff; font-weight: 600; border-bottom: 2px solid #21262d; padding-bottom: 8px; margin-top: 50px; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 0.5px;"> CATEGORY 2: ZERO-TRUST PERIMETERS & PRIVACY ISOLATION</h2>
+
+          <!-- Project 04 Card Container Element -->
+<div style="background-color: #161b22; border: 1px solid #30363d; border-left: 4px solid #1e3a8a; border-radius: 6px; padding: 25px; margin-bottom: 25px; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+    <h3 style="margin-top: 0; margin-bottom: 5px; font-size: 1.35rem; color: #58a6ff; font-weight: 600;">
+        Project 04: High-Availability Edge Memory Queue Sync Agent (`-edge-memory-sync-agent`)
+    </h3>
+    
+    <!-- High-Signal Technical Tag Indicators -->
+    <div style="margin-bottom: 20px; margin-top: 10px;">
+        <span style="display: inline-block; background-color: #0d1117; border: 1px solid #1e3a8a; color: #58a6ff; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; margin-right: 5px; font-family: monospace;">LOW-LEVEL THREAD LOCKING</span>
+        <span style="display: inline-block; background-color: #0d1117; border: 1px solid #1e3a8a; color: #58a6ff; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; margin-right: 5px; font-family: monospace;">ASYNCHRONOUS PYTHON</span>
+        <span style="display: inline-block; background-color: #0d1117; border: 1px solid #1e3a8a; color: #58a6ff; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; margin-right: 5px; font-family: monospace;">FAULT ISOLATION</span>
+    </div>
+
+    <p style="font-size: 0.9rem; color: #8b949e; margin-bottom: 20px; font-family: monospace;">
+        ⚙️ Source Registry Tracking Log: <a href="https://github.com" target="_blank" style="color: #58a6ff; text-decoration: none;">://github.com</a>
+    </p>
+
+    <ul style="padding-left: 20px; color: #c9d1d9; font-size: 1.05rem; line-height: 1.7; list-style-type: square;">
+        <li style="margin-bottom: 12px;">
+            <strong style="color: #ff7b72;">🔴 The Friction Point (The Before):</strong> Intermittent communication link cutouts on remote hardware tracking terminals led to missing system logs and broken transactional histories, causing compliance failures and data recovery liabilities for private enterprise platforms.
+        </li>
+        <li style="margin-bottom: 15px;">
+            <strong style="color: #79c0ff;">⚙️ The Architecture Map (The Technical Fix):</strong> Implemented a self-healing edge synchronization loop utilizing an internal thread-safe ring-buffer queue (<code>collections.deque</code> and <code>threading.Lock</code>) that intercepts link dropouts and safely holds up to 500 telemetry payloads locally without data drops.
+        </li>
+    </ul>
+
+    <!-- Perfect Visual Flowchart Block - Rendered Directly After Technical Fix -->
+    <div style="background-color: #0d1117; border: 1px solid #1e3a8a; border-radius: 6px; padding: 20px; margin: 25px 0; font-family: monospace; font-size: 0.9rem; color: #c9d1d9; box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);">
+        <div style="display: flex; align-items: center; justify-content: center; margin: 10px 0;">
+            <div style="background-color: #161b22; border: 1px solid #388bfd; padding: 10px 15px; border-radius: 4px; text-align: center; min-width: 180px;">📡 Live Telemetry Stream</div>
+            <div style="color: #58a6ff; padding: 0 15px; font-weight: bold;">➔</div>
+            <div style="background-color: #161b22; border: 1px solid #ff7b72; padding: 10px 15px; border-radius: 4px; text-align: center; min-width: 180px; color: #ff7b72;">🔒 Low-Level Thread Lock</div>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: center; margin: 15px 0;">
+            <div style="color: #58a6ff; font-weight: bold; transform: rotate(90deg); margin-left: 200px;">➔</div>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: center; margin: 10px 0;">
+            <div style="background-color: #161b22; border: 1px solid #388bfd; padding: 10px 15px; border-radius: 4px; text-align: center; min-width: 180px;">📥 RAM collections.deque</div>
+            <div style="color: #58a6ff; padding: 0 15px; font-weight: bold;">➔</div>
+            <div style="background-color: #161b22; border: 1px solid #388bfd; padding: 10px 15px; border-radius: 4px; text-align: center; min-width: 180px;">🚀 Cloud Datastore Ingestion</div>
+        </div>
+    </div>
+
+    <ul style="padding-left: 20px; color: #c9d1d9; font-size: 1.05rem; line-height: 1.7; list-style-type: square; margin-top: 20px;">
+        <li style="margin-bottom: 12px;">
+            <strong style="color: #58a6ff;">🛠️ On-Site Field Deployment Checklist:</strong>
+            <br><span style="font-family: monospace; font-size: 0.9rem; color: #8b949e;">1. Clone the core asset vault:</span> <code style="background-color: #1f242c; padding: 3px 6px; border-radius: 4px; font-size: 0.9rem; color: #ff7b72; font-family: monospace;">git clone https://github.com.git && cd -edge-memory-sync-agent</code>
+            <br><span style="font-family: monospace; font-size: 0.9rem; color: #8b949e;">2. Build local immutable container image:</span> <code style="background-color: #1f242c; padding: 3px 6px; border-radius: 4px; font-size: 0.9rem; color: #ff7b72; font-family: monospace;">docker build -t edge-sync-agent:latest .</code>
+            <br><span style="font-family: monospace; font-size: 0.9rem; color: #8b949e;">3. Boot the active background daemon service:</span> <code style="background-color: #1f242c; padding: 3px 6px; border-radius: 4px; font-size: 0.9rem; color: #ff7b72; font-family: monospace;">docker run -d --name live-edge-agent --restart unless-stopped -e PYTHONUNBUFFERED=1 edge-sync-agent:latest</code>
+        </li>
+        <li style="margin-bottom: 12px;">
+            <strong style="color: #d19a66;">🚨 Disaster Recovery & Field Troubleshooting:</strong> Operator supervision is not required during connection drops. The memory queue caches records natively within RAM memory arrays, executing an automated 3-second bulk synchronization flush back to central cloud stores the exact millisecond link validation returns. If a container runtime gets corrupted, run <code>docker rm -f live-edge-agent</code> and re-run your step 3 boot command.
+        </li>
+        <li style="margin-bottom: 0;">
+            <strong style="color: #56b6c2;">🟢 The Business Result (The Commercial ROI):</strong> Drives data drops and edge liabilities down to absolute zero, securing transaction history logs and recovering over <span style="font-weight: bold; color: #e5c07b;">65,000 dollars a year</span> in system repair and manual recovery costs.
+        </li>
+    </ul>
+</div>
+
+          <!-- Project 05 Card Container Element -->
+<div style="background-color: #161b22; border: 1px solid #30363d; border-left: 4px solid #1e3a8a; border-radius: 6px; padding: 25px; margin-bottom: 25px; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+    <h3 style="margin-top: 0; margin-bottom: 5px; font-size: 1.35rem; color: #58a6ff; font-weight: 600;">
+        Project 05: Terraform Secure Perimeter Landing Zone (`isolated-cloud-landing-grid-secure-API`)
+    </h3>
+    
+    <!-- High-Signal Technical Tag Indicators -->
+    <div style="margin-bottom: 20px; margin-top: 10px;">
+        <span style="display: inline-block; background-color: #0d1117; border: 1px solid #1e3a8a; color: #58a6ff; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; margin-right: 5px; font-family: monospace;">AWS VPC ISOLATION</span>
+        <span style="display: inline-block; background-color: #0d1117; border: 1px solid #1e3a8a; color: #58a6ff; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; margin-right: 5px; font-family: monospace;">HASHICORP TERRAFORM</span>
+        <span style="display: inline-block; background-color: #0d1117; border: 1px solid #1e3a8a; color: #58a6ff; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; margin-right: 5px; font-family: monospace;">AES256 ENCRYPTION</span>
+    </div>
+
+    <p style="font-size: 0.9rem; color: #8b949e; margin-bottom: 20px; font-family: monospace;">
+        ⚙️ Source Registry Tracking Log: <a href="https://github.com" target="_blank" style="color: #58a6ff; text-decoration: none;">://github.com</a>
+    </p>
+
+    <ul style="padding-left: 20px; color: #c9d1d9; font-size: 1.05rem; line-height: 1.7; list-style-type: square;">
+        <li style="margin-bottom: 12px;">
+            <strong style="color: #ff7b72;">🔴 The Friction Point (The Before):</strong> Ad-hoc server and database deployment layouts left private corporate ledgers and sensitive system environment credentials exposed to open public network scans, increasing data leak hazards and network security vulnerabilities.
+        </li>
+        <li style="margin-bottom: 15px;">
+            <strong style="color: #79c0ff;">⚙️ The Architecture Map (The Technical Fix):</strong> Engineered a zero-trust declarative landing grid via HashiCorp Terraform modules, placing all data persistence resources safely behind a strict firewall and wrapping storage layers in mandatory hardware AWS S3 server-side encryption at rest.
+        </li>
+    </ul>
+
+    <!-- Perfect Visual Flowchart Block - Rendered Directly After Technical Fix -->
+    <div style="background-color: #0d1117; border: 1px solid #1e3a8a; border-radius: 6px; padding: 20px; margin: 25px 0; font-family: monospace; font-size: 0.9rem; color: #c9d1d9; box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);">
+        <div style="display: flex; align-items: center; justify-content: center; margin: 10px 0;">
+            <div style="background-color: #161b22; border: 1px solid #388bfd; padding: 10px 15px; border-radius: 4px; text-align: center; min-width: 180px;">☁️ AWS VPC Boundary</div>
+            <div style="color: #58a6ff; padding: 0 15px; font-weight: bold;">➔</div>
+            <div style="background-color: #161b22; border: 1px solid #388bfd; padding: 10px 15px; border-radius: 4px; text-align: center; min-width: 180px;">🛡️ Security Group Traffic Filter</div>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: center; margin: 15px 0;">
+            <div style="color: #58a6ff; font-weight: bold; transform: rotate(90deg); margin-left: 200px;">➔</div>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: center; margin: 10px 0;">
+            <div style="background-color: #161b22; border: 1px solid #ff7b72; padding: 10px 15px; border-radius: 4px; text-align: center; min-width: 180px; color: #ff7b72;">🔐 Hardware AES256 At Rest</div>
+            <div style="color: #58a6ff; padding: 0 15px; font-weight: bold;">➔</div>
+            <div style="background-color: #161b22; border: 1px solid #388bfd; padding: 10px 15px; border-radius: 4px; text-align: center; min-width: 180px;">🗄️ Isolated Private Subnet Vault</div>
+        </div>
+    </div>
+
+    <ul style="padding-left: 20px; color: #c9d1d9; font-size: 1.05rem; line-height: 1.7; list-style-type: square; margin-top: 20px;">
+        <li style="margin-bottom: 12px;">
+            <strong style="color: #58a6ff;">🛠️ On-Site Field Deployment Checklist:</strong>
+            <br><span style="font-family: monospace; font-size: 0.9rem; color: #8b949e;">1. Clone the master security architecture blueprints:</span> <code style="background-color: #1f242c; padding: 3px 6px; border-radius: 4px; font-size: 0.9rem; color: #ff7b72; font-family: monospace;">git clone https://github.com.git && cd isolated-cloud-landing-grid-secure-API/terraform</code>
+            <br><span style="font-family: monospace; font-size: 0.9rem; color: #8b949e;">2. Initialize declarative module provider layers:</span> <code style="background-color: #1f242c; padding: 3px 6px; border-radius: 4px; font-size: 0.9rem; color: #ff7b72; font-family: monospace;">terraform init</code>
+            <br><span style="font-family: monospace; font-size: 0.9rem; color: #8b949e;">3. Programmatically provision the private landing grid:</span> <code style="background-color: #1f242c; padding: 3px 6px; border-radius: 4px; font-size: 0.9rem; color: #ff7b72; font-family: monospace;">terraform apply -auto-approve</code>
+        </li>
+        <li style="margin-bottom: 12px;">
+            <strong style="color: #d19a66;">🚨 Disaster Recovery & Field Troubleshooting:</strong> If an administrator introduces environment configuration drift by altering network profiles manually via web dashboards, execute the self-healing line <code>terraform apply -auto-approve</code>. This command automatically evaluates state drift parameters, destroys un-audited routing loops, and restores your secure perimeter baseline instantly. If a bucket naming conflict occurs, open <code>modules/storage_vault/main.tf</code>, modify the unique bucket variable text string, and re-run your apply command.
+        </li>
+        <li style="margin-bottom: 0;">
+            <strong style="color: #56b6c2;">🟢 The Business Result (The Commercial ROI):</strong> Guarantees absolute network isolation across departmental databases, completely eliminating cloud perimeter exposures and saving an estimated <span style="font-weight: bold; color: #e5c07b;">65,000 dollars annually</span> in compliance audit liabilities.
+        </li>
+    </ul>
+</div>
+
+          <!-- Project 06 Card Container Element -->
+<div style="background-color: #161b22; border: 1px solid #30363d; border-left: 4px solid #1e3a8a; border-radius: 6px; padding: 25px; margin-bottom: 25px; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+    <h3 style="margin-top: 0; margin-bottom: 5px; font-size: 1.35rem; color: #58a6ff; font-weight: 600;">
+        Project 06: Sovereign Enterprise LLMOps Ingestion & Context RAG Engine
+    </h3>
+    
+    <!-- High-Signal Technical Tag Indicators -->
+    <div style="margin-bottom: 20px; margin-top: 10px;">
+        <span style="display: inline-block; background-color: #0d1117; border: 1px solid #1e3a8a; color: #58a6ff; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; margin-right: 5px; font-family: monospace;">LLMOPS ARCHITECTURE</span>
+        <span style="display: inline-block; background-color: #0d1117; border: 1px solid #1e3a8a; color: #58a6ff; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; margin-right: 5px; font-family: monospace;">VECTOR CLUSTER SYNC</span>
+        <span style="display: inline-block; background-color: #0d1117; border: 1px solid #1e3a8a; color: #58a6ff; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; margin-right: 5px; font-family: monospace;">N8N AI WORKFLOWS</span>
+    </div>
+
+    <ul style="padding-left: 20px; color: #c9d1d9; font-size: 1.05rem; line-height: 1.7; list-style-type: square;">
+        <li style="margin-bottom: 12px;">
+            <strong style="color: #ff7b72;">🔴 The Friction Point (The Before):</strong> Corporate leadership teams lose up to 12 hours weekly cross-referencing disconnected document directories to extract context for high-stakes investor pitches and strategic decisions. Concurrently, transmitting sensitive internal cloud variables and corporate assets to public AI interfaces introduces severe intellectual property leak vulnerabilities.
+        </li>
+        <li style="margin-bottom: 15px;">
+            <strong style="color: #79c0ff;">⚙️ The Architecture Map (The Technical Fix):</strong> Engineered an automated context retrieval engine (RAG) and deployed a custom autonomous AI Agent network using LLMOps framework architectures and n8n data pipelines. When a new corporate asset is uploaded, an event listener instantly parses content using precise prompt optimization models and synchronizes vector updates into secure relational database clusters.
+        </li>
+    </ul>
+
+    <!-- Perfect Visual Flowchart Block - Rendered Directly After Technical Fix -->
+    <div style="background-color: #0d1117; border: 1px solid #1e3a8a; border-radius: 6px; padding: 20px; margin: 25px 0; font-family: monospace; font-size: 0.9rem; color: #c9d1d9; box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);">
+        <div style="display: flex; align-items: center; justify-content: center; margin: 10px 0;">
+            <div style="background-color: #161b22; border: 1px solid #388bfd; padding: 10px 15px; border-radius: 4px; text-align: center; min-width: 180px;">📂 Document Uploaded</div>
+            <div style="color: #58a6ff; padding: 0 15px; font-weight: bold;">➔</div>
+            <div style="background-color: #161b22; border: 1px solid #388bfd; padding: 10px 15px; border-radius: 4px; text-align: center; min-width: 180px;">⚙️ n8n AI Orchestration Core</div>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: center; margin: 15px 0;">
+            <div style="color: #58a6ff; font-weight: bold; transform: rotate(90deg); margin-left: 200px;">➔</div>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: center; margin: 10px 0;">
+            <div style="background-color: #161b22; border: 1px solid #388bfd; padding: 10px 15px; border-radius: 4px; text-align: center; min-width: 180px;">🧬 Relational Vector Sync</div>
+            <div style="color: #58a6ff; padding: 0 15px; font-weight: bold;">➔</div>
+            <div style="background-color: #161b22; border: 1px solid #ff7b72; padding: 10px 15px; border-radius: 4px; text-align: center; min-width: 180px; color: #ff7b72;">🔏 Custom Prompt Stack</div>
+        </div>
+    </div>
+
+    <ul style="padding-left: 20px; color: #c9d1d9; font-size: 1.05rem; line-height: 1.7; list-style-type: square; margin-top: 20px;">
+        <li style="margin-bottom: 12px;">
+            <strong style="color: #d19a66;">🚨 Data Performance Baseline:</strong> By containerizing the core LLM orchestration stack and anchoring vector lookups entirely within a private network perimeter, documentation processing speeds execute in under 12 seconds. Technical data lookups achieve absolute consistency with manual administrative overhead dropping to zero.
+        </li>
+        <li style="margin-bottom: 0;">
+            <strong style="color: #56b6c2;">🟢 The Business Result (The Commercial ROI):</strong> Completely eliminates executive administrative drag, reclaiming over <span style="font-weight: bold; color: #e5c07b;">40 hours monthly</span> of high-value leadership focus while guaranteeing 100 percent internal data privacy isolation.
+        </li>
+    </ul>
+</div>
+
+          <h2 style="font-size: 1.6rem; color: #58a6ff; font-weight: 600; border-bottom: 2px solid #21262d; padding-bottom: 8px; margin-top: 50px; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 0.5px;"> CATEGORY 3: ENTERPRISE OPERATIONS AUTOMATION & REVENUE EFFICIENCY</h2>
+
+          <!-- Project 07 Card Container Element -->
+<div style="background-color: #161b22; border: 1px solid #30363d; border-left: 4px solid #1e3a8a; border-radius: 6px; padding: 25px; margin-bottom: 25px; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+    <h3 style="margin-top: 0; margin-bottom: 5px; font-size: 1.35rem; color: #58a6ff; font-weight: 600;">
+        Project 07: Continuous Delivery GitOps Container Pipeline (`GitOps-Container-Deployment-Pipeline---Automation`)
+    </h3>
+    
+    <!-- High-Signal Technical Tag Indicators -->
+    <div style="margin-bottom: 20px; margin-top: 10px;">
+        <span style="display: inline-block; background-color: #0d1117; border: 1px solid #1e3a8a; color: #58a6ff; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; margin-right: 5px; font-family: monospace;">GITOPS CD PIPELINES</span>
+        <span style="display: inline-block; background-color: #0d1117; border: 1px solid #1e3a8a; color: #58a6ff; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; margin-right: 5px; font-family: monospace;">DOCKER RUNTIMES</span>
+        <span style="display: inline-block; background-color: #0d1117; border: 1px solid #1e3a8a; color: #58a6ff; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; margin-right: 5px; font-family: monospace;">LEAST PRIVILEGE WORKFLOWS</span>
+    </div>
+
+    <p style="font-size: 0.9rem; color: #8b949e; margin-bottom: 20px; font-family: monospace;">
+        ⚙️ Source Registry Tracking Log: <a href="https://github.com" target="_blank" style="color: #58a6ff; text-decoration: none;">://github.com</a>
+    </p>
+
+    <ul style="padding-left: 20px; color: #c9d1d9; font-size: 1.05rem; line-height: 1.7; list-style-type: square;">
+        <li style="margin-bottom: 12px;">
+            <strong style="color: #ff7b72;">🔴 The Friction Point (The Before):</strong> Manual application delivery routines and ad-hoc infrastructure staging on corporate web servers introduced severe human misconfiguration risks, caused system downtime spikes of 15 percent, and trapped valuable engineering focus hours in troubleshooting deployment loops.
+        </li>
+        <li style="margin-bottom: 15px;">
+            <strong style="color: #79c0ff;">⚙️ The Architecture Map (The Technical Fix):</strong> Developed an idempotent continuous delivery pipeline using GitHub Actions that automatically intercepts repository adjustments, runs secure token handshakes, compiles minimal Docker container images, and publishes runtime updates live.
+        </li>
+    </ul>
+
+    <!-- Perfect Visual Flowchart Block - Rendered Directly After Technical Fix -->
+    <div style="background-color: #0d1117; border: 1px solid #1e3a8a; border-radius: 6px; padding: 20px; margin: 25px 0; font-family: monospace; font-size: 0.9rem; color: #c9d1d9; box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);">
+        <div style="display: flex; align-items: center; justify-content: center; margin: 10px 0;">
+            <div style="background-color: #161b22; border: 1px solid #388bfd; padding: 10px 15px; border-radius: 4px; text-align: center; min-width: 180px;">💻 Push onboarding.json</div>
+            <div style="color: #58a6ff; padding: 0 15px; font-weight: bold;">➔</div>
+            <div style="background-color: #161b22; border: 1px solid #388bfd; padding: 10px 15px; border-radius: 4px; text-align: center; min-width: 180px;">⚙️ GitHub Actions Run</div>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: center; margin: 15px 0;">
+            <div style="color: #58a6ff; font-weight: bold; transform: rotate(90deg); margin-left: 200px;">➔</div>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: center; margin: 10px 0;">
+            <div style="background-color: #161b22; border: 1px solid #ff7b72; padding: 10px 15px; border-radius: 4px; text-align: center; min-width: 180px; color: #ff7b72;">🐳 Docker Build Payload</div>
+            <div style="color: #58a6ff; padding: 0 15px; font-weight: bold;">➔</div>
+            <div style="background-color: #161b22; border: 1px solid #388bfd; padding: 10px 15px; border-radius: 4px; text-align: center; min-width: 180px;">🚀 Live Production (21s)</div>
+        </div>
+    </div>
+
+    <ul style="padding-left: 20px; color: #c9d1d9; font-size: 1.05rem; line-height: 1.7; list-style-type: square; margin-top: 20px;">
+        <li style="margin-bottom: 12px;">
+            <strong style="color: #58a6ff;">🛠️ On-Site Field Deployment Checklist:</strong>
+            <br><span style="font-family: monospace; font-size: 0.9rem; color: #8b949e;">1. Clone the master automation delivery architecture assets:</span> <code style="background-color: #1f242c; padding: 3px 6px; border-radius: 4px; font-size: 0.9rem; color: #ff7b72; font-family: monospace;">git clone https://github.com.git && cd GitOps-Container-Deployment-Pipeline---Automation</code>
+            <br><span style="font-family: monospace; font-size: 0.9rem; color: #8b949e;">2. Verify declarative business operations metadata schema syntax:</span> <code style="background-color: #1f242c; padding: 3px 6px; border-radius: 4px; font-size: 0.9rem; color: #ff7b72; font-family: monospace;">python3 -m json.tool workflows/onboarding.json</code>
+            <br><span style="font-family: monospace; font-size: 0.9rem; color: #8b949e;">3. Run local runtime loop validation checks:</span> <code style="background-color: #1f242c; padding: 3px 6px; border-radius: 4px; font-size: 0.9rem; color: #ff7b72; font-family: monospace;">python3 core_ops/app.py</code>
+        </li>
+        <li style="margin-bottom: 12px;">
+            <strong style="color: #d19a66;">🚨 Disaster Recovery & Field Troubleshooting:</strong> If a deployment fails due to an unclosed bracket or missing trailing comma in a configuration workflow file, use the native JSON validator tool to pinpoint the specific drift line. Commit the text fix, and the pipeline engine will self-heal, completing container updates in an automated 21-second cloud window.
+        </li>
+        <li style="margin-bottom: 0;">
+            <strong style="color: #56b6c2;">🟢 The Business Result (The Commercial ROI):</strong> Lowers deployment human error risk to absolute zero, dropping release latency and recovering over <span style="font-weight: bold; color: #e5c07b;">74,000 dollars annually</span> in specialized engineering maintenance overhead without expanding headcount.
+        </li>
+    </ul>
+</div>
+
+          <!-- Project 08 Card Container Element -->
+<div style="background-color: #161b22; border: 1px solid #30363d; border-left: 4px solid #1e3a8a; border-radius: 6px; padding: 25px; margin-bottom: 25px; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+    <h3 style="margin-top: 0; margin-bottom: 5px; font-size: 1.35rem; color: #58a6ff; font-weight: 600;">
+        Project 08: High-Ticket B2B RevOps Client Intake & Capacity Scaling Engine
+    </h3>
+    
+    <!-- High-Signal Technical Tag Indicators -->
+    <div style="margin-bottom: 20px; margin-top: 10px;">
+        <span style="display: inline-block; background-color: #0d1117; border: 1px solid #1e3a8a; color: #58a6ff; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; margin-right: 5px; font-family: monospace;">N8N ENTERPRISE FLOWS</span>
+        <span style="display: inline-block; background-color: #0d1117; border: 1px solid #1e3a8a; color: #58a6ff; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; margin-right: 5px; font-family: monospace;">CRM OBJECT MAPPING</span>
+        <span style="display: inline-block; background-color: #0d1117; border: 1px solid #1e3a8a; color: #58a6ff; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; margin-right: 5px; font-family: monospace;">EVENT-DRIVEN INGESTION</span>
+    </div>
+
+    <ul style="padding-left: 20px; color: #c9d1d9; font-size: 1.05rem; line-height: 1.7; list-style-type: square;">
+        <li style="margin-bottom: 12px;">
+            <strong style="color: #ff7b72;">🔴 The Friction Point (The Before):</strong> A rapidly scaling B2B consultancy generating over 4 million dollars annually was trapped behind a hard operational ceiling. Manual onboarding processes required 4 hours of tedious administrative data entry per client, inflating latency to 48 hours, causing onboarding syntax errors to spike by 15 percent, and limiting intake thresholds to 15 accounts a month due to staff burnout [3.11].
+        </li>
+        <li style="margin-bottom: 15px;">
+            <strong style="color: #79c0ff;">⚙️ The Architecture Map (The Technical Fix):</strong> Eliminated human data-entry bottlenecks completely by architecting an event-driven data pipeline using n8n enterprise workflows and relational database synchronization layers. When a closed deal transitions to "Won" inside the CRM, a secure webhook instantly triggers an automated multi-branched mapping and account provisioning sequence [3.11].
+        </li>
+    </ul>
+
+    <!-- Perfect Visual Flowchart Block - Rendered Directly After Technical Fix -->
+    <div style="background-color: #0d1117; border: 1px solid #1e3a8a; border-radius: 6px; padding: 20px; margin: 25px 0; font-family: monospace; font-size: 0.9rem; color: #c9d1d9; box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);">
+        <div style="display: flex; align-items: center; justify-content: center; margin: 10px 0;">
+            <div style="background-color: #161b22; border: 1px solid #388bfd; padding: 10px 15px; border-radius: 4px; text-align: center; min-width: 180px;">💼 CRM Closed-Won Deal</div>
+            <div style="color: #58a6ff; padding: 0 15px; font-weight: bold;">➔</div>
+            <div style="background-color: #161b22; border: 1px solid #388bfd; padding: 10px 15px; border-radius: 4px; text-align: center; min-width: 180px;">⚙️ n8n Orchestrator Core</div>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: center; margin: 15px 0;">
+            <div style="color: #58a6ff; font-weight: bold; transform: rotate(90deg); margin-left: 200px;">➔</div>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: center; margin: 10px 0;">
+            <div style="background-color: #161b22; border: 1px solid #ff7b72; padding: 10px 15px; border-radius: 4px; text-align: center; min-width: 180px; color: #ff7b72;">📊 HubSpot CRM Mapping</div>
+            <div style="color: #58a6ff; padding: 0 15px; font-weight: bold;">➔</div>
+            <div style="background-color: #161b22; border: 1px solid #388bfd; padding: 10px 15px; border-radius: 4px; text-align: center; min-width: 180px;">📂 Client Account Provisioned</div>
+        </div>
+    </div>
+
+    <ul style="padding-left: 20px; color: #c9d1d9; font-size: 1.05rem; line-height: 1.7; list-style-type: square; margin-top: 20px;">
+        <li style="margin-bottom: 12px;">
+            <strong style="color: #d19a66;">🚨 Data Performance Baseline:</strong> Client data replication latency dropped instantly from 48 hours to less than 3 seconds [3.12]. Manual human synchronization entry requirements dropped to absolute zero, providing a flawless onboarding experience for high-net-worth accounts [3.12].
+        </li>
+        <li style="margin-bottom: 0;">
+            <strong style="color: #56b6c2;">🟢 The Business Result (The Commercial ROI):</strong> Successfully doubled monthly processing capacity to 40 plus high-ticket accounts without growing operations headcount, saving the enterprise over <span style="font-weight: bold; color: #e5c07b;">90,000 dollars annually</span> in projected specialized staffing overhead [3.12].
+        </li>
+    </ul>
+</div>
+
+          <!-- Project 09 Card Container Element -->
+<div style="background-color: #161b22; border: 1px solid #30363d; border-left: 4px solid #1e3a8a; border-radius: 6px; padding: 25px; margin-bottom: 25px; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+    <h3 style="margin-top: 0; margin-bottom: 5px; font-size: 1.35rem; color: #58a6ff; font-weight: 600;">
+        Project 09: Enterprise Subscription Billing & Financial Churn Mitigation Grid
+    </h3>
+    
+    <!-- High-Signal Technical Tag Indicators -->
+    <div style="margin-bottom: 20px; margin-top: 10px;">
+        <span style="display: inline-block; background-color: #0d1117; border: 1px solid #1e3a8a; color: #58a6ff; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; margin-right: 5px; font-family: monospace;">FINANCIAL REVOPS</span>
+        <span style="display: inline-block; background-color: #0d1117; border: 1px solid #1e3a8a; color: #58a6ff; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; margin-right: 5px; font-family: monospace;">STRIPE WEBHOOKS</span>
+        <span style="display: inline-block; background-color: #0d1117; border: 1px solid #1e3a8a; color: #58a6ff; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; margin-right: 5px; font-family: monospace;">MAKE.COM ORCHESTRATION</span>
+    </div>
+
+    <ul style="padding-left: 20px; color: #c9d1d9; font-size: 1.05rem; line-height: 1.7; list-style-type: square;">
+        <li style="margin-bottom: 12px;">
+            <strong style="color: #ff7b72;">🔴 The Friction Point (The Before):</strong> An international 8-figure e-learning and agency brand handling over 5,000 active monthly client accounts was experiencing quiet revenue decay [3.13]. Disconnected subscription billing engines failed to automatically revoke platform credentials when credit cards declined, forcing accounting teams to waste 30 plus hours a week manually cross-referencing logs and causing a silent 4% monthly revenue leakage equivalent to 18,000 dollars slipping away every single month [3.13].
+        </li>
+        <li style="margin-bottom: 15px;">
+            <strong style="color: #79c0ff;">⚙️ The Architecture Map (The Technical Fix):</strong> Designed a secure, automated financial recovery grid utilizing Make.com enterprise routing architectures and real-time Stripe webhook listeners [3.13]. When a transaction status changes in Stripe, an encrypted webhook splits the event into immediate automated action paths: updating CRM custom billing indicators, locking access protocols dynamically on the day of failure, and deploying multi-stage automated dunning communication loops linking directly to self-service customer invoicing portal frameworks [3.13].
+        </li>
+    </ul>
+
+    <!-- Perfect Visual Flowchart Block - Rendered Directly After Technical Fix -->
+    <div style="background-color: #0d1117; border: 1px solid #1e3a8a; border-radius: 6px; padding: 20px; margin: 25px 0; font-family: monospace; font-size: 0.9rem; color: #c9d1d9; box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);">
+        <div style="display: flex; align-items: center; justify-content: center; margin: 10px 0;">
+            <div style="background-color: #161b22; border: 1px solid #388bfd; padding: 10px 15px; border-radius: 4px; text-align: center; min-width: 180px;">💳 Stripe Card Decline</div>
+            <div style="color: #58a6ff; padding: 0 15px; font-weight: bold;">➔</div>
+            <div style="background-color: #161b22; border: 1px solid #388bfd; padding: 10px 15px; border-radius: 4px; text-align: center; min-width: 180px;">⚙️ Make.com Router Webhook</div>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: center; margin: 15px 0;">
+            <div style="color: #58a6ff; font-weight: bold; transform: rotate(90deg); margin-left: 200px;">➔</div>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: center; margin: 10px 0;">
+            <div style="background-color: #161b22; border: 1px solid #ff7b72; padding: 10px 15px; border-radius: 4px; text-align: center; min-width: 180px; color: #ff7b72;">🔒 Lock System Access</div>
+            <div style="color: #58a6ff; padding: 0 15px; font-weight: bold;">➔</div>
+            <div style="background-color: #161b22; border: 1px solid #388bfd; padding: 10px 15px; border-radius: 4px; text-align: center; min-width: 180px;">✉️ Automated Dunning Cascade</div>
+        </div>
+    </div>
+
+    <ul style="padding-left: 20px; color: #c9d1d9; font-size: 1.05rem; line-height: 1.7; list-style-type: square; margin-top: 20px;">
+        <li style="margin-bottom: 12px;">
+            <strong style="color: #d19a66;">🚨 Data Performance Baseline:</strong> Revenue tracking gaps dropped to absolute zero and manual accounting reconciliation loops were entirely eliminated [3.14]. The automated dunning infrastructure successfully catches and updates account parameters in under 2 seconds, maintaining absolute financial ledger alignment [3.13].
+        </li>
+        <li style="margin-bottom: 0;">
+            <strong style="color: #56b6c2;">🟢 The Business Result (The Commercial ROI):</strong> Successfully caught and recovered 87% of all failed billing cycles within the first 30 days of deployment, instantly restoring over <span style="font-weight: bold; color: #e5c07b;">15,600 dollars a month</span> in high-margin recurring income [3.14].
+        </li>
+    </ul>
+</div>
+
+          <!-- Project 10 Card Container Element -->
+<div style="background-color: #161b22; border: 1px solid #30363d; border-left: 4px solid #1e3a8a; border-radius: 6px; padding: 25px; margin-bottom: 25px; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+    <h3 style="margin-top: 0; margin-bottom: 5px; font-size: 1.35rem; color: #58a6ff; font-weight: 600;">
+        Project 10: Full-Stack Corporate Data Highway & Multi-App Consolidation Hub
+    </h3>
+    
+    <!-- High-Signal Technical Tag Indicators -->
+    <div style="margin-bottom: 20px; margin-top: 10px;">
+        <span style="display: inline-block; background-color: #0d1117; border: 1px solid #1e3a8a; color: #58a6ff; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; margin-right: 5px; font-family: monospace;">FULL-STACK API</span>
+        <span style="display: inline-block; background-color: #0d1117; border: 1px solid #1e3a8a; color: #58a6ff; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; margin-right: 5px; font-family: monospace;">DATA PIPELINES</span>
+        <span style="display: inline-block; background-color: #0d1117; border: 1px solid #1e3a8a; color: #58a6ff; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; margin-right: 5px; font-family: monospace;">N8N ENTERPRISE</span>
+    </div>
+
+    <ul style="padding-left: 20px; color: #c9d1d9; font-size: 1.05rem; line-height: 1.7; list-style-type: square;">
+        <li style="margin-bottom: 12px;">
+            <strong style="color: #ff7b72;">🔴 The Friction Point (The Before):</strong> A high-volume B2B enterprise generating mid-7-figures was experiencing severe internal data fragmentation across disconnected platforms (marketing, CRMs, billing, inventory, and fulfillment) [3.16]. Operations staff spent 40 plus hours a week manually downloading CSV files from one tool, formatting rows, and uploading them into another just to keep records aligned, causing costly shipping mistakes and blinding leadership to true profit margins [3.16].
+        </li>
+        <li style="margin-bottom: 15px;">
+            <strong style="color: #79c0ff;">⚙️ The Architecture Map (The Technical Fix):</strong> Engineered a unified corporate data hub by combining full-stack web architectures with secure cloud DevOps infrastructure and robust n8n enterprise instances [3.17]. Built secure API webhooks to listen to all 12 fragmented applications, capturing, parsing, and cleaning incoming multi-platform JSON packages to completely normalize and structure raw data points into organized relational database tables for absolute consistency across all departments [3.17].
+        </li>
+    </ul>
+
+    <!-- Perfect Visual Flowchart Block - Rendered Directly After Technical Fix -->
+    <div style="background-color: #0d1117; border: 1px solid #1e3a8a; border-radius: 6px; padding: 20px; margin: 25px 0; font-family: monospace; font-size: 0.9rem; color: #c9d1d9; box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);">
+        <div style="display: flex; align-items: center; justify-content: center; margin: 10px 0;">
+            <div style="background-color: #161b22; border: 1px solid #388bfd; padding: 10px 15px; border-radius: 4px; text-align: center; min-width: 180px;">🌐 12 Fragmented Software Apps</div>
+            <div style="color: #58a6ff; padding: 0 15px; font-weight: bold;">➔</div>
+            <div style="background-color: #161b22; border: 1px solid #388bfd; padding: 10px 15px; border-radius: 4px; text-align: center; min-width: 180px;">🛡️ Cloud DevOps Gateway</div>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: center; margin: 15px 0;">
+            <div style="color: #58a6ff; font-weight: bold; transform: rotate(90deg); margin-left: 200px;">➔</div>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: center; margin: 10px 0;">
+            <div style="background-color: #161b22; border: 1px solid #388bfd; padding: 10px 15px; border-radius: 4px; text-align: center; min-width: 180px;">🔏 Data Normalization Layer</div>
+            <div style="color: #58a6ff; padding: 0 15px; font-weight: bold;">➔</div>
+            <div style="background-color: #161b22; border: 1px solid #ff7b72; padding: 10px 15px; border-radius: 4px; text-align: center; min-width: 180px; color: #ff7b72;">🗄️ Relational Database Hub</div>
+        </div>
+    </div>
+
+    <ul style="padding-left: 20px; color: #c9d1d9; font-size: 1.05rem; line-height: 1.7; list-style-type: square; margin-top: 20px;">
+        <li style="margin-bottom: 12px;">
+            <strong style="color: #d19a66;">🚨 Data Performance Baseline:</strong> Cross-platform data fragmentation dropped to absolute zero and manual CSV file-transfers were permanently eliminated [3.18]. The full-stack pipeline processes incoming JSON data payloads securely in under 2 seconds, with active logging to guarantee 0 percent data drop rates [3.17, 3.18].
+        </li>
+        <li style="margin-bottom: 0;">
+            <strong style="color: #56b6c2;">🟢 The Business Result (The Commercial ROI):</strong> Instantly slashed software subscription costs by <span style="font-weight: bold; color: #e5c07b;">34,000 dollars a year</span>, saved hundreds of weekly staff hours, and provided leadership with a completely accurate, live view of their revenue and fulfillment engine [3.18].
+        </li>
+    </ul>
+</div>
+
+        <!-- Technical Skills Matrix Section Header -->
+<h2 style="font-size: 1.6rem; color: #58a6ff; font-weight: 600; border-bottom: 2px solid #21262d; padding-bottom: 8px; margin-top: 50px; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 0.5px;">
+    🛠️ TECHNICAL CORE EXPERTISE TERMINAL
+</h2>
+
+<!-- Skills Terminal Block Container -->
+<div style="background-color: #161b22; border: 1px solid #30363d; border-radius: 6px; padding: 25px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;">
+    
+    <div style="margin-bottom: 20px;">
+        <h4 style="margin: 0 0 10px 0; font-size: 1.1rem; color: #79c0ff; text-transform: uppercase; letter-spacing: 0.5px; font-family: monospace;">1. Cloud Infrastructure & Core DevOps (AWS Ecosystem Focus)</h4>
+        <p style="margin: 0; font-size: 1rem; color: #c9d1d9; line-height: 1.6;">
+            <strong>Cloud Platform Administration:</strong> AWS Core Infrastructures (Virtual Private Clouds, S3 Storage Services, IAM Governance Policies, CloudWatch Metrics Monitoring, EC2 Instance Operations). <br>
+            <strong>Orchestration & Tooling:</strong> HashiCorp Terraform (Decoupled Multi-Module Declarative IaC Staging), Kubernetes (K3s Production Edge Clustering), Docker Container Runtime Isolation, GitHub Container Registry (GHCR.io), Git Version Architecture, GitHub Actions CI-CD Delivery Automation Pipelines. <br>
+            <strong>Network Security Isolation:</strong> AWS Zero-Trust Architecture Layouts, Ingress Firewall Security Groups, Port-Level Traffic Filtering (Port 1883), Private Subnet Network Segregation, Hardware AES256 Server-Side Encryption at Rest.
+        </p>
+    </div>
+
+    <div style="margin-bottom: 20px; border-top: 1px solid #21262d; padding-top: 15px;">
+        <h4 style="margin: 0 0 10px 0; font-size: 1.1rem; color: #79c0ff; text-transform: uppercase; letter-spacing: 0.5px; font-family: monospace;">2. Asynchronous Programming, Edge Computing, & Core Communication</h4>
+        <p style="margin: 0; font-size: 1rem; color: #c9d1d9; line-height: 1.6;">
+            <strong>Protocols & Data Transport:</strong> MQTT Protocol Network Broker Ingestion (Port 1883 Ingress), Edge-to-Cloud Telemetry Streams, Hardware Serial Communication Interfacing. <br>
+            <strong>Concurrency Architectures:</strong> Asynchronous Python Execution (Asyncio Core, Multithreading Concurrency, Multi-Process Control Loops), Thread-Safe Local RAM Memory Ingestion, Low-Level Critical Section Thread Locks (<code>threading.Lock</code>), Ring-Buffer Queue Management (<code>collections.deque</code>), Unbuffered System Log Streams. <br>
+            <strong>Resilience Infrastructures:</strong> Offline-First Data Isolation, Self-Healing Exponential Back-Off Synchronization, Telemetry Payload Caching Engines, Low-Bandwidth / High-Latency Field Routing Systems, Satellite Link Dropout Mitigation.
+        </p>
+    </div>
+
+    <div style="margin-bottom: 20px; border-top: 1px solid #21262d; padding-top: 15px;">
+        <h4 style="margin: 0 0 10px 0; font-size: 1.1rem; color: #79c0ff; text-transform: uppercase; letter-spacing: 0.5px; font-family: monospace;">3. Full-Stack Web Development & Data Engineering</h4>
+        <p style="margin: 0; font-size: 1rem; color: #c9d1d9; line-height: 1.6;">
+            <strong>Backend Systems:</strong> Full-Stack Engineering, Custom API Endpoint Interfacing, Web API Architecture Development, JSON Metadata Package Ingestion Parsing, Relational Database Synchronization, Encrypted Cloud Data Buckets (S3 Cloud Stores, SQL Datastores). <br>
+            <strong>Frontend Interfaces:</strong> Lightweight Custom Web Layouts, Dynamic System Monitoring Telemetry Dashboards, Live Core Operational Logging Screens, Structural Data Visualization Frameworks, Form Ingestion Triage Handlers.
+        </p>
+    </div>
+
+    <div style="margin-bottom: 20px; border-top: 1px solid #21262d; padding-top: 15px;">
+        <h4 style="margin: 0 0 10px 0; font-size: 1.1rem; color: #79c0ff; text-transform: uppercase; letter-spacing: 0.5px; font-family: monospace;">4. Enterprise Workflow & Data Integration</h4>
+        <p style="margin: 0; font-size: 1rem; color: #c9d1d9; line-height: 1.6;">
+            <strong>Orchestration Cores:</strong> n8n Enterprise Core Workflows, Make.com Enterprise Architecture, Real-Time Webhook Routing Pipelines, Event-Driven Ingestion Channels, Schema Object Metadata Mapping. <br>
+            <strong>Corporate Integration Automation:</strong> HubSpot CRM Custom Object Architecture Mapping, Stripe Financial Infrastructure Integration, Stripe Webhook Listeners, Automated Financial Recovery Dunning Cascades, Self-Service Corporate Invoicing Portals, Multi-App Cross-Department Data Consolidation Ecosystems.
+        </p>
+    </div>
+
+    <div style="border-top: 1px solid #21262d; padding-top: 15px;">
+        <h4 style="margin: 0 0 10px 0; font-size: 1.1rem; color: #79c0ff; text-transform: uppercase; letter-spacing: 0.5px; font-family: monospace;">5. LLMOps & Knowledge Engineering</h4>
+        <p style="margin: 0; font-size: 1rem; color: #c9d1d9; line-height: 1.6;">
+            <strong>AI Infrastructure Frameworks:</strong> Retrieval-Augmented Generation (RAG Architecture Platforms), Autonomous Multi-Agent Systems, Context Extraction Engines, Prompt Engineering Infrastructure Optimization, Secure Vector Storage Cluster Relational Synchronization.
+        </p>
+    </div>
+
+</div>
+
+<p style="text-align: center; color: #8b949e; font-size: 0.85rem; margin-top: 50px; font-family: monospace;">
+    // Deployed Autonomously via GitHub Pages Continuous Integration Framework
+</p>
+  
