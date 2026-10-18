@@ -22,7 +22,7 @@
         .metric-num { font-size: 1.8rem; font-weight: bold; color: #58a6ff; line-height: 1; }
         .metric-lbl { font-size: 0.85rem; color: #8b949e; text-transform: uppercase; margin-top: 5px; }
         
-        /* 4-Card Dashboard Menu Layout Grid */
+        /* Dashboard Control Deck Grid Layout */
         .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-bottom: 40px; }
         .menu-card { background-color: #161b22; border: 1px solid #30363d; border-radius: 6px; padding: 25px; text-align: center; cursor: pointer; transition: transform 0.2s, border-color 0.2s; }
         .menu-card:hover { transform: translateY(-3px); border-color: #388bfd; background-color: #1c2128; }
@@ -41,26 +41,30 @@
         ul { padding-left: 20px; margin: 15px 0; }
         li { margin-bottom: 10px; font-size: 1.05rem; }
         code { background-color: #1f242c; padding: 3px 6px; border-radius: 4px; font-family: monospace; font-size: 0.9rem; color: #ff7b72; }
-                .section-divider { border: 0; height: 1px; background: #21262d; border-top: 1px solid #30363d; margin: 50px 0; }
-        .grid-subheading { font-family: monospace; font-size: 0.9rem; color: #8b949e; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; display: block; }
-        
-        /* High-Signal Architecture Diagrams (Pure HTML Canvas Layout) */
+               
+        /* High-Signal Architecture Diagrams Framework */
         .diagram-container { background-color: #0d1117; border: 1px solid #1e3a8a; border-radius: 6px; padding: 20px; margin: 20px 0; font-family: monospace; font-size: 0.9rem; }
-        .dia-row { display: flex; align-items: center; justify-content: center; margin: 10px 0; }
+        .dia-row { display: flex; align-items: center; justify-content: center; margin: 10px 0; flex-wrap: wrap; gap: 5px; }
         .dia-box { background-color: #161b22; border: 1px solid #388bfd; padding: 10px 15px; border-radius: 4px; text-align: center; min-width: 180px; color: #c9d1d9; }
         .dia-box.alert { border-color: #ff7b72; color: #ff7b72; }
         .dia-arrow { color: #58a6ff; padding: 0 15px; font-weight: bold; }
-        
+
+        /* Structural Layout Demarcation Indicators */
+        .section-divider { border: 0; height: 1px; background: #21262d; border-top: 1px solid #30363d; margin: 40px 0; }
+        .grid-subheading { font-family: monospace; font-size: 0.9rem; color: #8b949e; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; display: block; }
         .skills-group { margin-bottom: 25px; }
-        .skills-group h4 { margin: 0 0 10px 0; font-size: 1.1rem; color: #79c0ff; text-transform: uppercase; }
+        .skills-group h4 { margin: 0 0 10px 0; font-size: 1.1rem; color: #79c0ff; text-transform: uppercase; font-family: monospace; }
         
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
     <script>
         function openDrawer(panelId) {
-            document.querySelectorAll('.content-panel').forEach(p => p.style.display = 'none');
-            document.getElementById(panelId).style.display = 'block';
-            document.getElementById(panelId).scrollIntoView({ behavior: 'smooth' });
+            document.querySelectorAll('.content-panel').forEach(p => { p.style.display = 'none'; });
+            var target = document.getElementById(panelId);
+            if (target) {
+                target.style.display = 'block';
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
         }
     </script>
 </head>
@@ -88,19 +92,19 @@
     <!-- 4-Card Dashboard Control Deck Grid -->
     <div class="dashboard-grid">
         <div class="menu-card" onclick="openDrawer('maritime-panel')">
-            <h2>🚢 Maritime Edge</h2>
+            <h2> Maritime Edge</h2>
             <p>3 Production Systems</p>
         </div>
         <div class="menu-card" onclick="openDrawer('zero-trust-panel')">
-            <h2>🔒 Zero-Trust</h2>
+            <h2> Zero-Trust</h2>
             <p>3 Production Systems</p>
         </div>
         <div class="menu-card" onclick="openDrawer('ops-automation-panel')">
-            <h2>🚀 Ops Automation</h2>
+            <h2> Ops Automation</h2>
             <p>4 Production Systems</p>
         </div>
         <div class="menu-card" onclick="openDrawer('skills-panel')">
-            <h2>🛠️ Core Skills</h2>
+            <h2> Core Skills</h2>
             <p>Full Terminal Stack</p>
         </div>
     </div>
@@ -119,8 +123,8 @@
                 <li><strong style="color:#79c0ff;">⚙️ The Architecture Map:</strong> Engineered an unbuffered, air-gapped edge pipeline utilizing asynchronous Python concurrency locks and thread-safe data structures to isolate, buffer, and preserve streaming vessel telemetry locally within hardware RAM during communication blackouts.</li>
             </ul>
             <div class="diagram-container">
-                <div class="dia-row"><div class="dia-box">📡 Vessel Sensor Telemetry</div><div class="dia-arrow">➔</div><div class="dia-box">🛰️ Edge Link Monitor</div></div>
-                <div class="dia-row" style="margin-left: 200px;"><div class="dia-arrow">🔽 Link Dead</div></div>
+                 <div class="dia-row"><div class="dia-box">📡 Vessel Sensor Telemetry</div><div class="dia-arrow">➔</div><div class="dia-box">🛰️ Edge Link Monitor</div></div>
+                <div class="dia-row"><div class="dia-arrow">⬇️ Satellite Link Disconnected</div></div>
                 <div class="dia-row"><div class="dia-box alert">🔒 Thread-Locked RAM Buffer</div><div class="dia-arrow">➔</div><div class="dia-box">🔄 Auto Queue Flush Sync</div><div class="dia-arrow">➔</div><div class="dia-box">📤 Cloud Database Ingestion</div></div>
             </div>
             <ul>
