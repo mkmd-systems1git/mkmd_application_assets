@@ -228,8 +228,8 @@
     <div class="tags-row"><span class="tag">GitOps</span><span class="tag">Docker</span><span class="tag">GitHub Actions</span></div>
     <div class="src-link">Tracking Log: <a href="https://github.com" target="_blank">://github.com</a></div>
     <ul>
-        <li><strong style="color:#ff7b72;">🔴 The Friction Point:</strong> Updating internal software applications on cargo vessels at sea historically required specialized technicians to travel to regional ports, causing severe deployment delays and expensive shipping bottlenecks [3.12].</li>
-        <li><strong style="color:#79c0ff;">⚙️ The Architecture Map:</strong> Built an automated over-the-air GitOps delivery conveyor belt utilizing GitHub Actions and secure Docker package abstractions to package, verify, and stream rolling microservice configuration updates directly to remote data nodes [3.12].</li>
+        <li><strong style="color:#ff7b72;">🔴 The Friction Point:</strong> Updating internal software applications on cargo vessels at sea historically requires specialized technicians to travel to regional ports, causing severe deployment delays and expensive shipping bottlenecks [3.12].</li>
+        <li><strong style="color:#79c0ff;">⚙️ The Architectural Fix:</strong> Built an automated over-the-air GitOps delivery conveyor belt utilizing GitHub Actions and secure Docker package abstractions to compile, package, verify, and stream rolling microservice configuration updates directly to remote data nodes [3.12].</li>
     </ul>
     <div class="diagram-container">
         <div class="dia-row"><div class="dia-box">💻 Git Push to main</div><div class="dia-arrow">➔</div><div class="dia-box">⚙️ GitHub Actions CI-CD</div><div class="dia-arrow">➔</div><div class="dia-box alert">📦 GHCR.io Container Vault</div><div class="dia-arrow">➔</div><div class="dia-box">🚢 Remote Fleet Nodes</div></div>
@@ -239,23 +239,10 @@
             <code>git clone https://github.com.git && cd maritime-fleet-gitops</code><br>
             <code>cat .github/workflows/deploy-pipeline.yml</code>
         </li>
-        <li><strong style="color:#d19a66;">🚨 Disaster Recovery:</strong> If a container registry authentication timeout occurs due to satellite link clipping, the engine’s built-in permissions configuration block (<code>packages: write</code>) will automatically re-verify handshakes on the next sequential git event loop trigger [3.12].</li>
-        <li><strong style="color:#56b6c2;">🟢 Commercial ROI:</strong> Eliminates port technician travel expenses completely, saving over <strong>$74,000 dollars a year</strong> in manual operational waste [3.12].</li>
+        <li><strong style="color:#d19a66;">🚨 Disaster Recovery & Field Troubleshooting :</strong> If a container registry authentication timeout occurs due to deep-sea satellite link clipping, operator's intervention is not required. The engine’s built-in secure permissions configuration block (<code>packages: write</code>) will automatically re-verify handshakes on the next sequential git event loop trigger [3.12].</li>
+        <li><strong style="color:#56b6c2;">🟢 Commercial ROI:</strong> Eliminates unnecessary port technician travel expenses, and cuts deployment errors to absolute zero saving over <strong>$74,000 dollars a year</strong> in manual operational costs [3.12].</li>
     </ul>
 </div>
-
-    <p style="font-size: 0.9rem; color: #8b949e; margin-bottom: 20px; font-family: monospace;">
-        ⚙️ Source Registry Tracking Log: <a href="https://github.com" target="_blank" style="color: #58a6ff; text-decoration: none;">://github.com</a>
-    </p>
-
-    <ul style="padding-left: 20px; color: #c9d1d9; font-size: 1.05rem; line-height: 1.7; list-style-type: square;">
-        <li style="margin-bottom: 12px;">
-            <strong style="color: #ff7b72;">🔴 The Friction Point (The Before):</strong> Updating critical internal software application layers on cargo vessels at sea historically required specialized systems technicians to physically travel to regional ports, causing severe deployment bottlenecks and expensive shipping delays.
-        </li>
-        <li style="margin-bottom: 15px;">
-            <strong style="color: #79c0ff;">⚙️ The Architecture Map (The Technical Fix):</strong> Built an automated, over-the-air GitOps delivery conveyor belt utilizing GitHub Actions orchestration and secure Docker package abstractions to package, verify, and stream rolling microservice configuration updates directly to remote fleet data nodes.
-        </li>
-    </ul>
 
     <!-- Project 03 Card -->
     <div class="project-block">
@@ -263,8 +250,8 @@
         <div class="tags-row"><span class="tag">AWS Cloud</span><span class="tag">HashiCorp Terraform</span><span class="tag">IaC Hardening</span></div>
         <div class="src-link">Tracking Log: <a href="https://github.com" target="_blank">://github.com</a></div>
         <ul>
-            <li><strong style="color:#ff7b72;">🔴 The Friction Point:</strong> Manual cloud dashboard setup patterns for port receiving stations created un-audited infrastructure environments, exposed open database ingress ports, and increased vulnerability to data breach vectors [3.12].</li>
-            <li><strong style="color:#79c0ff;">⚙️ The Architecture Map:</strong> Designed a highly decoupled, modular Infrastructure-as-Code landing zone layout using HashiCorp Terraform to programmatically provision an isolated virtual network perimeter secured by tight network firewall rules and encrypted AWS S3 storage vaults [3.12].</li>
+            <li><strong style="color:#ff7b72;">🔴 The Friction Point:</strong> Manual cloud dashboard configurations patterns for port receiving stations created un-audited cloud infrastructure environments, exposed open database ingress ports, and increased vulnerability to data breach vectors [3.12].</li>
+            <li><strong style="color:#79c0ff;">⚙️ The Architectural Fix:</strong> Designed a highly decoupled, modular Infrastructure-as-Code(IaC) landing zone layout using HashiCorp Terraform to programmatically provision an isolated virtual network perimeter secured by tight network firewall rules and encrypted AWS S3 storage vaults [3.12].</li>
         </ul>
         <div class="diagram-container">
             <div class="dia-row"><div class="dia-box">🎛️ Terraform Control Cockpit</div><div class="dia-arrow">➔</div><div class="dia-box">🛡️ AWS VPC Network Perimeter</div><div class="dia-arrow">➔</div><div class="dia-box alert">🔒 S3 Secured Vault (AES256)</div></div>
@@ -274,8 +261,8 @@
             <code>git clone https://github.com.git && cd maritime-cloud-coast-infrastructure/terraform</code><br>
             <code>terraform init && terraform apply -auto-approve</code>
         </li>
-        <li><strong style="color:#d19a66;">🚨 Disaster Recovery:</strong> In the event of manual dashboard configuration drift, running <code>terraform apply -auto-approve</code> automatically tears down un-audited paths and perfectly restores your secure network perimeter instantly [3.12].</li>
-        <li><strong style="color:#56b6c2;">🟢 Commercial ROI:</strong> Saves an estimated <strong>$65,000 dollars annually</strong> in regulatory data compliance audit liabilities [3.12].</li>
+        <li><strong style="color:#d19a66;">🚨 Disaster Recovery & Field Troubleshooting :</strong> In the event of manual web panel interference or environment configuration drift, running the self-healing idempotency recovery line <code>terraform apply -auto-approve</code> automatically tears down un-audited access paths and perfectly restores your secure network perimeter instantly [3.12].</li>
+        <li><strong style="color:#56b6c2;">🟢 Commercial ROI:</strong> Enforces absolute security isolation and data protection. This saves an estimated <strong>$65,000 dollars annually</strong> in regulatory data compliance audit liabilities and manual hardening [3.12].</li>
     </ul>
   </div>
 </div>
@@ -292,7 +279,7 @@
         <div class="src-link">Tracking Log: <a href="https://github.com" target="_blank">://github.com</a></div>
         <ul>
             <li><strong style="color:#ff7b72;">🔴 The Friction Point:</strong> Intermittent communication link cutouts on remote telemetry terminals led to missing system logs and broken transactional histories, causing compliance failures for high-stakes enterprise platforms [3.12].</li>
-            <li><strong style="color:#79c0ff;">⚙️ The Architecture Map:</strong> Implemented a self-healing edge synchronization loop utilizing an internal thread-safe ring-buffer queue (<code>collections.deque</code> and <code>threading.Lock</code>) that intercepts dropouts and safely holds 500 telemetry payloads locally without data drops [3.12].</li>
+            <li><strong style="color:#79c0ff;">⚙️ The Architectural Fix:</strong> Implemented a self-healing edge synchronization loop utilizing an internal thread-safe ring-buffer queue (<code>collections.deque</code> and <code>threading.Lock</code>) that intercepts dropouts, dynamic allocations, and safely holds 500 telemetry payloads locally without data drops [3.12].</li>
         </ul>
         <div class="diagram-container">
             <div class="dia-row"><div class="dia-box">📡 Live Telemetry Payload</div><div class="dia-arrow">➔</div><div class="dia-box alert">🔒 Low-Level Thread Lock</div><div class="dia-arrow">➔</div><div class="dia-box">📥 RAM Buffer Array</div><div class="dia-arrow">➔</div><div class="dia-box">🚀 Cloud Datastore Sync</div></div>
@@ -302,8 +289,8 @@
                 <code>git clone https://github.com.git && cd -edge-memory-sync-agent</code><br>
                 <code>docker build -t edge-sync:latest . && docker run -d --name live-edge-agent --restart unless-stopped edge-sync:latest</code>
             </li>
-            <li><strong style="color:#d19a66;">🚨 Disaster Recovery:</strong> The queue caches records natively, executing a clean 3-second bulk synchronization wave straight to the cloud core the exact millisecond uplink validation returns [3.12]. If a container env is corrupted, run <code>docker rm -f live-edge-agent</code> and re-run the boot line [3.12].</li>
-            <li><strong style="color:#56b6c2;">🟢 Commercial ROI:</strong> Drives data drops to absolute zero, saving over <strong>$65,000 dollars a year</strong> in system repair costs [3.12].</li>
+            <li><strong style="color:#d19a66;">🚨 Disaster Recovery & Field Troubleshooting:</strong> The queue caches records natively without operator supervision, executing a clean 3-second bulk synchronization wave straight to the cloud core the exact millisecond uplink validation returns [3.12]. If a container env is corrupted, run <code>docker rm -f live-edge-agent</code> and re-run the boot line [3.12].</li>
+            <li><strong style="color:#56b6c2;">🟢 Commercial ROI:</strong> Drives data drops and configuration liabilities to absolute, securing history logs and saving over <strong>$65,000 dollars a year</strong> in system repair costs [3.12].</li>
         </ul>
     </div>
 
@@ -313,8 +300,8 @@
         <div class="tags-row"><span class="tag">AWS VPC</span><span class="tag">HashiCorp Terraform</span><span class="tag">AES256</span></div>
         <div class="src-link">Tracking Log: <a href="https://github.com" target="_blank">://github.com</a></div>
         <ul>
-            <li><strong style="color:#ff7b72;">🔴 The Friction Point:</strong> Ad-hoc database deployments left private client ledgers and sensitive system credentials exposed to open public network scans, increasing data leak liabilities [3.12].</li>
-            <li><strong style="color:#79c0ff;">⚙️ The Architecture Map:</strong> Engineered a zero-trust declarative landing grid via HashiCorp Terraform modules, placing all storage persistence resources behind a strict edge firewall and wrapping data layers in mandatory hardware AWS S3 server-side encryption at rest [3.12].</li>
+            <li><strong style="color:#ff7b72;">🔴 The Friction Point:</strong> Ad-hoc cloud server and database deployments left private client ledgers and sensitive system credentials exposed to open public network scans, increasing data leak liabilities [3.12].</li>
+            <li><strong style="color:#79c0ff;">⚙️ The Architectural Fix:</strong> Engineered a zero-trust declarative landing grid via HashiCorp Terraform modules, placing all storage persistence resources behind a strict edge firewall and wrapping data layers in mandatory hardware AES-256 server-side encryption at rest [3.12].</li>
         </ul>
         <div class="diagram-container">
             <div class="dia-row"><div class="dia-box">☁️ AWS Cloud Perimeter</div><div class="dia-arrow">➔</div><div class="dia-box">🛡️ Traffic Ingress SG Filter</div><div class="dia-arrow">➔</div><div class="dia-box alert">🔒 Isolated Internal Subnet</div><div class="dia-arrow">➔</div><div class="dia-box">🔐 S3 Bucket (AES256 Enforced)</div></div>
@@ -324,8 +311,8 @@
                 <code>git clone https://github.com.git && cd isolated-cloud-landing-grid-secure-API/terraform</code><br>
                 <code>terraform init && terraform apply -auto-approve</code>
             </li>
-            <li><strong style="color:#d19a66;">🚨 Disaster Recovery:</strong> If a manual setting causes boundary drift, execute <code>terraform apply -auto-approve</code> to instantly restore isolation parameters [3.12]. If a bucket naming conflict occurs, open <code>modules/storage_vault/main.tf</code>, alter the bucket name string variable, and re-run apply [3.12].</li>
-            <li><strong style="color:#56b6c2;">🟢 Commercial ROI:</strong> Guarantees absolute privacy isolation, saving an estimated <strong>\$65,000 dollars annually</strong> in corporate compliance audit liabilities [3.12].</li>
+            <li><strong style="color:#d19a66;">🚨 Disaster Recovery & Field Troubleshooting:</strong> If a manual setting causes configuration drift, execute <code>terraform apply -auto-approve</code> to instantly restore isolation parameters by tearing down un-audited network paths [3.12]. If a bucket naming conflict occurs, open <code>modules/storage_vault/main.tf</code>, alter the unique bucket name string variable, and re-run apply [3.12].</li>
+            <li><strong style="color:#56b6c2;">🟢 Commercial ROI:</strong> Guarantees absolute privacy isolation across data tiers, saving an estimated <strong>\$65,000 dollars annually</strong> in compliance audit liabilities [3.12].</li>
         </ul>
     </div>
             
@@ -334,8 +321,8 @@
         <h3>Project 06: Sovereign Enterprise LLMOps Ingestion & Context RAG Engine</h3>
         <div class="tags-row"><span class="tag">LLMOps Engine</span><span class="tag">Vector Storage</span><span class="tag">n8n Automation</span></div>
         <ul>
-            <li><strong style="color:#ff7b72;">🔴 The Friction Point:</strong> Corporate leadership teams lose hours cross-referencing disconnected document directories to extract context for critical business decisions, while sharing data with public third-party AI interfaces risks severe intellectual property leaks.</li>
-            <li><strong style="color:#79c0ff;">⚙️ The Architecture Map:</strong> Constructed a self-hosted, sovereign Retrieval-Augmented Generation (RAG) platform linking secure local vector storage layers with private LLMOps pipelines using n8n to automate executive document parsing.</li>
+            <li><strong style="color:#ff7b72;">🔴 The Friction Point:</strong> Corporate leadership teams lose upto 12 hours weekly cross-referencing disconnected document directories to extract context for critical business decisions. Concurrently, while sharing sensitive data to public third-party AI interfaces risks severe intellectual property leaks.</li>
+            <li><strong style="color:#79c0ff;">⚙️ The Architectural Fix:</strong> Constructed a self-hosted, sovereign Retrieval-Augmented Generation (RAG) platform linking secure local vector storage layers with private/custom LLMOps pipelines using n8n to automate executive document parsing. When a new corporate asset is uploaded, an event listener parses content using precise prompt optimization models and synchronizes vector updates into secure relational database clusters.</li>
         </ul>
         <div class="diagram-container">
             <div class="dia-row"><div class="dia-box">📂 Corporate Document Upload</div><div class="dia-arrow">➔</div><div class="dia-box">⚙️ n8n Webhook Listener</div><div class="dia-arrow">➔</div><div class="dia-box">🔏 Custom Prompt Logic</div><div class="dia-arrow">➔</div><div class="dia-box alert">🧬 Vector Database Sync</div></div>
@@ -357,7 +344,7 @@
         <div class="tags-row"><span class="tag">GitOps CD</span><span class="tag">Docker Packaging</span><span class="tag">GitHub Actions</span></div>
         <div class="src-link">Tracking Log: <a href="https://github.com" target="_blank">://github.com</a></div>
         <ul>
-            <li><strong style="color:#ff7b72;">🔴 The Friction Point:</strong> Manual software updates on production servers introduced human configuration risks, caused system downtime spikes of 15 percent, and delayed critical business operations scaling.</li>
+            <li><strong style="color:#ff7b72;">🔴 The Friction Point:</strong> Manual software updates on production servers introduced human configuration risks, caused system downtime spikes of 15 percent, and delayed critical business operations and scaling.</li>
             <li><strong style="color:#79c0ff;">⚙️ The Architecture Map:</strong> Developed an idempotent continuous delivery pipeline using GitHub Actions that automatically intercepts repository adjustments, runs secure token handshakes, compiles minimal Docker container images, and publishes updates live.</li>
         </ul>
         <div class="diagram-container">
@@ -368,7 +355,7 @@
                 <code>git clone https://github.com.git</code><br>
                 <code>python3 -m json.tool workflows/onboarding.json && python3 core_ops/app.py</code>
             </li>
-            <li><strong style="color:#d19a66;">🚨 Disaster Recovery:</strong> If a deployment fails due to a syntax error inside a workflow configuration file, use the native JSON validator tool to pinpoint the drift line, commit the text fix, and the pipeline engine will complete updates in 21 seconds.</li>
+            <li><strong style="color:#d19a66;">🚨 Disaster Recovery & Field Troubleshooting:</strong> If a deployment fails due to a syntax error inside a workflow configuration file, use the native JSON validator tool to pinpoint the specific drift line, commit the text fix, and the pipeline engine will self-heal and complete updates in 21 seconds.</li>
             <li><strong style="color:#56b6c2;">🟢 Commercial ROI:</strong> Lowers human error risk to absolute zero, recovering over <strong>\$74,000 dollars annually</strong> in engineering maintenance overhead.</li>
         </ul>
     </div>
@@ -378,14 +365,14 @@
      <h3>Project 08: High-Ticket B2B RevOps Client Intake & Capacity Scaling Engine</h3>
      <div class="tags-row"><span class="tag">RevOps Ingestion</span><span class="tag">HubSpot API</span><span class="tag">n8n Enterprise</span></div>
      <ul>
-         <li><strong style="color:#ff7b72;">🔴 The Friction Point:</strong> High-ticket consulting firms closed out deals only to find their backend operations trapped behind an operational onboarding ceiling, requiring 4 hours of manual data tracking loops per account and causing a 15% error spike [3.4].</li>
-         <li><strong style="color:#79c0ff;">⚙️ The Architecture Map:</strong> Built an event-driven data integration pipeline linking n8n enterprise workflows with HubSpot CRM systems to completely automate client intake object routing, structure custom metadata objects, and sync accounts in real-time [3.4].</li>
+         <li><strong style="color:#ff7b72;">🔴 The Friction Point:</strong> High-ticket consulting firms closed out deals only to find their backend operations trapped behind an operational onboarding ceiling, requiring 4 hours of tedious manual data tracking loops per account and causing a 15% error spike [3.4].</li>
+         <li><strong style="color:#79c0ff;">⚙️ The Architectural Fix:</strong> Built an event-driven data integration pipeline linking n8n enterprise workflows with relational database synchronization systems(like Hubspot) to completely automate client intake object routing, structure custom metadata objects, and sync accounts in real-time [3.4].</li>
     </ul>
     <div class="diagram-container">
         <div class="dia-row"><div class="dia-box">💼 CRM "Closed-Won" Deal</div><div class="dia-arrow">➔</div><div class="dia-box">⚙️ n8n Intake Orchestrator</div><div class="dia-arrow">➔</div><div class="dia-box">📊 HubSpot Custom Objects</div><div class="dia-arrow">➔</div><div class="dia-box alert">📂 Client Access Automated</div></div>
     </div>
     <ul>
-        <li><strong style="color:#56b6c2;">🟢 Commercial ROI:</strong> Reduces data entry latency from 48 hours to less than 3 seconds with 0% manual errors, allowing the enterprise to double intake capacity to 40+ accounts without increasing headcount, saving <strong>$90,000 dollars a year</strong> [3.5].</li>
+        <li><strong style="color:#56b6c2;">🟢 Commercial ROI:</strong> Reduces data entry latency from 48 hours to less than 3 seconds with 0% manual errors, allowing the enterprise to double intake capacity to 40+ accounts without increasing headcount, saving <strong>$90,000 dollars a year in specialized staffing</strong> [3.5].</li>
     </ul>
 </div>
 
@@ -394,8 +381,8 @@
     <h3>Project 09: Enterprise Subscription Billing & Financial Churn Mitigation Grid</h3>
     <div class="tags-row"><span class="tag">Financial Engineering</span><span class="tag">Stripe Webhooks</span><span class="tag">Make.com Stacking</span></div>
     <ul>
-        <li><strong style="color:#ff7b72;">🔴 The Friction Point:</strong> Large-scale digital platforms bleed revenue silently due to failed subscription transactions, mismatched invoicing logs, and unrevoked credentials when client cards decline, forcing accounting teams to waste 30 plus hours a week manually cross-referencing records and causing an $18,000/mo cash leak [3.6].</li>
-        <li><strong style="color:#79c0ff;">⚙️ The Architecture Map:</strong> Designed a secure, automated financial recovery grid utilizing Make.com enterprise routing architectures and real-time Stripe webhook listeners [3.6]. When a transaction status changes in Stripe, an encrypted webhook splits the event into immediate automated action paths: updating CRM custom billing indicators, locking access protocols dynamically on the day of failure, and deploying multi-stage automated dunning communication loops linking directly to self-service customer invoicing portal frameworks [3.6].</li>
+        <li><strong style="color:#ff7b72;">🔴 The Friction Point:</strong> Large-scale digital platforms bleed revenue silently due to failed subscription transactions, mismatched invoicing logs, and unrevoked credentials when client cards decline, forcing accounting teams to waste 30 plus hours a week manually cross-referencing records and causing a silent 4% monthly revenue which is equivalent to 18,000 dollars leak [3.6].</li>
+        <li><strong style="color:#79c0ff;">⚙️ The Architectural Fix:</strong> Designed a secure, automated financial recovery grid utilizing Make.com enterprise routing architectures and real-time Stripe webhook listeners [3.6]. When a transaction status changes in Stripe, an encrypted webhook splits the event into immediate automated action paths: updating CRM custom billing indicators, locking access protocols dynamically on the day of failure, and deploying multi-stage automated dunning communication loops linking directly to self-service customer invoicing portal frameworks [3.6].</li>
     </ul>
     <div class="diagram-container">
         <div class="dia-row"><div class="dia-box">💳 Stripe Transaction Failure</div><div class="dia-arrow">➔</div><div class="dia-box">⚙️ Make.com Financial Router</div><div class="dia-arrow">➔</div><div class="dia-box alert">🔒 Key Access Revocation</div><div class="dia-arrow">➔</div><div class="dia-box">✉️ Staggered Dunning Loops</div></div>
@@ -410,8 +397,8 @@
     <h3>Project 10: Full-Stack Corporate Data Highway & Multi-App Consolidation Hub</h3>
     <div class="tags-row"><span class="tag">API Integration</span><span class="tag">Data Normalization</span><span class="tag">Data Silo Removal</span></div>
     <ul>
-        <li><strong style="color:#ff7b72;">🔴 The Friction Point:</strong> Businesses operating across fragmented software platforms suffer heavy data silos. Staff waste 40 plus hours a week manually downloading CSV files from one tool, formatting rows, and uploading them into another just to keep cross-department records aligned, resulting in catastrophic sync latency and shipping errors [3.12].</li>
-        <li><strong style="color:#79c0ff;">⚙️ The Architecture Map:</strong> Engineered a unified corporate data hub by combining full-stack web architectures with secure cloud DevOps infrastructure and robust n8n enterprise instances [3.12]. Built secure API webhooks to listen to all 12 fragmented corporate apps, capturing, parsing, and cleaning incoming multi-platform JSON packages to completely normalize and structure raw data points into organized relational database tables for absolute consistency across all departments [3.12].</li>
+        <li><strong style="color:#ff7b72;">🔴 The Friction Point:</strong> Businesses operating across fragmented software platforms(marketing, CRMs, billing, inventory) suffer heavy internal data fragmentation. Staff waste 40 plus hours a week manually downloading CSV files from one tool, formatting rows, and uploading them into another just to keep cross-department records aligned, resulting in catastrophic sync latency and data shipping errors [3.12].</li>
+        <li><strong style="color:#79c0ff;">⚙️ The Architectural Fix:</strong> Engineered a unified corporate data hub by combining full-stack web architectures with secure cloud DevOps infrastructure and robust n8n enterprise instances [3.12]. Built secure API webhooks to listen to all 12 fragmented corporate apps, capturing, parsing, and cleaning incoming multi-platform JSON packages to completely normalize and structure raw data points into organized relational database tables for absolute consistency across all departments [3.12].</li>
     </ul>
     <div class="diagram-container">
         <div class="dia-row"><div class="dia-box">🌐 12 Siloed External Apps</div><div class="dia-arrow">➔</div><div class="dia-box">⚙️ API Ingress Webhooks</div><div class="dia-arrow">➔</div><div class="dia-box">🔏 JSON Payload Normalization</div><div class="dia-arrow">➔</div><div class="dia-box alert">🗄️ Relational Database Highway</div></div>
