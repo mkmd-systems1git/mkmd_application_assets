@@ -90,24 +90,107 @@
         </div>
     </div>
 
-    <!-- 4-Card Dashboard Control Deck Grid -->
-    <div class="dashboard-grid">
-        <div class="menu-card" onclick="openDrawer('maritime-panel')">
-            <h2> Maritime Edge</h2>
-            <p>3 Production Systems</p>
+    <!-- New Combined Layout Container Styling Rules -->
+    <style>
+        .master-dashboard-container {
+            display: flex;
+            align-items: stretch;
+            gap: 30px;
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+        .projects-section-block {
+            flex: 3;
+            display: flex;
+            flex-direction: column;
+        }
+        .skills-section-block {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-width: 220px;
+        }
+        .vertical-separation-wall {
+            width: 1px;
+            background-color: #30363d;
+            margin: 0 10px;
+        }
+        .dashboard-row-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            flex-grow: 1;
+        }
+        .menu-card {
+            background-color: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            padding: 25px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s, border-color 0.2s;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: calc(100% - 50px);
+        }
+        .menu-card:hover {
+            transform: translateY(-3px);
+            border-color: #388bfd;
+            background-color: #1c2128;
+        }
+        .menu-card h2 { margin: 0 0 10px 0; font-size: 1.15rem; color: #58a6ff; text-transform: uppercase; letter-spacing: 0.5px; }
+        .menu-card p { margin: 0; font-size: 0.85rem; color: #8b949e; }
+        .dashboard-topic-label {
+            font-family: monospace;
+            font-size: 0.85rem;
+            color: #8b949e;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 15px;
+            display: block;
+            text-align: left;
+            font-weight: 600;
+        }
+    </style>
+
+    <!-- Master Hand-Drawn Dashboard Execution Block -->
+    <div class="master-dashboard-container">
+        
+        <!-- Left Side: Completed Projects Columns Block -->
+        <div class="projects-section-block">
+            <span class="dashboard-topic-label">Topic ➔ Completed Projects Breakdown</span>
+            <div class="dashboard-row-grid">
+                <div class="menu-card" onclick="openDrawer('maritime-panel')">
+                    <h2>Maritime Edge</h2>
+                    <p>3 Production Systems</p>
+                </div>
+                <div class="menu-card" onclick="openDrawer('zero-trust-panel')">
+                    <h2>Zero-Trust</h2>
+                    <p>3 Production Systems</p>
+                </div>
+                <div class="menu-card" onclick="openDrawer('ops-automation-panel')">
+                    <h2>Ops Automation</h2>
+                    <p>4 Production Systems</p>
+                </div>
+            </div>
         </div>
-        <div class="menu-card" onclick="openDrawer('zero-trust-panel')">
-            <h2> Zero-Trust</h2>
-            <p>3 Production Systems</p>
+
+        <!-- Center: The Vertical Separation Line Grid Block -->
+        <div class="vertical-separation-wall"></div>
+
+        <!-- Right Side: Independent Skills Column Block -->
+        <div class="skills-section-block">
+            <span class="dashboard-topic-label">Topic ➔ Skills</span>
+            <div class="menu-card" onclick="openDrawer('skills-panel')">
+                <h2>Core Skills</h2>
+                <p>Full Terminal Stack</p>
+            </div>
         </div>
-        <div class="menu-card" onclick="openDrawer('ops-automation-panel')">
-            <h2> Ops Automation</h2>
-            <p>4 Production Systems</p>
-        </div>
-        <div class="menu-card" onclick="openDrawer('skills-panel')">
-            <h2> Core Skills</h2>
-            <p>Full Terminal Stack</p>
-        </div>
+
     </div>
 
     <!-- New Structural Subheading for Your Portfolio Section -->
