@@ -213,7 +213,7 @@
             </div>
             <ul>
                 <li><strong style="color:#58a6ff;">🛠️ On-Site Deployment Checklist:</strong><br>
-                    <code>git clone github.com/mkmd-systems1git/maritime-edge-pipeline.git && cd maritime-edge-pipeline</code><br>
+                    <code>git clone https://github.com/mkmd-systems1git/maritime-edge-pipeline.git && cd maritime-edge-pipeline</code><br>
                     <code>docker build -t edge-pipeline:latest .</code><br>
                     <code>docker run -d --name edge-engine --restart unless-stopped edge-pipeline:latest</code>
                 </li>
@@ -236,7 +236,7 @@
     </div>
     <ul>
         <li><strong style="color:#58a6ff;">🛠️ On-Site Deployment Checklist:</strong><br>
-            <code>git clone https://github.com.git && cd maritime-fleet-gitops</code><br>
+            <code>git clone https://github.com/mkmd-systems1git/maritime-fleet-gitops.git && cd maritime-fleet-gitops</code><br>
             <code>cat .github/workflows/deploy-pipeline.yml</code>
         </li>
         <li><strong style="color:#d19a66;">🚨 Disaster Recovery & Field Troubleshooting :</strong> If a container registry authentication timeout occurs due to deep-sea satellite link clipping, operator's intervention is not required. The engine’s built-in secure permissions configuration block (<code>packages: write</code>) will automatically re-verify handshakes on the next sequential git event loop trigger [3.12].</li>
@@ -258,7 +258,7 @@
         </div>
         <ul>
             <li><strong style="color:#58a6ff;">🛠️ On-Site Deployment Checklist:</strong><br>
-            <code>git clone https://github.com.git && cd maritime-cloud-coast-infrastructure/terraform</code><br>
+            <code>git clone https://github.com/mkmd-systems1git/maritime-cloud-coast-infrastructure.git && cd maritime-cloud-coast-infrastructure/terraform</code><br>
             <code>terraform init && terraform apply -auto-approve</code>
         </li>
         <li><strong style="color:#d19a66;">🚨 Disaster Recovery & Field Troubleshooting :</strong> In the event of manual web panel interference or environment configuration drift, running the self-healing idempotency recovery line <code>terraform apply -auto-approve</code> automatically tears down un-audited access paths and perfectly restores your secure network perimeter instantly [3.12].</li>
@@ -286,7 +286,7 @@
         </div>
         <ul>
             <li><strong style="color:#58a6ff;">🛠️ On-Site Deployment Checklist:</strong><br>
-                <code>git clone https://github.com.git && cd -edge-memory-sync-agent</code><br>
+                <code>git clone https://github.com/mkmd-systems1git/-edge-memory-sync-agent.git && cd -edge-memory-sync-agent</code><br>
                 <code>docker build -t edge-sync:latest . && docker run -d --name live-edge-agent --restart unless-stopped edge-sync:latest</code>
             </li>
             <li><strong style="color:#d19a66;">🚨 Disaster Recovery & Field Troubleshooting:</strong> The queue caches records natively without operator supervision, executing a clean 3-second bulk synchronization wave straight to the cloud core the exact millisecond uplink validation returns [3.12]. If a container env is corrupted, run <code>docker rm -f live-edge-agent</code> and re-run the boot line [3.12].</li>
@@ -308,7 +308,7 @@
         </div>
         <ul>
             <li><strong style="color:#58a6ff;">🛠️ On-Site Deployment Checklist:</strong><br>
-                <code>git clone https://github.com.git && cd isolated-cloud-landing-grid-secure-API/terraform</code><br>
+                <code>git clone https://github.com/mkmd-systems1git/isolated-cloud-landing-grid-secure-API.git && cd isolated-cloud-landing-grid-secure-API/terraform</code><br>
                 <code>terraform init && terraform apply -auto-approve</code>
             </li>
             <li><strong style="color:#d19a66;">🚨 Disaster Recovery & Field Troubleshooting:</strong> If a manual setting causes configuration drift, execute <code>terraform apply -auto-approve</code> to instantly restore isolation parameters by tearing down un-audited network paths [3.12]. If a bucket naming conflict occurs, open <code>modules/storage_vault/main.tf</code>, alter the unique bucket name string variable, and re-run apply [3.12].</li>
@@ -342,8 +342,7 @@
     <div class="project-block">
         <h3>Project 07: Continuous Delivery GitOps Container Pipeline (`GitOps-Container-Deployment-Pipeline---Automation`)</h3>
         <div class="tags-row"><span class="tag">GitOps CD</span><span class="tag">Docker Packaging</span><span class="tag">GitHub Actions</span></div>
-        <div class="src-link">Tracking Log: <a href="https://github.com/mkmd-systems1git/GitOps-Container-Deployment-Pipeline---Automation" target="_blank">https://github.com/mkmd-systems1git/GitOps-Container-Deployment-Pipeline---Automation</a></div>
-        <ul>
+        <div class="src-link">Tracking Log: <a href="ccc
             <li><strong style="color:#ff7b72;">🔴 The Friction Point:</strong> Manual software updates on production servers introduced human configuration risks, caused system downtime spikes of 15 percent, and delayed critical business operations and scaling.</li>
             <li><strong style="color:#79c0ff;">⚙️ The Architecture Map:</strong> Developed an idempotent continuous delivery pipeline using GitHub Actions that automatically intercepts repository adjustments, runs secure token handshakes, compiles minimal Docker container images, and publishes updates live.</li>
         </ul>
@@ -352,7 +351,7 @@
         </div>
         <ul>
             <li><strong style="color:#58a6ff;">🛠️ On-Site Deployment Checklist:</strong><br>
-                <code>git clone https://github.com.git</code><br>
+                <code>git clone https://github.com/mkmd-systems1git/GitOps-Container-Deployment-Pipeline---Automation.git</code><br>
                 <code>python3 -m json.tool workflows/onboarding.json && python3 core_ops/app.py</code>
             </li>
             <li><strong style="color:#d19a66;">🚨 Disaster Recovery & Field Troubleshooting:</strong> If a deployment fails due to a syntax error inside a workflow configuration file, use the native JSON validator tool to pinpoint the specific drift line, commit the text fix, and the pipeline engine will self-heal and complete updates in 21 seconds.</li>
