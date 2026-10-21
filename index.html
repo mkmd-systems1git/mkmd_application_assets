@@ -280,15 +280,18 @@
         <ul>
             <li><strong style="color:#ff7b72;">🔴 The Friction Point:</strong> Intermittent communication link cutouts on remote telemetry terminals led to missing system logs and broken transactional histories, causing compliance failures for high-stakes enterprise platforms [3.12].</li>
             <li><strong style="color:#79c0ff;">⚙️ The Architectural Fix:</strong> Implemented a self-healing edge synchronization loop utilizing an internal thread-safe ring-buffer queue (<code>collections.deque</code> and <code>threading.Lock</code>) that intercepts dropouts, dynamic allocations, and safely holds 500 telemetry payloads locally without data drops [3.12].</li>
-        </ul>
-        <div class="diagram-container">
-            <div class="dia-row"><div class="dia-box">📡 Live Telemetry Payload</div><div class="dia-arrow">➔</div><div class="dia-box alert">🔒 Low-Level Thread Lock</div><div class="dia-arrow">➔</div><div class="dia-box">📥 RAM Buffer Array</div><div class="dia-arrow">➔</div><div class="dia-box">🚀 Cloud Datastore Sync</div></div>
-        </div>
-        <ul>
-            <li><strong style="color:#58a6ff;">🛠️ On-Site Deployment Checklist:</strong><br>
-                <code>git clone https://github.com/mkmd-systems1git/-edge-memory-sync-agent.git && cd -edge-memory-sync-agent</code><br>
-                <code>docker build -t edge-sync:latest . && docker run -d --name live-edge-agent --restart unless-stopped edge-sync:latest</code>
-            </li>
+           
+            <ul style="padding-left: 20px; color: #c9d1d9; font-size: 1.05rem; line-height: 1.7; list-style-type: square; margin-top: 20px;">
+        <li style="margin-bottom: 12px;">
+            <strong style="color: #58a6ff;">🛠️ On-Site Field Deployment Checklist:</strong>
+            <br><span style="font-family: monospace; font-size: 0.9rem; color: #8b949e;">1. Clone the master asset vault repository cleanly:</span> 
+            <br><code style="background-color: #1f242c; padding: 3px 6px; border-radius: 4px; font-size: 0.9rem; color: #ff7b72; font-family: monospace; display: block; margin: 5px 0;">git clone https://github.com && cd -edge-memory-sync-agent</code>
+            <span style="font-family: monospace; font-size: 0.9rem; color: #8b949e;">2. Compile the local immutable execution container image layer:</span> 
+            <br><code style="background-color: #1f242c; padding: 3px 6px; border-radius: 4px; font-size: 0.9rem; color: #ff7b72; font-family: monospace; display: block; margin: 5px 0;">docker build -t edge-sync-agent:latest .</code>
+            <span style="font-family: monospace; font-size: 0.9rem; color: #8b949e;">3. Boot the background tracking engine tracking service daemon:</span> 
+            <br><code style="background-color: #1f242c; padding: 3px 6px; border-radius: 4px; font-size: 0.9rem; color: #ff7b72; font-family: monospace; display: block; margin: 5px 0;">docker run -d --name live-edge-agent --restart unless-stopped -e PYTHONUNBUFFERED=1 edge-sync-agent:latest</code>
+        </li>
+    </ul>
             <li><strong style="color:#d19a66;">🚨 Disaster Recovery & Field Troubleshooting:</strong> The queue caches records natively without operator supervision, executing a clean 3-second bulk synchronization wave straight to the cloud core the exact millisecond uplink validation returns [3.12]. If a container env is corrupted, run <code>docker rm -f live-edge-agent</code> and re-run the boot line [3.12].</li>
             <li><strong style="color:#56b6c2;">🟢 Commercial ROI:</strong> Drives data drops and configuration liabilities to absolute, securing history logs and saving over <strong>$65,000 dollars a year</strong> in system repair costs [3.12].</li>
         </ul>
@@ -306,11 +309,17 @@
         <div class="diagram-container">
             <div class="dia-row"><div class="dia-box">☁️ AWS Cloud Perimeter</div><div class="dia-arrow">➔</div><div class="dia-box">🛡️ Traffic Ingress SG Filter</div><div class="dia-arrow">➔</div><div class="dia-box alert">🔒 Isolated Internal Subnet</div><div class="dia-arrow">➔</div><div class="dia-box">🔐 S3 Bucket (AES256 Enforced)</div></div>
         </div>
-        <ul>
-            <li><strong style="color:#58a6ff;">🛠️ On-Site Deployment Checklist:</strong><br>
-                <code>git clone https://github.com/mkmd-systems1git/isolated-cloud-landing-grid-secure-API.git && cd isolated-cloud-landing-grid-secure-API/terraform</code><br>
-                <code>terraform init && terraform apply -auto-approve</code>
-            </li>
+            <ul style="padding-left: 20px; color: #c9d1d9; font-size: 1.05rem; line-height: 1.7; list-style-type: square; margin-top: 20px;">
+        <li style="margin-bottom: 12px;">
+            <strong style="color: #58a6ff;">🛠️ On-Site Field Deployment Checklist:</strong>
+            <br><span style="font-family: monospace; font-size: 0.9rem; color: #8b949e;">1. Clone the master security perimeter architecture blueprints:</span> 
+            <br><code style="background-color: #1f242c; padding: 3px 6px; border-radius: 4px; font-size: 0.9rem; color: #ff7b72; font-family: monospace; display: block; margin: 5px 0;">git clone https://github.com && cd isolated-cloud-landing-grid-secure-API/terraform</code>
+            <span style="font-family: monospace; font-size: 0.9rem; color: #8b949e;">2. Initialize the declarative infrastructure provider state layer modules:</span> 
+            <br><code style="background-color: #1f242c; padding: 3px 6px; border-radius: 4px; font-size: 0.9rem; color: #ff7b72; font-family: monospace; display: block; margin: 5px 0;">terraform init</code>
+            <span style="font-family: monospace; font-size: 0.9rem; color: #8b949e;">3. Programmatically provision the private landing grid network wall:</span> 
+            <br><code style="background-color: #1f242c; padding: 3px 6px; border-radius: 4px; font-size: 0.9rem; color: #ff7b72; font-family: monospace; display: block; margin: 5px 0;">terraform apply -auto-approve</code>
+        </li>
+    </ul>
             <li><strong style="color:#d19a66;">🚨 Disaster Recovery & Field Troubleshooting:</strong> If a manual setting causes configuration drift, execute <code>terraform apply -auto-approve</code> to instantly restore isolation parameters by tearing down un-audited network paths [3.12]. If a bucket naming conflict occurs, open <code>modules/storage_vault/main.tf</code>, alter the unique bucket name string variable, and re-run apply [3.12].</li>
             <li><strong style="color:#56b6c2;">🟢 Commercial ROI:</strong> Guarantees absolute privacy isolation across data tiers, saving an estimated <strong>\$65,000 dollars annually</strong> in compliance audit liabilities [3.12].</li>
         </ul>
@@ -350,9 +359,9 @@
             <div class="dia-row"><div class="dia-box">📄 onboarding.json Code Push</div><div class="dia-arrow">➔</div><div class="dia-box">🔷 GitHub Actions Runner</div><div class="dia-arrow">➔</div><div class="dia-box alert">🐳 Package Docker Shell</div><div class="dia-arrow">➔</div><div class="dia-box">🚀 Production Automated Rollout</div></div>
         </div>
         <ul>
-            <li><strong style="color:#58a6ff;">🛠️ On-Site Deployment Checklist:</strong><br>
-                <code>git clone https://github.com/mkmd-systems1git/GitOps-Container-Deployment-Pipeline---Automation.git</code><br>
-                <code>python3 -m json.tool workflows/onboarding.json && python3 core_ops/app.py</code>
+            <li><strong style="color:#58a6ff;">🛠️ On-Site Deployment Checklist:</strong><br> 
+                <br><span style="font-family: monospace; font-size: 0.9rem; color: #8b949e;">1. Clone the master delivery assets:</span> 
+<code style="background-color: #1f242c; padding: 3px 6px; border-radius: 4px; font-size: 0.9rem; color: #ff7b72; font-family: monospace;">git clone https://github.com && cd GitOps-Container-Deployment-Pipeline---Automation</code>
             </li>
             <li><strong style="color:#d19a66;">🚨 Disaster Recovery & Field Troubleshooting:</strong> If a deployment fails due to a syntax error inside a workflow configuration file, use the native JSON validator tool to pinpoint the specific drift line, commit the text fix, and the pipeline engine will self-heal and complete updates in 21 seconds.</li>
             <li><strong style="color:#56b6c2;">🟢 Commercial ROI:</strong> Lowers human error risk to absolute zero, recovering over <strong>\$74,000 dollars annually</strong> in engineering maintenance overhead.</li>
