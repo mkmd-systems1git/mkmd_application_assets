@@ -99,7 +99,7 @@ def process_pipeline():
             continue
 
                prompt = f"""
-        You are Mueni Kitoko's Strategic Personal AI Agent. Review this job description against her Master Resume and Full Portfolio Project Details.
+        You are Mueni Kitoko's Strategic Personal AI Agent. Review this job description against her Master Resume, and Full Portfolio Project Details.
         
         RESUME SUMMARY CONTEXT:
         {assets['resume']}
