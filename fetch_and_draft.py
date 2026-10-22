@@ -12,14 +12,22 @@ CLEANUP_DAYS = 7
 DASHBOARD_FILE = "tracking_dashboard.csv"
 
 def get_master_assets():
-    """Reads your master files from the repository context."""
-    assets = {"resume": "", "cover_letter": ""}
+    """Reads your master files and detailed portfolio project data from the repository."""
+    assets = {"resume": "", "cover_letter": "", "portfolio": ""}
     try:
-        with open("resume.md", "r") as f:
+        with open("resume.md", "r", encoding="utf-8") as f:
             assets["resume"] = f.read()
-        with open("cover_letter.md", "r") as f:
+        with open("cover_letter.md", "r", encoding="utf-8") as f:
             assets["cover_letter"] = f.read()
-    except FileNotFoundError as e:
+        
+        # Upgraded Layer: Read your main portfolio file to extract your 10 detailed projects
+        if os.path.exists("index.html"):
+            with open("index.html", "r", encoding="utf-8") as f:
+                assets["portfolio"] = f.read()
+        elif os.path.exists("html.md"):
+            with open("html.md", "r", encoding="utf-8") as f:
+                assets["portfolio"] = f.read()
+    except Exception as e:
         print(f"Error loading foundational assets: {e}")
     return assets
 
@@ -90,15 +98,19 @@ def process_pipeline():
         if job['id'] in existing_ids:
             continue
 
-        prompt = f"""
-        You are Mueni Kitoko's Strategic Personal AI Agent. Review this job description against her Master Resume.
+               prompt = f"""
+        You are Mueni Kitoko's Strategic Personal AI Agent. Review this job description against her Master Resume and Full Portfolio Project Details.
         
-        RESUME CONTEXT:
+        RESUME SUMMARY CONTEXT:
         {assets['resume']}
+
+        DETAILED PORTFOLIO & 10 PROJECT DRAWERS CONTEXT:
+        {assets['portfolio']}
         
         JOB TO EVALUATE:
         Company: {job['company']} | Title: {job['title']}
         Description: {job['description']}
+        ...
         
         INSTRUCTIONS:
         1. Rate how strongly Mueni can solve this company's operational problems out of 100.
