@@ -1,7 +1,7 @@
 MUENI KITOKO
 Nairobi, Kenya | muenikitoko63@gmail.com
-GitHub Profile: ://github.com
-Portfolio Site: mkmd-systems1git.github.io
+GitHub Profile: https://github.com/mkmd-systems1git
+Portfolio Site: https://mkmd-systems1git.github.io/mkmd_application_assets
 
 
 {{CURRENT_DATE}}
