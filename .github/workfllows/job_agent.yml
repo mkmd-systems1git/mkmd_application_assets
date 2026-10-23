@@ -2,16 +2,14 @@ name: Autonomous Job Search & Application Drafter Engine
 
 on:
   schedule:
-    # This tells GitHub to run your agent completely automatically every single morning at 6:00 AM UTC
     - cron: '0 6 * * *'
   workflow_dispatch:
-    # This button allows you to manually trigger the agent from the GitHub "Actions" tab whenever you want
 
 jobs:
   run-agent:
     runs-on: ubuntu-latest
     permissions:
-      contents: write # Allows the agent to update your CSV file and write new draft letters to your repo
+      contents: write
 
     steps:
       - name: Checkout Application Assets Repository
@@ -28,7 +26,6 @@ jobs:
 
       - name: Execute Fetching and Asset Tailoring Pipeline
         env:
-          # This securely pipes your free Gemini API key into the cloud runner
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           python fetch_and_draft.py
@@ -38,6 +35,5 @@ jobs:
           git config --global user.name "Mueni Kitoko AI Assistant"
           git config --global user.email "agent@muenikitoko.cloud"
           git add tracking_dashboard.csv drafts/
-          # Only commit changes if the agent actually found new positions or updated old rows
           git diff --quiet && git diff --staged --quiet || git commit -m "Automated Sync: Pipeline ledger updated & high-probability drafts compiled"
           git push
