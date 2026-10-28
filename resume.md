@@ -1,6 +1,6 @@
 # MUENI KITOKO
 ### EDGE DEVOPS & CLOUD SYSTEMS AUTOMATION ENGINEER
-Nairobi, Kenya | muenikitoko63@gmail.com 
+Nairobi, Kenya | misskitokomarcy@gmail.com 
 Github Profile: https://github.com/mkmd-systems1git
 Portfolio Site:  https://mkmd-systems1git.github.io/mkmd_application_assets/
 
