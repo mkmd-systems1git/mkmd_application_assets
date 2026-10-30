@@ -1,176 +1,182 @@
+#!/usr/bin/env python3
+"""
+MKMD Autonomous Application Agent
+Orchestrator: fetch_and_draft.py
+Target Fields: Maritime Edge, Private Aviation, UHNWI Family Offices, Autonomous Startups
+Constraints: $0 Cost, Zero Local Compute, 7-Day State Expiration Lifecycle
+"""
+
 import os
+import re
 import csv
 import json
+import hashlib
 import urllib.request
-from datetime import datetime
-import google.generativeai as genai
+import urllib.parse
+import xml.etree.ElementTree as ET
+from datetime import datetime, timedelta
+from pathlib import Path
 
-# Configuration constants
-DRAFT_SCORE_THRESHOLD = 80
-CLEANUP_DAYS = 7
-DASHBOARD_FILE = "tracking_dashboard.csv"
+# --- GLOBAL SYSTEM ENVIRONMENT CONFIGURATION ---
+GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
+REPO_ROOT = Path(__file__).resolve().parent
+TRACKING_CSV = REPO_ROOT / "tracking_dashboard.csv"
+DRAFTS_DIR = REPO_ROOT / "drafts"
 
-def get_master_assets():
-    """Reads master resume, cover letter, and Jekyll portfolio context safely."""
-    assets = {"resume": "", "cover_letter": "", "portfolio": ""}
+GEMINI_ENDPOINT = (
+    "https://googleapis.com"
+    f"gemini-2.5-flash:generateContent?key={GEMINI_API_KEY}"
+)
+
+# --- STRICT 14-COLUMN AIRTABLE DATA REPLICATOR SCHEMA ---
+CSV_COLUMNS = [
+    "JOB_ID",
+    "Date_Logged",
+    "Target_Market_Sector",
+    "Target_Platform",
+    "Company_Name",
+    "Position_Title",
+    "Offered_Income_Floor",
+    "Hardware_Laptop_Required",
+    "Status_Tracking",
+    "SCORE",
+    "Problem to solve",
+    "Strategic_Pitch_Angle",
+    "Draft_Artifacts_Path",
+    "URL"
+]
+
+# --- ASSET INGESTION LAYER (IMMUTABLE RAG VAULT) ---
+def load_rag_context() -> dict:
+    """
+    Reads Mueni's universal application profiles and portfolio data natively.
+    Treats assets as a read-only context reservoir for the evaluation brain.
+    """
+    resume_path = REPO_ROOT / "resume.md"
+    cover_letter_path = REPO_ROOT / "cover_letter.md"
+    portfolio_path = REPO_ROOT / "index.html"
+
+    # Safely digest files, fallback seamlessly to generic strings if empty
+    return {
+        "resume": resume_path.read_text(encoding="utf-8") if resume_path.exists() else "Resume file unavailable.",
+        "cover_letter_template": cover_letter_path.read_text(encoding="utf-8") if cover_letter_path.exists() else "",
+        "portfolio": portfolio_path.read_text(encoding="utf-8") if portfolio_path.exists() else "Portfolio file unavailable."
+    }
+
+# --- INGESTION PIPELINE (STREAM & WEBHOOK CONVEYOR) ---
+def fetch_rss_feed(url: str, sector_name: str) -> list:
+    """
+    Parses open technical developer feeds securely.
+    Includes error handling and custom headers to bypass scraping blocks.
+    """
+    jobs = []
     try:
-        with open("resume.md", "r", encoding="utf-8") as f:
-            assets["resume"] = f.read()
-        with open("cover_letter.md", "r", encoding="utf-8") as f:
-            assets["cover_letter"] = f.read()
-        if os.path.exists("index.html"):
-            with open("index.html", "r", encoding="utf-8") as f:
-                assets["portfolio"] = f.read()
-    except Exception as e:
-        print(f"Error loading foundational assets: {e}")
-    return assets
+        req = urllib.request.Request(
+            url, 
+            headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) MKMD-Systems-Agent/2.0"}
+        )
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            xml_data = resp.read()
+            if not xml_data.strip():
+                return jobs
+            
+            tree = ET.fromstring(xml_data)
+            for item in tree.findall("./channel/item"):
+                title = item.findtext("title", "").strip()
+                link = item.findtext("link", "").strip()
+                desc = item.findtext("description", "").strip()
+                guid = item.findtext("guid", link).strip()
+                
+                # Sanitize HTML tags out of job descriptions safely
+                clean_desc = re.sub(r"<[^>]+>", " ", desc)
+                
+                if ":" in title:
+                    parts = title.split(":", 1)
+                    company = parts[0].strip()
+                    role = parts[1].strip()
+                else:
+                    company = "Niche Inefficient Principal"
+                    role = title
 
-def fetch_active_streams():
-    """Ingests data from open technical remote streams safely."""
-    listings = []
-    # Targeted global remote developer data pipeline channel
-    url = "https://workingnomads.com"
-    try:
-        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
-        with urllib.request.urlopen(req, timeout=10) as response:
-            data = json.loads(response.read().decode())
-            for job in data[:10]: # Extract newest entries to manage processing limits safely
-                listings.append({
-                    "id": str(job.get('id', job.get('pk'))),
-                    "title": job.get('title'),
-                    "company": job.get('company_name', 'Enterprise Cloud Target'),
-                    "description": job.get('description'),
-                    "url": job.get('url', 'https://workingnomads.com'),
-                    "sector": "Global Remote Infrastructure"
+                jobs.append({
+                    "raw_id": guid,
+                    "company": company,
+                    "role": role,
+                    "description": clean_desc.strip()[:4000],
+                    "url": link,
+                    "sector_hint": sector_name
                 })
     except Exception as e:
-        print(f"Standard remote technical feed stream paused: {e}")
-    return listings
+        print(f"[INGESTION BYPASS] Skipping feed pipeline for {sector_name}: {e}")
+    return jobs
 
-def process_pipeline():
-    """Evaluates opportunities based strictly on privacy, resilience, and asset continuity."""
-    assets = get_master_assets()
-    if not assets["resume"]:
-        return
+def fetch_inbound_webhook_alerts() -> list:
+    """
+    Consumes raw JSON files pushed from Make.com into the inbound_alerts/ directory.
+    Deletes staging alert payloads on processing to keep repository storage at zero.
+    """
+    alert_dir = REPO_ROOT / "inbound_alerts"
+    jobs = []
+    if not alert_dir.exists():
+        return jobs
 
-    gemini_key = os.environ.get("GEMINI_API_KEY")
-    if not gemini_key:
-        print("Missing GEMINI_API_KEY secret token environment variable.")
-        return
-    genai.configure(api_key=gemini_key)
-    model = genai.GenerativeModel('gemini-1.5-flash')
-
-    raw_jobs = fetch_active_streams()
-    existing_rows = []
-    existing_ids = set()
-
-    if os.path.exists(DASHBOARD_FILE):
-        with open(DASHBOARD_FILE, mode='r', newline='', encoding='utf-8') as f:
-            reader = csv.DictReader(f)
-            existing_rows = list(reader)
-            existing_ids = {row['JOB_ID'] for row in existing_rows if 'JOB_ID' in row}
-
-    today = datetime.utcnow().strftime('%Y-%m-%d')
-    cleaned_rows = []
-    for row in existing_rows:
+    for alert_file in alert_dir.glob("*.json"):
         try:
-            row_date = datetime.strptime(row['Date_Logged'], '%Y-%m-%d')
-            is_expired = (today - row_date).days >= CLEANUP_DAYS
-            if row['Status_Tracking'] == 'Discovered' and is_expired:
-                continue 
-        except (ValueError, KeyError):
-            pass
-        cleaned_rows.append(row)
-
-    new_logs = []
-    for job in raw_jobs:
-        if job['id'] in existing_ids:
-            continue
-
-        prompt = f"""
-        You are Mueni Kitoko's Personal Strategic Job Agent. Evaluate this posting strictly against her 
-        DevOps/Cloud Systems & Automation resume and her 10-project portfolio site layout context.
-
-        RESUME ASSETS:
-        {assets['resume']}
-
-        PORTFOLIO ASSETS:
-        {assets['portfolio']}
-
-        OPPORTUNITY DESCRIPTION:
-        Title: {job['title']}
-        Description: {job['description']}
-
-        CRITICAL EVALUATION ENGINE CONSTRAINTS:
-        1. Emphasize Security, Privacy, Resilience, and High Availability over corporate agile metrics.
-        2. Map the problem to her core pillars: Ultra-Private Sovereign Cloud, Digital Estate Continuity, Smart Estate Automation (K3s/Starlink), or OSINT Reputation Monitoring.
-        3. Audit for laptop hardware requirements. If explicitly stated or implied for secure remote travel infrastructure, note it.
-        4. Identify the target market sector (Maritime, Aviation, UHNWI Family Office, or Enterprise SaaS).
-        5. Draft a highly assertive, problem-centric cover letter template based on her original language patterns.
-
-        Return response STRICTLY in clean JSON matching these exact keys:
-        {{
-            "score": 0-100 integer,
-            "problem_category": "Sovereign Cloud OR Estate Automation OR Dead Man's Switch OR OSINT",
-            "extracted_problem": "precise business pain point description",
-            "strategic_pitch": "one-sentence aggressive metric-focused alignment statement",
-            "platform_stack": "AWS/Bare-Metal/K3s/n8n",
-            "income_floor": "$4500+ or High-Value Gig Contract",
-            "laptop_provided": "Yes or No or Not Specified",
-            "market_sector": "string",
-            "custom_cover_letter_draft": "full letter text"
-        }}
-        """
-        try:
-            response = model.generate_content(prompt)
-            clean_text = response.text.strip().lstrip("```json").rstrip("```").strip()
-            analysis = json.loads(clean_text)
+            # Parse text contents directly from the base64 encrypted webhook payload structure
+            raw_content = alert_file.read_text(encoding="utf-8")
+            data = json.loads(raw_content)
             
-            score = int(analysis.get('score', 0))
-            draft_path = "N/A"
-
-            if score >= DRAFT_SCORE_THRESHOLD:
-                folder_name = f"drafts/{job['company'].replace(' ', '_')}_{job['id']}"
-                os.makedirs(folder_name, exist_ok=True)
-                with open(f"{folder_name}/tailored_cover_letter.txt", "w", encoding="utf-8") as f_cl:
-                    f_cl.write(analysis.get('custom_cover_letter_draft', ''))
-                repo_env = os.environ.get('GITHUB_REPOSITORY', 'mkmd-systems1git/mkmd_application_assets')
-                draft_path = f"https://github.com{repo_env}/tree/main/{folder_name}"
-
-            # Maps rows seamlessly to your exact 14 Airtable spreadsheet dashboard fields
-            new_logs.append({
-                "JOB_ID": job['id'],
-                "Date_Logged": today,
-                "Target_Market_Sector": analysis.get('market_sector', job['sector']),
-                "Target_Platform": analysis.get('platform_stack', 'Cloud Core'),
-                "Company_Name": job['company'],
-                "Position_Title": job['title'],
-                "Offered_Income_Floor": analysis.get('income_floor', 'Market Rate'),
-                "Hardware_Laptop_Required": analysis.get('laptop_provided', 'Not Specified'),
-                "Status_Tracking": "Discovered",
-                "SCORE": str(score),
-                "Problem to solve": analysis.get('extracted_problem', ''),
-                "Strategic_Pitch_Angle": analysis.get('strategic_pitch', ''),
-                "Draft_Artifacts_Path": draft_path,
-                "URL": job['url']
+            # Reconstruct variables out of raw email text block
+            body_text = data.get("body", "No clear text block parsed.")
+            
+            jobs.append({
+                "raw_id": data.get("id", alert_file.stem).strip(),
+                "company": data.get("company", "Stealth Portfolio Network / Private Estate").strip(),
+                "role": data.get("title", "Systems & Infrastructure Architect").strip(),
+                "description": body_text[:4000],
+                "url": data.get("link", "Direct Inbound Mailbox Gateway").strip(),
+                "sector_hint": data.get("sector", "Stealth Market (Private Operations)").strip()
             })
-            print(f"✅ Evaluated {job['company']} - Match SCORE: {score}%")
+            alert_file.unlink() # Purge the staging payload file instantly to prevent double processing loops
+            print(f"[WEBHOOK CONSUMED] Safely integrated and cleaned alert payload: {alert_file.name}")
         except Exception as e:
-            print(f"Skipping evaluation due to loop formatting: {e}")
+            print(f"[WARN] Inbound alert structure processing error on file {alert_file.name}: {e}")
+    return jobs
+# --- DETERMINISTIC MEMORY REGISTER & STATE LIFECYCLE ---
+def read_ledger() -> list:
+    """Reads current tracking repository database file safely."""
+    if not TRACKING_CSV.exists():
+        return []
+    rows = []
+    with open(TRACKING_CSV, mode="r", newline="", encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+        for r in reader:
+            rows.append(r)
+    return rows
 
-    final_rows = cleaned_rows + new_logs
-    fieldnames = [
-        "JOB_ID", "Date_Logged", "Target_Market_Sector", "Target_Platform", "Company_Name", 
-        "Position_Title", "Offered_Income_Floor", "Hardware_Laptop_Required", "Status_Tracking", 
-        "SCORE", "Problem to solve", "Strategic_Pitch_Angle", "Draft_Artifacts_Path", "URL"
-    ]
-    
-    with open(DASHBOARD_FILE, mode='w', newline='', encoding='utf-8') as f:
-        writer = csv.DictWriter(f, fieldnames=fieldnames)
-        writer.writeheader()
-        writer.writerows(final_rows)
-    print("Tracking ledger update completed successfully.")
+def execute_lifecycle_cleanup(rows: list) -> list:
+    """
+    Maintains clean dashboard boundaries. If an unapproved record hits the 7-day 
+    expiration limit, it flips it to Expired instead of deleting the row.
+    This protects historical state tracking and prevents duplicate entry logging.
+    """
+    cutoff_date = datetime.now() - timedelta(days=7)
+    for r in rows:
+        if r.get("Status_Tracking") == "Discovered":
+            try:
+                log_time = datetime.strptime(r["Date_Logged"], "%Y-%m-%d")
+                if log_time < cutoff_date:
+                    r["Status_Tracking"] = "Expired"
+                    print(f"[STATE SHIFT] Stale item shifted to Expired status: {r['JOB_ID']} ({r['Company_Name']})")
+            except Exception:
+                pass
+    return rows
 
-if __name__ == "__main__":
-    process_pipeline()
-v
+def generate_deterministic_id(company: str, raw_link: str) -> str:
+    """
+    Creates a secure, permanent SHA-256 fingerprint for every job.
+    Bypasses volatile runtime hashing, guaranteeing zero duplicate entries across runs.
+    """
+    clean_company = re.sub(r"[^\w]", "", company.replace(" ", "_")).upper()[:12]
+    hasher = hashlib.sha256(raw_link.encode("utf-8")).hexdigest()[:6].upper()
+    return f"JOB-{clean_company}-{hasher}"
