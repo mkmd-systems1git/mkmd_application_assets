@@ -1,7 +1,7 @@
 import os
 import json
 import google.generativeai as genai
-
+ 
 def evaluate_job_match(job_title, job_description, job_type="Permanent"):
     """
     Evaluates an open job or freelance side hustle against Mueni Kitoko's 
