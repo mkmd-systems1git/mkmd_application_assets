@@ -293,3 +293,90 @@ Output a raw JSON block containing these two string keys:
     except Exception as e:
         print(f"[ERROR] Failed drafting tailored package for {job['company']}: {e}")
         return "Draft generation timeout.", "Resume generation timeout."
+
+# --- DATABASE PERSISTENCE LAYER ---
+def write_ledger(rows: list):
+    with open(TRACKING_CSV, mode="w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=CSV_COLUMNS)
+        writer.writeheader()
+        writer.writerows(rows)
+
+# --- SYSTEM EXECUTION CORE LOOP ---
+def main():
+    print("[SYSTEM INITIALIZATION] Hydrating RAG context repositories...")
+    rag_data = load_rag_context()
+    ledger_records = read_ledger()
+    
+    # Run historical 7-day status cleanup shifts
+    ledger_records = execute_lifecycle_cleanup(ledger_records)
+    historical_registry_keys = {row["JOB_ID"] for row in ledger_records}
+
+    print("[STREAM INGESTION] Crawling high-end target vectors...")
+    
+    # Premium High-End Technical Aggregators (Track 2 Feeds)
+    wwork_remote_feed = fetch_rss_feed("https://weworkremotely.com", "High-Growth Remote Infrastructure")
+    working_nomads_feed = fetch_rss_feed("https://workingnomads.com", "Elite Edge Automation Networks")
+    
+    # Intercept Private Custom Email Alert Pipelines (Track 1 Folder)
+    stealth_webhook_alerts = fetch_inbound_webhook_alerts()
+    
+    opportunity_pool = wwork_remote_feed + working_nomads_feed + stealth_webhook_alerts
+    staged_new_records = []
+    timestamp_today = datetime.now().strftime("%Y-%m-%d")
+
+    for target_job in opportunity_pool:
+        unique_job_id = generate_deterministic_id(target_job["company"], target_job["url"])
+        
+        # Enforce absolute deduplication guardrails
+        if unique_job_id in historical_registry_keys:
+            continue
+
+        print(f"[EVALUATING FIT] {target_job['company']} -> {target_job['role']}")
+        analysis_data = evaluate_market_fit(target_job, rag_data)
+        assigned_score = int(analysis_data.get("score", 0))
+
+        drafts_storage_reference = ""
+        
+        # --- 85% ABSOLUTE STRATEGIC MATCH GATE THRESHOLD ---
+        if assigned_score >= 85:
+            clean_folder_name = re.sub(r"[^\w\-]", "", target_job["company"].replace(" ", "_"))
+            target_build_path = DRAFTS_DIR / f"{clean_folder_name}_{unique_job_id}"
+            target_build_path.mkdir(parents=True, exist_ok=True)
+
+            # Generate both custom cover letter and project-tailored resume strings simultaneously
+            cl_text, resume_text = assemble_application_package(target_job, analysis_data, rag_data)
+            
+            # Save pre-written assets natively into your private repository drafts folder
+            (target_build_path / "cover_letter.md").write_text(cl_text, encoding="utf-8")
+            (target_build_path / "tailored_resume.md").write_text(resume_text, encoding="utf-8")
+
+            # Save the clean reference path for your visual Airtable link column
+            drafts_storage_reference = f"drafts/{clean_folder_name}_{unique_job_id}/"
+            print(f"🎉 TARGET MATCH SECURED ({assigned_score}%): Application package compiled at {drafts_storage_reference}")
+
+        new_row_payload = {
+            "JOB_ID": unique_job_id,
+            "Date_Logged": timestamp_today,
+            "Target_Market_Sector": analysis_data.get("sector", target_job["sector_hint"]),
+            "Target_Platform": analysis_data.get("platform", "Multi-Cloud Edge Stack"),
+            "Company_Name": target_job["company"],
+            "Position_Title": target_job["role"],
+            "Offered_Income_Floor": analysis_data.get("income_floor", "$4,500+ Base Scale"),
+            "Hardware_Laptop_Required": analysis_data.get("hardware_required", "Not Specified"),
+            "Status_Tracking": "Discovered",
+            "SCORE": assigned_score,
+            "Problem to solve": analysis_data.get("problem_to_solve", "System bottleneck triage required."),
+            "Strategic_Pitch_Angle": analysis_data.get("strategic_pitch_angle", "Positioned via portfolio metrics."),
+            "Draft_Artifacts_Path": f"https://github.com{drafts_storage_reference}" if drafts_storage_reference else "",
+            "URL": target_job["url"]
+        }
+
+        staged_new_records.append(new_row_payload)
+        historical_registry_keys.add(unique_job_id)
+
+    # Commit records to the tracking ledger file
+    write_ledger(ledger_records + staged_new_records)
+    print(f"[PIPELINE TASK COMPLETE] Safely logged {len(staged_new_records)} fresh, unique matching opportunities.")
+
+if __name__ == "__main__":
+    main()
