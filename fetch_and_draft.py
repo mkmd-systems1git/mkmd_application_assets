@@ -180,3 +180,116 @@ def generate_deterministic_id(company: str, raw_link: str) -> str:
     clean_company = re.sub(r"[^\w]", "", company.replace(" ", "_")).upper()[:12]
     hasher = hashlib.sha256(raw_link.encode("utf-8")).hexdigest()[:6].upper()
     return f"JOB-{clean_company}-{hasher}"
+
+# --- AI CORE INFERENCE & ADAPTIVE TAILORING AGENT ---
+def evaluate_market_fit(job: dict, rag_context: dict) -> dict:
+    """Routes target opportunity descriptions through the Gemini API context vault."""
+    if not GEMINI_API_KEY:
+        raise ValueError("CRITICAL SYSTEM FAILURE: GEMINI_API_KEY secret is not provisioned.")
+
+    prompt = f"""
+You are the elite Executive Systems Architect Agent working directly for Mueni Kitoko.
+Mueni's Core Technical Capabilities & Matrix (STRICT COMPLIANCE REQUIRED - ZERO HALLUCINATION ALLOWED):
+{rag_context['resume']}
+
+Detailed Project Implementations & Drawer Stack Architecture:
+{rag_context['portfolio']}
+
+Target Vacancy Information Data Block:
+- Issuing Entity: {job['company']}
+- Stated Role: {job['role']}
+- Market Sector Context: {job['sector_hint']}
+- Description Payload:
+\"\"\"{job['description']}\"\"\"
+
+CRITICAL TARGET PARSING RULES:
+1. Assign a deterministic fit SCORE from 0 to 100 based on her 10 projects.
+2. Scan for laptop provisioning parameters. Mark field exactly as "Yes", "No", or "Not Specified".
+3. Extract Target Market Sector (Must be one of: Maritime, Aviation, Family Office, Autonomous Startup).
+4. Identify Target Platform architecture (e.g., AWS Cloud, K3s Hybrid Clustering, Bare-Metal Linux, Starlink/VSAT Networks).
+5. State the clear business bottleneck or system friction this company needs resolved in exactly 1 or 2 clean sentences.
+6. Generate a highly confident Strategic Pitch Angle explicitly matching her verified infrastructure metrics ($74k/yr waste reduction or $65k/yr data tracking recovery efficiency).
+
+Output strictly valid raw JSON code output format containing these exact structural string keys:
+{{
+  "score": <integer>,
+  "sector": "string",
+  "platform": "string",
+  "income_floor": "string",
+  "hardware_required": "string",
+  "problem_to_solve": "string",
+  "strategic_pitch_angle": "string"
+}}
+"""
+    payload = {
+        "contents": [{"parts": [{"text": prompt}]}],
+        "generationConfig": {"temperature": 0.1, "responseMimeType": "application/json"}
+    }
+
+    try:
+        req = urllib.request.Request(
+            GEMINI_ENDPOINT,
+            data=json.dumps(payload).encode("utf-8"),
+            headers={"Content-Type": "application/json"}
+        )
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            response_payload = json.loads(resp.read().decode("utf-8"))
+            raw_text = response_payload["candidates"][0]["content"]["parts"][0]["text"]
+            return json.loads(raw_text)
+    except Exception as e:
+        print(f"[ERROR] Gemini inference parsing failed for {job['company']}: {e}")
+        return {
+            "score": 0, "sector": job["sector_hint"], "platform": "Multi-Cloud",
+            "income_floor": "Market Rate", "hardware_required": "Not Specified",
+            "problem_to_solve": "Bypassed automatic linguistic extraction.",
+            "strategic_pitch_angle": "Deploying zero-trust perimeter containment and edge workflow integrations."
+        }
+
+def assemble_application_package(job: dict, eval_metrics: dict, rag_context: dict) -> tuple:
+    """Generates an assertive, metrics-dense application package (Cover Letter and Tailored Resume) mapped to her profile."""
+    prompt = f"""
+You are compiling a highly assertive application package on behalf of Mueni Kitoko.
+Mueni's Structural Value Pitch:
+"I build zero-trust, automated backup, and resilient cloud/edge security infrastructure for operations that cannot afford data leaks, operational friction, or downtime."
+
+Universal Base Cover Letter Asset & Blueprint:
+{rag_context['cover_letter_template']}
+
+Master Resume Blueprint:
+{rag_context['resume']}
+
+Target Engagement Scope:
+- Company Profile: {job['company']}
+- Systems Title: {job['role']}
+- Core System Friction: {eval_metrics['problem_to_solve']}
+- Position Strategy Angle: {eval_metrics['strategic_pitch_angle']}
+
+COMPLIANCE MANDATES:
+- Maintain an authoritative, solution-first tone.
+- Map the core operational problem directly into her relevant portfolio drawers.
+- Maintain her verified system metrics ($74k/year cost savings or $65k automated disaster recovery optimizations).
+
+Output a raw JSON block containing these two string keys:
+{{
+  "cover_letter": "An assertive cover letter swapping all placeholders securely.",
+  "tailored_resume": "A customized version of her resume that highlights the specific GitHub projects from her portfolio index (out of her 10 projects) that directly address the company's tech stack and friction points."
+}}
+"""
+    payload = {
+        "contents": [{"parts": [{"text": prompt}]}],
+        "generationConfig": {"temperature": 0.2, "responseMimeType": "application/json"}
+    }
+    try:
+        req = urllib.request.Request(
+            GEMINI_ENDPOINT,
+            data=json.dumps(payload).encode("utf-8"),
+            headers={"Content-Type": "application/json"}
+        )
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            response_payload = json.loads(resp.read().decode("utf-8"))
+            raw_text = response_payload["candidates"][0]["content"]["parts"][0]["text"]
+            pkg = json.loads(raw_text)
+            return pkg.get("cover_letter", ""), pkg.get("tailored_resume", "")
+    except Exception as e:
+        print(f"[ERROR] Failed drafting tailored package for {job['company']}: {e}")
+        return "Draft generation timeout.", "Resume generation timeout."
