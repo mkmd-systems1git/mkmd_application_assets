@@ -1,39 +1,52 @@
-name: Autonomous Job Search & Application Drafter Engine
+name: MKMD Autonomous Application Agent
 
 on:
   schedule:
-    - cron: '0 6 * * *'
-  workflow_dispatch:
+    # 04:00 UTC triggers exactly at 07:00 AM East African Time (EAT) every single morning
+    - cron: '0 4 * * *'
+  workflow_dispatch: # Allows you to manually trigger the agent at any time with one click
+
+permissions:
+  contents: write # Grants the cloud runner permission to update your CSV ledger and save letter drafts
 
 jobs:
   run-agent:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
 
     steps:
-      - name: Checkout Application Assets Repository
+      - name: Checkout Application Repository Assets
         uses: actions/checkout@v4
+        with:
+          persist-credentials: true
 
-      - name: Setup Zero-Resource Python Environment
+      - name: Initialize Free Python Runtime Environment
         uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
+          python-version: '3.11'
 
-      - name: Install Runtime Dependencies
+      - name: Verify Staging Directories and Files
         run: |
-          pip install google-generativeai
+          mkdir -p drafts
+          mkdir -p inbound_alerts
+          if [ ! -f tracking_dashboard.csv ]; then
+            echo "JOB_ID,Date_Logged,Target_Market_Sector,Target_Platform,Company_Name,Position_Title,Offered_Income_Floor,Hardware_Laptop_Required,Status_Tracking,SCORE,Problem to solve,Strategic_Pitch_Angle,Draft_Artifacts_Path,URL" > tracking_dashboard.csv
+          fi
 
-      - name: Execute Fetching and Asset Tailoring Pipeline
+      - name: Execute Autonomous Parsing & Evaluation Engine
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: |
-          python fetch_and_draft.py
+        run: python fetch_and_draft.py
 
-      - name: Commit Dashboard Ledger Updates & Draft Artifacts
+      - name: Securely Commit and Push State Updates to Repository
         run: |
-          git config --global user.name "Mueni Kitoko AI Assistant"
-          git config --global user.email "agent@muenikitoko.cloud"
+          git config --global user.name "mkmd-automation-bot"
+          git config --global user.email "automation-bot@mkmd.internal"
           git add tracking_dashboard.csv drafts/
-          git diff --quiet && git diff --staged --quiet || git commit -m "Automated Sync: Pipeline ledger updated & high-probability drafts compiled"
-          git push
+          
+          # Only commit if fresh, high-scoring opportunities or lifecycle state updates occurred
+          if git diff --staged --quiet; then
+            echo "No fresh target opportunities or state updates identified today."
+          else
+            git commit -m "bot(engine): execute morning ingestion routine and sync state logs [skip ci]"
+            git push origin main
+          fi
