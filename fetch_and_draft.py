@@ -123,20 +123,16 @@ def fetch_inbound_webhook_alerts() -> list:
 
     for alert_file in alert_dir.glob("*.json"):
         try:
-            # Parse text contents directly from the base64 encrypted webhook payload structure
-            raw_content = alert_file.read_text(encoding="utf-8")
-            data = json.loads(raw_content)
-            
-            # Reconstruct variables out of raw email text block
-            body_text = data.get("body", "No clear text block parsed.")
+          # Reconstruct variables out of raw email text block
+            body_text = data.get("body") or data.get("text") or "No clear text block parsed."
             
             jobs.append({
-                "raw_id": data.get("id", alert_file.stem).strip(),
-                "company": data.get("company", "Stealth Portfolio Network / Private Estate").strip(),
-                "role": data.get("title", "Systems & Infrastructure Architect").strip(),
+                "raw_id": str(data.get("id") or alert_file.stem).strip(),
+                "company": str(data.get("company") or data.get("from") or "Stealth Portfolio Network / Private Estate").strip(),
+                "role": str(data.get("title") or data.get("subject") or "Systems & Infrastructure Architect").strip(),
                 "description": body_text[:4000],
-                "url": data.get("link", "Direct Inbound Mailbox Gateway").strip(),
-                "sector_hint": data.get("sector", "Stealth Market (Private Operations)").strip()
+                "url": str(data.get("link") or "Direct Inbound Mailbox Gateway").strip(),
+                "sector_hint": str(data.get("sector") or "Stealth Market (Private Operations)").strip()  
             })
             alert_file.unlink() # Purge the staging payload file instantly to prevent double processing loops
             print(f"[WEBHOOK CONSUMED] Safely integrated and cleaned alert payload: {alert_file.name}")
