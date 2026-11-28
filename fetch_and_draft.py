@@ -10,6 +10,7 @@ import os
 import re
 import csv
 import json
+import time
 import hashlib
 import urllib.request
 import urllib.parse
@@ -333,6 +334,7 @@ def main():
 
         print(f"[EVALUATING FIT] {target_job['company']} -> {target_job['role']}")
         analysis_data = evaluate_market_fit(target_job, rag_data)
+        time.sleep(4)  # Prevents Gemini API free-tier 429 rate-limit errors
         assigned_score = int(analysis_data.get("score", 0))
 
         drafts_storage_reference = ""
