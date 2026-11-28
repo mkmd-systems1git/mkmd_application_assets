@@ -37,11 +37,12 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python fetch_and_draft.py
 
-      - name: Securely Commit and Push State Updates to Repository
+           - name: Securely Commit and Push State Updates to Repository
         run: |
           git config --global user.name "mkmd-automation-bot"
           git config --global user.email "automation-bot@mkmd.internal"
-          git add tracking_dashboard.csv drafts/
+          git add tracking_dashboard.csv drafts/ inbound_alerts/
+
           
           # Only commit if fresh, high-scoring opportunities or lifecycle state updates occurred
           if git diff --staged --quiet; then
